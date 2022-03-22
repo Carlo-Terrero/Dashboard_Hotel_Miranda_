@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const Contact = () => {
+export const Guest = () => {
 
     return(
         <div>
-            Soy Contact
+            i'm Guest
         </div>
     )
 }

@@ -1,21 +1,18 @@
 import {BrowserRouter as Router , Routes, Route } from 'react-router-dom';
 
-import { NavBarLateral } from "./navBar/navBarLateral";
 import { NavBarSuperior } from './navBar/navBarSuperior';
 import { Bookings } from "./pages/bookings";
-import { Contact } from "./pages/contact";
+import { Concierge } from "./pages/concierge";
 import { Dashboard } from "./pages/dashboard";
 import { User } from "./pages/users";
 import { Rooms } from "./pages/rooms";
-
+import { Guest } from "./pages/guest";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <NavBarSuperior/>
-        <NavBarLateral/>
-        
 
         <Routes>
 
@@ -23,9 +20,9 @@ function App() {
           <Route exat path='/dashboard' element={<Dashboard/>}/>
           <Route path="/bookings" element={<Bookings/>}/>
           <Route path="/rooms" element={<Rooms/>}/>
-          <Route path="/contact" element={<Contact/>}/>
+          <Route path="/concierge" element={<Concierge/>}/>
           <Route path="/user" element={<User/>} />
-
+          <Route path="/guest" element={<Guest/>}/>
         </Routes>
         
       </Router>

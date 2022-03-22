@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
+
+//Icons
 import {FiAlignJustify, FiBell} from "react-icons/fi";
 import {IoIosLogOut} from "react-icons/io";
-import {ImEnvelop} from "react-icons/im"
+import {ImEnvelop} from "react-icons/im";
+import { NavBarLateral } from "./navBarLateral";
 
 
 const Div = styled.div`
@@ -34,35 +37,42 @@ const P = styled.p`
 
 export const NavBarSuperior = () => {
 
+    const [ menuLateral, setMenuLateral] = useState(true)
+   
     const handleClick = () => {
-        console.log("burguer click")
+        menuLateral ? setMenuLateral(false) : setMenuLateral(true)
     }
-    return(
-        <Div>
-            
-            <Div>
-                <Div>
-                    <img src="../../../static/logo.ong"/>
-                    <div>
-                        <H1>Travl</H1>
-                        <P>Hotel Admin Dashboard</P>
-                    </div>
-                </Div>           
-           
-                <Div>
-                    <FiAlignJustify onClick={handleClick}/>
-                        Dashboard
-                </Div>
-            </Div>
 
-            <DivIcon>
-                <ImEnvelop />
-                <FiBell />
-                <IoIosLogOut />
-            </DivIcon>
-           
+    return(
+        <>
+            <Div>
             
+                <Div>
+                    <Div>
+                        <img src="../../../static/logo.ong"/>
+                        <div>
+                            <H1>Travl</H1>
+                            <P>Hotel Admin Dashboard</P>
+                        </div>
+                    </Div>           
             
-        </Div>
+                    <Div>
+                        <FiAlignJustify onClick={handleClick}/>
+                            Dashboard
+                    </Div>
+                </Div>
+
+                <DivIcon>
+                    <ImEnvelop />
+                    <FiBell />
+                    <IoIosLogOut />
+                </DivIcon>
+                
+            </Div>
+            
+            {menuLateral ? <NavBarLateral/> : null}
+            
+        </>
+       
     )
 }
