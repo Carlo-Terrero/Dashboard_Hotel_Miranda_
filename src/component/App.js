@@ -7,6 +7,7 @@ import { Dashboard } from "./pages/dashboard";
 import { User } from "./pages/users";
 import { Rooms } from "./pages/rooms";
 import { Guest } from "./pages/guest";
+import { Auth } from "./pages/auth";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
 
           <Route exat path='/' element={<Dashboard/>}/>
+          <Route path="/auth" element={<Auth/>}/>
           <Route exat path='/dashboard' element={<Dashboard/>}/>
           <Route path="/bookings" element={<Bookings/>}/>
           <Route path="/rooms" element={<Rooms/>}/>

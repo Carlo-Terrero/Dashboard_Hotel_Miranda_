@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { AiOutlineMore } from 'react-icons/ai';
-import { MdOutlineLocalPhone } from 'react-icons/md';
 
 const DivContainer = styled.div`
     display: grid; 
@@ -32,6 +31,7 @@ const ContainerRooms = styled(Container)`
     border-bottom-left-radius: 25px; */
     border-top: none;
     padding-right: 3rem;
+    align-items: center;
 `;
 
 const Div = styled.div`
@@ -41,8 +41,8 @@ const Div = styled.div`
 `;
 
 const DivCabecera = styled(Div)`
-    gap: 7rem;
-    margin-right: 2rem;
+    gap: 9rem;
+    margin-right: -2rem;
 `;
 
 const DivMid = styled(Div)`
@@ -58,18 +58,13 @@ const DivMidDatos = styled(DivMid)`
 const DivCheck = styled(Div)`
     align-items: baseline;
     width: 300px;
-    margin-right: -5rem;
+    
 `;
 
 const DivCheckRooms = styled(DivCheck)`
     align-items: center;
     gap: 1.5rem;
     margin: 0;
-`;
-
-const DivPrecio = styled(Div)`
-    gap: 0.5rem;
-    width: 100px;
 `;
 
 const DivData = styled.div`
@@ -108,36 +103,62 @@ const Check = styled.input`
 
 const DivImg = styled.div`
     margin: 1rem 0;
-    height: 5/*  */rem;    
-    width: 5rem;
+    height: 3rem;    
+    width: 3rem;
     background: grey;
     border-radius: 15px;
 `;
 
-const PGreen = styled.p`
-    color: green;
-    width: 83px;
-    
+
+const Button = styled.button`
+    color: black;
+    background: green;
+    height: 2.5rem;
+    border: none;
+    width: 7rem;
+    border-radius: 10px;
 `;
 
-const PRed = styled(PGreen)`
+const BtnGreen = styled(Button)`
+    color: green;
+    background: #43fe8b3d;
+`;
+
+const BtnRed = styled(BtnGreen)`
     color: red;
+    background: #f2858566;
 `;
 
-const Pv = styled.p`
-    color: green;
+const BtnLiveGrey = styled(BtnGreen)`
+    color: grey;
+    background: #3b3b3b3d;
 `;
 
-const DivIcon = styled.div`
-    font-size: 1.5rem;
+const BtnDarkGrey = styled(BtnGreen)`
+    color: #d3d0d0;
+    background: grey
 `;
 
-const DivSchedule = styled.div`
-    width: 200px;
+const PRoom = styled(P)`
+    width: 9rem;
 `;
 
 
-export const ConciergeList = (props) => {
+export const GuesteList = (props) => {
+
+    const handleStatus = (state) => {
+        
+        switch(state) {
+            case state = 1:
+                return <BtnGreen>Booked</BtnGreen>
+            case state = 2:
+                return <BtnRed>Refund</BtnRed>
+            case state = 3:
+                return <BtnLiveGrey>Pending</BtnLiveGrey>
+            case state = 4:
+                return <BtnDarkGrey>Canceled</BtnDarkGrey>
+        }
+    }
 
 
     return(
@@ -146,22 +167,24 @@ export const ConciergeList = (props) => {
                 <DivCheck>                    
                     <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
                     
-                    <P>Name</P>
+                    <P>Guest</P>
                 </DivCheck>
 
                 {/* <DivMid> */}
-                    <P>Job Desk</P>
-                    <P>Schedule</P>                    
+                    <P>Order Date</P>
+                    <P>Check In</P>                    
+                    <P>Check Out</P>                    
+                    <P>Special Request</P>                    
                 {/* </DivMid> */}
 
                 <DivCabecera>
-                    <P>Contact</P>
+                    <P>Room type</P>
                     <P>Status</P>
                 </DivCabecera>
                 
             </Container>
 
-            {props.concierges.map((concierge,i) => 
+            {props.guests.map((guest,i) => 
                 <ContainerRooms>
                     <DivCheckRooms>                    
                         <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
@@ -171,37 +194,22 @@ export const ConciergeList = (props) => {
                         </DivImg>
                         
                         <DivData>
-                            <P>{concierge.name}</P>
-                            <Id>{concierge.id}</Id>
-                            <P>{concierge.fecha_alta}</P>
+                            <P>{guest.first_name}</P>
+                            <Id>{guest.id}</Id>
                         </DivData>
                         
-                    </DivCheckRooms>
+                    </DivCheckRooms>  
 
-                    {/* <DivMidDatos> */}
-                        <Pd>{concierge.job_desk}</Pd>
-                      
-                      <DivSchedule>
-                        <P>{concierge.schedule}</P>
-                        <Pv>Check schedule</Pv>
-                      </DivSchedule>
-                                                                                               
-                    {/* </DivMidDatos> */}
-
-                    <Div>
-                        <DivPrecio>
-                            <DivIcon>
-                                <MdOutlineLocalPhone/>
-                            </DivIcon>
-                            
-                            <P>{concierge.contact} </P> 
-                           
-                        </DivPrecio>
+                    <Pd>{guest.order_date}</Pd>                                            
+                    <P>{guest.check_in}</P>
+                    <P>{guest.check_out}</P>
                         
-                        <P>{concierge.status === true ? <PGreen>ACTIVE</PGreen> : <PRed>INACTIVE</PRed>}</P>
-
-                       
-                    </Div>
+                    <Button> View Notes</Button>
+                    
+                    <PRoom>{guest.room_type} </PRoom>                       
+                        
+                    {/* <P>{guest.status === true ? <PGreen>ACTIVE</PGreen> : <PRed>INACTIVE</PRed>}</P> */}
+                    {handleStatus(guest.status)}
 
                     <DivMenuPuntos>
                         {<AiOutlineMore/>}
@@ -212,7 +220,7 @@ export const ConciergeList = (props) => {
 
             )}
             
-            {console.log(props.concierges)}
+            {console.log(props.guests)}
         </DivContainer>
     )
 }
