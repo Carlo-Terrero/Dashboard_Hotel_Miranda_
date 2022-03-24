@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { RoomList } from "../rooms/roomList";
-import { rooms } from "../data/rooms"
+import { RoomList } from "../lists/roomList";
+import { roomsData } from "../data/rooms";
+import { Paginador } from "../comun/paginador";
 
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -64,9 +65,6 @@ const DivIcon = styled.div`
 
 export const Rooms = () =>{
     
-
-    const Rooms = rooms;
-    
     return (
         <DivBase>
             <Div>
@@ -92,8 +90,10 @@ export const Rooms = () =>{
                 </ControlDiv>
 
                 <div>
-                    <RoomList rooms={rooms}/>                    
+                    <RoomList rooms={roomsData}/>                    
                 </div>
+
+                <Paginador paginas={8}/>
 
             </Div>
             

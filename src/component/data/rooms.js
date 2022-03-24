@@ -1,4 +1,4 @@
-export const rooms = [{
+export const roomsData = [{
     "id": 1,
     "first_name": "Fawne",
     "bed_type": "Goldenrod",
