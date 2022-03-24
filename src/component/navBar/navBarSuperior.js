@@ -35,12 +35,17 @@ const P = styled.p`
     font-size: 0.8rem;
 `;
 
-export const NavBarSuperior = () => {
+export const NavBarSuperior = (props) => {
 
     const [ menuLateral, setMenuLateral] = useState(true)
    
     const handleClick = () => {
         menuLateral ? setMenuLateral(false) : setMenuLateral(true)
+    }
+
+    const handleClickAut = () => {
+        props.setAuth(false)
+        console.log('auth')
     }
 
     return(
@@ -58,14 +63,14 @@ export const NavBarSuperior = () => {
             
                     <Div>
                         <FiAlignJustify onClick={handleClick}/>
-                            Dashboard
+                            Dashboard {props.auth == true ? 'in' : 'out'} 
                     </Div>
                 </Div>
 
                 <DivIcon>
                     <ImEnvelop />
                     <FiBell />
-                    <IoIosLogOut />
+                    <IoIosLogOut onClick={handleClickAut}/>
                 </DivIcon>
                 
             </Div>

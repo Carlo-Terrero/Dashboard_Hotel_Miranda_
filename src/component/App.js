@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import {BrowserRouter as Router , Routes, Route } from 'react-router-dom';
 
 import { NavBarSuperior } from './navBar/navBarSuperior';
@@ -10,15 +11,18 @@ import { Guest } from "./pages/guest";
 import { Auth } from "./pages/auth";
 
 function App() {
+
+  const [auth, setAuth] = useState(false);
+
   return (
     <div className="App">
       <Router>
-        <NavBarSuperior/>
+        <NavBarSuperior auth={auth} setAuth={setAuth}/>
 
         <Routes>
 
           <Route exat path='/' element={<Dashboard/>}/>
-          <Route path="/auth" element={<Auth/>}/>
+          <Route path="/auth"  element={<Auth setAuth={setAuth}/>}  />
           <Route exat path='/dashboard' element={<Dashboard/>}/>
           <Route path="/bookings" element={<Bookings/>}/>
           <Route path="/rooms" element={<Rooms/>}/>
