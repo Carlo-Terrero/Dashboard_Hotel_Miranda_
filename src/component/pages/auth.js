@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styled from "styled-components";
 
@@ -54,13 +55,16 @@ export const Auth = (props) => {
     const [pass, setPass] = useState('');   
     /* const [auth, setAuth] = useState(false); */
 
+    const navigate =  useNavigate();
+
     const handleSubmit = (e) => {
 
         e.preventDefault();
 
         if (email === "carlos@gmail.com" && pass === "ponko"){
             props.setAuth(true);
-            console.log(email, pass)
+            navigate('/dashboard');
+            
         }else{
             alert('Caracteres no coinciden')
         }
@@ -92,9 +96,10 @@ export const Auth = (props) => {
                {/* {auth ? <p>Log in</p> : <p>Log out</p>} */}
 
                
-                <p>hols {props.setAuth == true ? 'in' : 'out'}</p>
+                <p>hols {props.auth === true ? 'in' : 'out'}</p>
                 <p>Email: carlos@gmail.com</p>
                 <p>Pass: ponko</p>
+                {console.log(props)}
             </Div>
         </DivBase>
     )

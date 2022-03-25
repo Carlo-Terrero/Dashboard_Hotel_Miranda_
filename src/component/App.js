@@ -9,6 +9,7 @@ import { User } from "./pages/users";
 import { Rooms } from "./pages/rooms";
 import { Guest } from "./pages/guest";
 import { Auth } from "./pages/auth";
+import { GuestDetails } from "./details/guestDetails";
 
 function App() {
 
@@ -21,14 +22,19 @@ function App() {
 
         <Routes>
 
-          <Route exat path='/' element={<Dashboard/>}/>
-          <Route path="/auth"  element={<Auth setAuth={setAuth}/>}  />
-          <Route exat path='/dashboard' element={<Dashboard/>}/>
+          <Route path="/"  element={<Auth setAuth={setAuth} auth={auth}/>}  />
+          <Route path='/dashboard' element={<Dashboard/>}/>
+
           <Route path="/bookings" element={<Bookings/>}/>
+
           <Route path="/rooms" element={<Rooms/>}/>
+
           <Route path="/concierge" element={<Concierge/>}/>
+          
           <Route path="/user" element={<User/>} />
+
           <Route path="/guest" element={<Guest/>}/>
+          <Route path="/guest/:id" element={<GuestDetails/>}/>
         </Routes>
         
       </Router>

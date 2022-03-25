@@ -127,6 +127,10 @@ const BtnRed = styled(BtnGreen)`
 export const RoomList = (props) => {
 
 
+    const handleClick = (date) => {
+        console.log('hola', date)
+    }
+
     return(
         <DivContainer>
             <Container>
@@ -150,7 +154,7 @@ export const RoomList = (props) => {
             </Container>
 
             {props.rooms.map((room,i) => 
-                <ContainerRooms>
+                <ContainerRooms key={i} onClick={() => handleClick(i)}>
                     <DivCheckRooms>                    
                         <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
 
@@ -191,7 +195,6 @@ export const RoomList = (props) => {
 
             )}
             
-            {console.log(props.rooms)}
-        </DivContainer>
+            </DivContainer>
     )
 }

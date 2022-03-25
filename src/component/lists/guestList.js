@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -51,14 +52,9 @@ const DivMid = styled(Div)`
     margin-left: -4rem;
 `;
 
-const DivMidDatos = styled(DivMid)`
-    margin-left: 0;
-`;
-
 const DivCheck = styled(Div)`
     align-items: baseline;
     width: 300px;
-    
 `;
 
 const DivCheckRooms = styled(DivCheck)`
@@ -95,7 +91,6 @@ const Id = styled(P)`
     color: green;
 `;
 
-
 const Check = styled.input`
     color: red;
     font-size:2rem;
@@ -108,7 +103,6 @@ const DivImg = styled.div`
     background: grey;
     border-radius: 15px;
 `;
-
 
 const Button = styled.button`
     color: black;
@@ -143,11 +137,11 @@ const PRoom = styled(P)`
     width: 9rem;
 `;
 
-
 export const GuesteList = (props) => {
 
-    const handleStatus = (state) => {
-        
+    const navigate = useNavigate()
+
+    const handleStatus = (state) => {        
         switch(state) {
             case state = 1:
                 return <BtnGreen>Booked</BtnGreen>
@@ -160,6 +154,10 @@ export const GuesteList = (props) => {
         }
     }
 
+    const handleClick = (id) => {
+        console.log('hola', id);
+        navigate(`${id}`)
+    }
 
     return(
         <DivContainer>
@@ -185,7 +183,7 @@ export const GuesteList = (props) => {
             </Container>
 
             {props.guests.map((guest,i) => 
-                <ContainerRooms>
+                <ContainerRooms key={i} onClick={() => handleClick(guest.id)}>
                     <DivCheckRooms>                    
                         <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
 
@@ -220,7 +218,6 @@ export const GuesteList = (props) => {
 
             )}
             
-            {console.log(props.guests)}
         </DivContainer>
     )
 }

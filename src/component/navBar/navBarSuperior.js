@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 //Icons
 import {FiAlignJustify, FiBell} from "react-icons/fi";
 import {IoIosLogOut} from "react-icons/io";
 import {ImEnvelop} from "react-icons/im";
 import { NavBarLateral } from "./navBarLateral";
-
 
 const Div = styled.div`
     display: flex;
@@ -17,7 +17,6 @@ const Div = styled.div`
     padding-right: 2rem;
     gap: 2rem;
     font-size: 1.2rem;
-
 `;
 
 const DivIcon = styled(Div)`
@@ -37,15 +36,17 @@ const P = styled.p`
 
 export const NavBarSuperior = (props) => {
 
-    const [ menuLateral, setMenuLateral] = useState(true)
+    const navigate = useNavigate();
+
+    const [ menuLateral, setMenuLateral] = useState(false)
    
     const handleClick = () => {
         menuLateral ? setMenuLateral(false) : setMenuLateral(true)
     }
 
-    const handleClickAut = () => {
-        props.setAuth(false)
-        console.log('auth')
+    const handleAut = () => {
+        props.setAuth(false);
+        navigate('/');
     }
 
     return(
@@ -54,7 +55,7 @@ export const NavBarSuperior = (props) => {
             
                 <Div>
                     <Div>
-                        <img src="../../../static/logo.ong"/>
+                        <img src="../../../static/logo.ong" alt="Logo"/>
                         <div>
                             <H1>Travl</H1>
                             <P>Hotel Admin Dashboard</P>
@@ -63,14 +64,18 @@ export const NavBarSuperior = (props) => {
             
                     <Div>
                         <FiAlignJustify onClick={handleClick}/>
-                            Dashboard {props.auth == true ? 'in' : 'out'} 
+                            Log {props.auth === true ? 'in' : 'out'} 
                     </Div>
                 </Div>
 
                 <DivIcon>
                     <ImEnvelop />
                     <FiBell />
-                    <IoIosLogOut onClick={handleClickAut}/>
+                    {/* <IoIosLogOut onClick={props.setAuth(false)}/> */}
+                    {props.auth === true ? 
+                        <IoIosLogOut onClick={handleAut}/> :
+                        null
+                    }
                 </DivIcon>
                 
             </Div>
