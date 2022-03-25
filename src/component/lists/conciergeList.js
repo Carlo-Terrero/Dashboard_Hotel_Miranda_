@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -139,6 +140,11 @@ const DivSchedule = styled.div`
 
 export const ConciergeList = (props) => {
 
+    const navigate = useNavigate();
+
+    const handleClick = (id) => {        
+        navigate(`${id}`);
+    }
 
     return(
         <DivContainer>
@@ -162,7 +168,7 @@ export const ConciergeList = (props) => {
             </Container>
 
             {props.concierges.map((concierge,i) => 
-                <ContainerRooms>
+                <ContainerRooms key={i} onClick={() => handleClick(concierge.id)}>
                     <DivCheckRooms>                    
                         <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
 
@@ -212,7 +218,7 @@ export const ConciergeList = (props) => {
 
             )}
             
-            {console.log(props.concierges)}
+            
         </DivContainer>
     )
 }

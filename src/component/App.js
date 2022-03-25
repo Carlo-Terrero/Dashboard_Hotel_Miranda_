@@ -10,6 +10,8 @@ import { Rooms } from "./pages/rooms";
 import { Guest } from "./pages/guest";
 import { Auth } from "./pages/auth";
 import { GuestDetails } from "./details/guestDetails";
+import { ConsciergeDetail } from "./details/consciergeDetail";
+import { RoomDetails } from "./details/roomDetails";
 
 function App() {
 
@@ -18,23 +20,25 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <NavBarSuperior auth={auth} setAuth={setAuth}/>
+        <NavBarSuperior auth={auth} setAuth={setAuth} />
 
         <Routes>
 
-          <Route path="/"  element={<Auth setAuth={setAuth} auth={auth}/>}  />
-          <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path="/"  element={<Auth setAuth={setAuth} auth={auth}/>} />
+          <Route path='/dashboard' element={<Dashboard/>} />
 
-          <Route path="/bookings" element={<Bookings/>}/>
+          <Route path="/bookings" element={<Bookings/>} />
 
-          <Route path="/rooms" element={<Rooms/>}/>
+          <Route path="/rooms" element={<Rooms/>} />
+          <Route path="/rooms/:id" element={<RoomDetails/>} />
 
-          <Route path="/concierge" element={<Concierge/>}/>
+          <Route path="/concierge" element={<Concierge/>} />
+          <Route path="/concierge/:id" element={<ConsciergeDetail/>} />
           
           <Route path="/user" element={<User/>} />
 
-          <Route path="/guest" element={<Guest/>}/>
-          <Route path="/guest/:id" element={<GuestDetails/>}/>
+          <Route path="/guest" element={<Guest/>} />
+          <Route path="/guest/:id" element={<GuestDetails/>} />
         </Routes>
         
       </Router>

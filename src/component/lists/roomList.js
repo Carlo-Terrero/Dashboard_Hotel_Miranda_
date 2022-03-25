@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -126,9 +127,11 @@ const BtnRed = styled(BtnGreen)`
 
 export const RoomList = (props) => {
 
+    const navigate = useNavigate();
 
     const handleClick = (date) => {
         console.log('hola', date)
+        navigate(`${date}`)
     }
 
     return(
@@ -154,7 +157,7 @@ export const RoomList = (props) => {
             </Container>
 
             {props.rooms.map((room,i) => 
-                <ContainerRooms key={i} onClick={() => handleClick(i)}>
+                <ContainerRooms key={i} onClick={() => handleClick(room.id)}>
                     <DivCheckRooms>                    
                         <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
 
