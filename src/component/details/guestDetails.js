@@ -7,7 +7,7 @@ export const GuestDetails = () => {
 
     return (
         <div>
-            <p>Hola tralalal {id}</p>
+            <p>Soy guest {id}</p>
         </div>
     )
 }
