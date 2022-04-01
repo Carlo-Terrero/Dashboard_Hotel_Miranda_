@@ -8,7 +8,6 @@ import { Paginador } from "../comun/paginador";
 import { IoIosArrowDown } from "react-icons/io";
 
 const DivBase = styled.div`
-    background: #8080800d;
     padding: 2rem;
 `;
 

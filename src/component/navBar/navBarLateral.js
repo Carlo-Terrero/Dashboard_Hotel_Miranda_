@@ -34,6 +34,11 @@ const Div = styled.div`
     color: #318431ab;
     display: flex;
     gap: 1rem;
+
+    a{
+        text-decoration: none;
+        color: black;
+    }
 `;
 
 const Div2 = styled(Div)`

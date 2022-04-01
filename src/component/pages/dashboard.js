@@ -7,7 +7,6 @@ import styled from "styled-components";
 import { RiCalendarCheckLine } from "react-icons/ri";
 
 const DivBase = styled.div`
-    background: #8080800d;
     padding: 2rem;
 `;
 

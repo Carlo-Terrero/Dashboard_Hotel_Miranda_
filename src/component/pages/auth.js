@@ -80,17 +80,17 @@ export const Auth = (props) => {
                     <label>
                         <p>Email:</p>
                         {/* <input type="email" value={email} onChange={handleChangeEmail}/> */}
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                        <input class='mail' type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                         
                     </label>
 
                     <label>
                         <p>Pasword:</p>
-                        <input type="pasword" value={pass} onChange={(e) => setPass(e.target.value)}/>
+                        <input class='pass' type="password" value={pass} onChange={(e) => setPass(e.target.value)}/>
                     </label>
 
                     {/* <input type="submit" value="Submit" /> */}
-                    <button type="submit">sumit</button>
+                    <button class='sumit' type="submit">sumit</button>
                 </Form>
                
                {/* {auth ? <p>Log in</p> : <p>Log out</p>} */}
