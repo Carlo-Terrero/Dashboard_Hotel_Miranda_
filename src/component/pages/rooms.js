@@ -4,8 +4,7 @@ import styled from "styled-components";
 import { RoomList } from "../lists/roomList";
 import { roomsData } from "../data/rooms";
 import { Paginador } from "../comun/paginador";
-
-import { IoIosArrowDown } from "react-icons/io";
+import { Btn_NewEst } from "../comun/btn-newest";
 
 const DivBase = styled.div`
     padding: 2rem;
@@ -48,19 +47,6 @@ const NewRoom = styled.button`
    
 `;
 
-const Newest = styled(NewRoom)`
-    display: flex;
-    color: #013401;
-    background: white;
-    border: #013401 1px solid;
-    gap: 0.5rem;
-    width: 120px;
-`;
-
-const DivIcon = styled.div`
-    color: grey;
-    font-size: 1rem;
-`;
 
 export const Rooms = () =>{
     
@@ -81,9 +67,8 @@ export const Rooms = () =>{
                             + New Room
                         </NewRoom>
 
-                        <Newest>
-                            Newest <DivIcon><IoIosArrowDown/></DivIcon>
-                        </Newest>
+                        <Btn_NewEst/>
+                        
                     </ControlDiv>
                    
                 </ControlDiv>

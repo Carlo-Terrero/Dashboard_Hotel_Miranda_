@@ -5,6 +5,8 @@ import { GuesteList } from "../lists/guestList";
 import { guestData } from "../data/guest";
 import { Paginador } from "../comun/paginador";
 
+import { Btn_NewEst } from "../comun/btn-newest";
+
 import { IoIosArrowDown } from "react-icons/io";
 
 const DivBase = styled.div`
@@ -49,20 +51,6 @@ const NewRoom = styled.button`
     gap: 0.5rem;
 `;
 
-const Newest = styled(NewRoom)`
-    display: flex;
-    color: #013401;
-    background: white;
-    border: #013401 1px solid;
-    gap: 0.5rem;
-    width: 120px;
-`;
-
-const DivIcon = styled.div`
-    color: grey;
-    font-size: 1rem;
-`;
-
 export const Guest = () =>{
 
     
@@ -84,9 +72,8 @@ export const Guest = () =>{
                             <IoIosArrowDown/>
                         </NewRoom>
 
-                        <Newest>
-                            Newest <DivIcon><IoIosArrowDown/></DivIcon>
-                        </Newest>
+                        <Btn_NewEst/>
+                        
                     </ControlDiv>
                    
                 </ControlDiv>

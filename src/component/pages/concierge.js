@@ -4,8 +4,7 @@ import styled from "styled-components";
 import { ConciergeList } from "../lists/conciergeList";
 import { conciersgeData } from "../data/concierge"
 import { Paginador } from "../comun/paginador";
-
-import { IoIosArrowDown } from "react-icons/io";
+import { Btn_NewEst } from "../comun/btn-newest";
 
 const DivBase = styled.div`
     padding: 2rem;
@@ -48,19 +47,6 @@ const NewRoom = styled.button`
    
 `;
 
-const Newest = styled(NewRoom)`
-    display: flex;
-    color: #013401;
-    background: white;
-    border: #013401 1px solid;
-    gap: 0.5rem;
-    width: 120px;
-`;
-
-const DivIcon = styled.div`
-    color: grey;
-    font-size: 1rem;
-`;
 
 export const Concierge = () =>{
 
@@ -82,9 +68,10 @@ export const Concierge = () =>{
                             + New Employee
                         </NewRoom>
 
-                        <Newest>
+                        <Btn_NewEst/>
+                        {/* <Newest>
                             Newest <DivIcon><IoIosArrowDown/></DivIcon>
-                        </Newest>
+                        </Newest> */}
                     </ControlDiv>
                    
                 </ControlDiv>
