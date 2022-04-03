@@ -4,7 +4,9 @@ import styled from "styled-components";
 import { ConciergeList } from "../lists/conciergeList";
 import { conciersgeData } from "../data/concierge"
 import { Paginador } from "../comun/paginador";
-import { Btn_NewEst } from "../comun/btn-newest";
+import { BtnNewEst } from "../comun/btnNewEst";
+import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
+
 
 const DivBase = styled.div`
     padding: 2rem;
@@ -22,19 +24,6 @@ const ControlDiv = styled.div`
     margin-bottom: 0.3rem;
 `;
 
-const MiniDiv = styled(ControlDiv)`
-    justify-content: space-between; 
-    gap: 0;   
-`;
-
-const P = styled.p`
-    border-bottom: #80808075 1px solid;
-    color: #464444;
-    padding-bottom: 1rem;
-    width: 10rem;
-    text-align: center;
-`;
-
 const NewRoom = styled.button`
     color: white;
     background: #013401;
@@ -44,31 +33,34 @@ const NewRoom = styled.button`
     height: 2.5rem;
     justify-content: center;
     align-items: center;
-   
 `;
 
 
 export const Concierge = () =>{
-
+    
+    const selectores = ['All Employee', 'Active Employee', 'Inactive Employee']
     
     return (
         <DivBase>
             <Div>
                 <ControlDiv>
-                    <MiniDiv>
+
+                    <SelectorGreenMenu selectores={selectores}/>
+
+                    {/* <MiniDiv>
                         <P>All Employee</P>
                         
                         <P>Active Employee</P>
                         
                         <P>Inactive Employee</P>
-                    </MiniDiv>                         
+                    </MiniDiv>  */}                        
 
                     <ControlDiv>
                         <NewRoom>
                             + New Employee
                         </NewRoom>
 
-                        <Btn_NewEst/>
+                        <BtnNewEst/>
                         {/* <Newest>
                             Newest <DivIcon><IoIosArrowDown/></DivIcon>
                         </Newest> */}

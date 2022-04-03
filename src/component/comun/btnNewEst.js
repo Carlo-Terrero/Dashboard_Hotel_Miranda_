@@ -31,7 +31,7 @@ const DivIcon = styled.div`
     font-size: 1.5em;
 `;
 
-export const Btn_NewEst = () => {
+export const BtnNewEst = () => {
 
     return(
         <Newest>

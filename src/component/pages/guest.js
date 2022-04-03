@@ -5,7 +5,8 @@ import { GuesteList } from "../lists/guestList";
 import { guestData } from "../data/guest";
 import { Paginador } from "../comun/paginador";
 
-import { Btn_NewEst } from "../comun/btn-newest";
+import { BtnNewEst } from "../comun/btnNewEst";
+import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
 
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -25,19 +26,6 @@ const ControlDiv = styled.div`
     margin-bottom: 0.3rem;
 `;
 
-const MiniDiv = styled(ControlDiv)`
-    justify-content: space-between; 
-    gap: 0;   
-`;
-
-const P = styled.p`
-    border-bottom: #80808075 1px solid;
-    color: #464444;
-    padding-bottom: 1rem;
-    width: 10rem;
-    text-align: center;
-`;
-
 const NewRoom = styled.button`
     color: white;
     display: flex;
@@ -53,18 +41,14 @@ const NewRoom = styled.button`
 
 export const Guest = () =>{
 
+    const selectores = ['All Guest', 'Pending', 'Booked', 'Canceled', 'Refund']
     
     return (
         <DivBase>
             <Div>
                 <ControlDiv>
-                    <MiniDiv>
-                        <P>All Guest</P>                       
-                        <P>Pending</P>
-                        <P>Booked</P>                        
-                        <P>Canceled</P>                        
-                        <P>Refund</P>
-                    </MiniDiv>                         
+
+                    <SelectorGreenMenu selectores={selectores}/>                                           
 
                     <ControlDiv>
                         <NewRoom>
@@ -72,7 +56,7 @@ export const Guest = () =>{
                             <IoIosArrowDown/>
                         </NewRoom>
 
-                        <Btn_NewEst/>
+                        <BtnNewEst/>
                         
                     </ControlDiv>
                    
