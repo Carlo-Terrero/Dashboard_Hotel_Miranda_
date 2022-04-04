@@ -18,7 +18,7 @@ const Name = styled.a`
   
 `; */
 
-export const Btn_Nav = (props) => {
+export const BtnNav = (props) => {
 
     const nameLink =  props.name.toLowerCase()
 

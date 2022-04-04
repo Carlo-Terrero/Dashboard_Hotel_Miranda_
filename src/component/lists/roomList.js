@@ -2,8 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
-
 import { AiOutlineMore } from 'react-icons/ai';
+
 
 const DivContainer = styled.div`
     display: grid; 
@@ -154,12 +154,12 @@ export const RoomList = (props) => {
                     <P>Status</P>
                 </DivCabecera>
                 
-            </Container>
+            </Container>        
 
             {props.rooms.map((room,i) => 
                 <ContainerRooms key={i} onClick={() => handleClick(room.id)}>
                     <DivCheckRooms>                    
-                        <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
+                        <Check type="checkbox" id={`cbox${i}`} value="first_checkbox" /> 
 
                         <DivImg>
                             img aqui
@@ -185,7 +185,6 @@ export const RoomList = (props) => {
                         </DivPrecio>
                         
                         <P>{room.status === true ? <BtnGreen>Available</BtnGreen> : <BtnRed>Booked</BtnRed>}</P>
-
                        
                     </Div>
 
@@ -198,6 +197,6 @@ export const RoomList = (props) => {
 
             )}
             
-            </DivContainer>
+        </DivContainer>
     )
 }

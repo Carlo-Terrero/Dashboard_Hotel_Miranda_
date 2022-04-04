@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -37,8 +38,11 @@ const Button = styled.button`
 
 export const BoxUser = () => {
 
+    const navigate = useNavigate();
+
     const handleClick = () => {
-        console.log('contact us')
+        //console.log('contact us')
+        navigate('/user');
     }
 
     return(

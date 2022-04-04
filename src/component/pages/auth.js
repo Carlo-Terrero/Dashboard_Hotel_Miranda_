@@ -75,7 +75,6 @@ export const Auth = (props) => {
         <DivBase>
             <Div>
                 
-
                 <Form onSubmit={handleSubmit}>
                     <label>
                         <p>Email:</p>

@@ -45,15 +45,7 @@ export const Concierge = () =>{
             <Div>
                 <ControlDiv>
 
-                    <SelectorGreenMenu selectores={selectores}/>
-
-                    {/* <MiniDiv>
-                        <P>All Employee</P>
-                        
-                        <P>Active Employee</P>
-                        
-                        <P>Inactive Employee</P>
-                    </MiniDiv>  */}                        
+                    <SelectorGreenMenu selectores={selectores}/>                               
 
                     <ControlDiv>
                         <NewRoom>
@@ -61,9 +53,7 @@ export const Concierge = () =>{
                         </NewRoom>
 
                         <BtnNewEst/>
-                        {/* <Newest>
-                            Newest <DivIcon><IoIosArrowDown/></DivIcon>
-                        </Newest> */}
+                        
                     </ControlDiv>
                    
                 </ControlDiv>

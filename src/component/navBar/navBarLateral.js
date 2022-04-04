@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Btn_Nav } from '../comun/btn-nav';
+import { BtnNav } from '../comun/btn-nav';
 import { BoxUser } from '../comun/boxUser';
 
 import styled from "styled-components";
@@ -65,7 +65,7 @@ export const NavBarLateral = () => {
                     <MdOutlineDashboard/>
                 </IconDiv>
 
-                <Btn_Nav name={"Dashboard"} />
+                <BtnNav name={"Dashboard"} />
             </Div>
 
             <Div>
@@ -73,7 +73,7 @@ export const NavBarLateral = () => {
                     <RiKey2Line/>
                 </Rotador>
                 
-                <Btn_Nav name={"Rooms"} />
+                <BtnNav name={"Rooms"} />
             </Div>
 
             <Div>
@@ -81,7 +81,7 @@ export const NavBarLateral = () => {
                     <RiCalendarCheckLine/>
                 </IconDiv>
 
-                <Btn_Nav name={"Bookings"} />
+                <BtnNav name={"Bookings"} />
             </Div>
 
             <Div>
@@ -89,7 +89,7 @@ export const NavBarLateral = () => {
                     <FaRegUser/>
                 </IconDiv>                    
                 
-                <Btn_Nav name={"Guest"} />                
+                <BtnNav name={"Guest"} />                
             </Div>
             
             <Div>
@@ -97,7 +97,7 @@ export const NavBarLateral = () => {
                     <RiKey2Line/>
                 </IconDiv>
 
-                <Btn_Nav name={"Concierge"} />
+                <BtnNav name={"Concierge"} />
             </Div>
 
 
