@@ -23,6 +23,8 @@ const reducer = (state, action) => {
       return {...state, email: action.value}
     case 'AUTH':
       return {...state, auth: action.value}
+    default:
+      return state
   }
 }
 
@@ -33,14 +35,12 @@ const initialState = {
   auth: false,
 }
 
-// Inicializacion de reducer
-//const [state, dispatch] = useReducer(reducer, initialState)
-
 // Configuracion del Context
 export const LogingContext = createContext(initialState);
 
 function App() {  
 
+  // Inicializacion de reducer
   const [state, dispatch] = useReducer(reducer, initialState)
 
   return (

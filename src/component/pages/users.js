@@ -8,11 +8,11 @@ export const User = () =>{
     
     return (
         <div>
-            Mi nombre es {dataUser.name}
+            Nombre de usuario: {dataUser.name}
             <br/>
-            Mi correo es {dataUser.email} 
+            Correo del usuario: {dataUser.email} 
             <br/>
-            Estado {dataUser.auth ? 'activa' : 'in-activo'}
+            Estado de la cuenta {dataUser.auth ? 'Activa' : 'IN-ACTIVA'}
         </div>
     )
 }
