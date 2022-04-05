@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, createContext} from 'react';
 import {BrowserRouter as Router , Routes, Route } from 'react-router-dom';
 
 import { NavBarSuperior } from './navBar/navBarSuperior';
@@ -13,35 +13,56 @@ import { GuestDetails } from "./details/guestDetails";
 import { ConsciergeDetail } from "./details/consciergeDetail";
 import { RoomDetails } from "./details/roomDetails";
 
-function App() {
+const userlog = {
+  name: 'no logg',
+  email: 'no logg mail',
+  auth: false,
+}
+
+export const LogingContext = createContext(userlog);
+
+function App() {  
+
+  const userloging = {
+    name: 'Tego Calderon',
+    email: 'Tego@gmail.com',
+    auth: true,
+  }
 
   const [auth, setAuth] = useState(false);
 
   return (
     <div className="App">
-      <Router>
-        <NavBarSuperior auth={auth} setAuth={setAuth} />
+      <LogingContext.Provider
+          value={userloging}
+          >
 
-        <Routes>
+        <Router>
 
-          <Route path="/"  element={<Auth setAuth={setAuth} auth={auth}/>} />
-          <Route path='/dashboard' element={<Dashboard/>} />
+          <NavBarSuperior auth={auth} setAuth={setAuth} />
 
-          <Route path="/bookings" element={<Bookings/>} />
+          <Routes>
 
-          <Route path="/rooms" element={<Rooms/>} />
-          <Route path="/rooms/:id" element={<RoomDetails/>} />
+            <Route path="/"  element={<Auth setAuth={setAuth} auth={auth}/>} />
+            <Route path='/dashboard' element={<Dashboard/>} />
 
-          <Route path="/concierge" element={<Concierge/>} />
-          <Route path="/concierge/:id" element={<ConsciergeDetail/>} />
+            <Route path="/bookings" element={<Bookings/>} />
+
+            <Route path="/rooms" element={<Rooms/>} />
+            <Route path="/rooms/:id" element={<RoomDetails/>} />
+
+            <Route path="/concierge" element={<Concierge/>} />
+            <Route path="/concierge/:id" element={<ConsciergeDetail/>} />
+            
+            <Route path="/user" element={<User/>} />
+
+            <Route path="/guest" element={<Guest/>} />
+            <Route path="/guest/:id" element={<GuestDetails/>} />
+          </Routes>
           
-          <Route path="/user" element={<User/>} />
-
-          <Route path="/guest" element={<Guest/>} />
-          <Route path="/guest/:id" element={<GuestDetails/>} />
-        </Routes>
-        
-      </Router>
+        </Router>
+      </LogingContext.Provider>
+      
     </div>
   );
 }

@@ -79,17 +79,17 @@ export const Auth = (props) => {
                     <label>
                         <p>Email:</p>
                         {/* <input type="email" value={email} onChange={handleChangeEmail}/> */}
-                        <input class='mail' type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                        <input className='mail' type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                         
                     </label>
 
                     <label>
                         <p>Pasword:</p>
-                        <input class='pass' type="password" value={pass} onChange={(e) => setPass(e.target.value)}/>
+                        <input className='pass' type="password" value={pass} onChange={(e) => setPass(e.target.value)}/>
                     </label>
 
                     {/* <input type="submit" value="Submit" /> */}
-                    <button class='sumit' type="submit">sumit</button>
+                    <button className='sumit' type="submit">sumit</button>
                 </Form>
                
                {/* {auth ? <p>Log in</p> : <p>Log out</p>} */}
@@ -98,7 +98,6 @@ export const Auth = (props) => {
                 <p>hols {props.auth === true ? 'in' : 'out'}</p>
                 <p>Email: carlos@gmail.com</p>
                 <p>Pass: ponko</p>
-                {console.log(props)}
             </Div>
         </DivBase>
     )

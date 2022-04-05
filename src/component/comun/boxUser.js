@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
+
+import {LogingContext} from '../App'
 
 const Div = styled.div`
     display: grid;
@@ -15,6 +17,7 @@ const Div = styled.div`
 `;
 
 const ImgDiv = styled.div`
+    
     background: grey;
     height: 7rem;
     border-radius: 15px;
@@ -38,21 +41,25 @@ const Button = styled.button`
 
 export const BoxUser = () => {
 
+    const dataUser = useContext(LogingContext);
+    
+
     const navigate = useNavigate();
 
     const handleClick = () => {
-        //console.log('contact us')
         navigate('/user');
     }
 
     return(
         <Div>
-            <ImgDiv>
-                img aqui
-            </ImgDiv>
-            <H4>name name</H4>
-            <P>mail@mail.com</P>
-            <Button onClick={handleClick}><b>contact Us</b></Button>
+            <div>
+                <ImgDiv>
+                    img aqui
+                </ImgDiv>
+                <H4>{dataUser.name}</H4>
+                <P>{dataUser.email}</P>
+                <Button onClick={handleClick}><b>contact Us</b></Button>
+            </div>
         </Div>
     )
 }

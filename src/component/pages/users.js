@@ -1,30 +1,24 @@
 import React, { useContext } from "react"
-import UserContext from "../context/userContext";
+import { LogingContext } from "../App"
 
-/**/
-import { Toolbar } from "../ejemplo/toolbar";
+export const User = () =>{
 
-import {MyContext} from "./bookings";
+    const dataUser = useContext(LogingContext);
 
-export const User1 = () =>{
     
-    //cons este hook accedemos al dato del context
-    //console.log(MyContext)
-    const date = useContext(MyContext);
-    {console.log('las props ',date)}
-    console.log(date);
-
     return (
         <div>
-            Soy User con {date.name}
+            Mi nombre es {dataUser.name}
             <br/>
-            Soy User con {date.email}
+            Mi correo es {dataUser.email} 
+            <br/>
+            Estado {dataUser.auth ? 'activa' : 'in-activo'}
         </div>
     )
 }
 
 /*------------------------------------------------------------------------------------*/
-
+/*
 const themes = {
     light: {
       foreground: "#000000",
@@ -38,7 +32,7 @@ const themes = {
   
     export const ThemeContext = React.createContext(themes.light);
   
-    export const User = () => {
+    export const User1 = () => {
         return (
             <ThemeContext.Provider value={themes.dark}>
                 <Toolbar />
