@@ -14,7 +14,7 @@ import { ConsciergeDetail } from "./details/consciergeDetail";
 import { RoomDetails } from "./details/roomDetails";
 
 // Configuracion de del Reducer
-//Esta es la funcion que se encarga de gestionar los datos con los que trabajaremos
+// Esta es la funcion que se encarga de gestionar los datos con los que trabajaremos
 const reducer = (state, action) => {
   switch (action.type) {
     case 'NAME':
@@ -67,7 +67,7 @@ function App() {
             <Route path="/concierge" element={<Concierge/>} />
             <Route path="/concierge/:id" element={<ConsciergeDetail/>} />
             
-            <Route path="/user" element={<User/>} />
+            <Route path="/user" element={<User dispatch={dispatch}/>} />
 
             <Route path="/guest" element={<Guest/>} />
             <Route path="/guest/:id" element={<GuestDetails/>} />
