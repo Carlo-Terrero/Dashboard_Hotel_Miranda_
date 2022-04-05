@@ -1,4 +1,4 @@
-import React, {useState, createContext} from 'react';
+import React, {useReducer, createContext} from 'react';
 import {BrowserRouter as Router , Routes, Route } from 'react-router-dom';
 
 import { NavBarSuperior } from './navBar/navBarSuperior';
@@ -13,37 +13,50 @@ import { GuestDetails } from "./details/guestDetails";
 import { ConsciergeDetail } from "./details/consciergeDetail";
 import { RoomDetails } from "./details/roomDetails";
 
-const userlog = {
+// Configuracion de del Reducer
+//Esta es la funcion que se encarga de gestionar los datos con los que trabajaremos
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'NAME':
+      return {...state, name: action.value}
+    case 'EMAIL':
+      return {...state, email: action.value}
+    case 'AUTH':
+      return {...state, auth: action.value}
+  }
+}
+
+//Datos iniciales
+const initialState = {
   name: 'no logg',
   email: 'no logg mail',
   auth: false,
 }
 
-export const LogingContext = createContext(userlog);
+// Inicializacion de reducer
+//const [state, dispatch] = useReducer(reducer, initialState)
+
+// Configuracion del Context
+export const LogingContext = createContext(initialState);
 
 function App() {  
 
-  const userloging = {
-    name: 'Tego Calderon',
-    email: 'Tego@gmail.com',
-    auth: true,
-  }
-
-  const [auth, setAuth] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
     <div className="App">
       <LogingContext.Provider
-          value={userloging}
+            value={state}
+          /* value={userloging} */
           >
 
         <Router>
 
-          <NavBarSuperior auth={auth} setAuth={setAuth} />
+          <NavBarSuperior dispatch={dispatch} />
 
           <Routes>
 
-            <Route path="/"  element={<Auth setAuth={setAuth} auth={auth}/>} />
+            <Route path="/"  element={<Auth dispatch={dispatch}/>} />
             <Route path='/dashboard' element={<Dashboard/>} />
 
             <Route path="/bookings" element={<Bookings/>} />

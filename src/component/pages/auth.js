@@ -53,7 +53,6 @@ export const Auth = (props) => {
     
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');   
-    /* const [auth, setAuth] = useState(false); */
 
     const navigate =  useNavigate();
 
@@ -62,7 +61,10 @@ export const Auth = (props) => {
         e.preventDefault();
 
         if (email === "carlos@gmail.com" && pass === "ponko"){
-            props.setAuth(true);
+            props.dispatch({type: 'NAME', value: 'Tego Calderon'});
+            props.dispatch({type: 'EMAIL', value: 'tego@calderon.com'})
+            props.dispatch({type: 'AUTH', value: true})
+            
             navigate('/dashboard');
             
         }else{
@@ -77,10 +79,8 @@ export const Auth = (props) => {
                 
                 <Form onSubmit={handleSubmit}>
                     <label>
-                        <p>Email:</p>
-                        {/* <input type="email" value={email} onChange={handleChangeEmail}/> */}
-                        <input className='mail' type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                        
+                        <p>Email:</p>                        
+                        <input className='mail' type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>                        
                     </label>
 
                     <label>
@@ -88,16 +88,13 @@ export const Auth = (props) => {
                         <input className='pass' type="password" value={pass} onChange={(e) => setPass(e.target.value)}/>
                     </label>
 
-                    {/* <input type="submit" value="Submit" /> */}
                     <button className='sumit' type="submit">sumit</button>
                 </Form>
-               
-               {/* {auth ? <p>Log in</p> : <p>Log out</p>} */}
-
                
                 <p>hols {props.auth === true ? 'in' : 'out'}</p>
                 <p>Email: carlos@gmail.com</p>
                 <p>Pass: ponko</p>
+                
             </Div>
         </DivBase>
     )

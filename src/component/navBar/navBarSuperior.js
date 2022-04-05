@@ -1,6 +1,9 @@
-import React, {useState} from "react";
-import styled from "styled-components";
+import React, {useState, useContext} from "react";
+import { LogingContext } from "../App";
 import { useNavigate } from "react-router-dom";
+
+
+import styled from "styled-components";
 
 //Icons
 import {FiAlignJustify, FiBell} from "react-icons/fi";
@@ -36,18 +39,21 @@ const P = styled.p`
 
 export const NavBarSuperior = (props) => {
 
+    const dataLoggingContext = useContext(LogingContext);
     const navigate = useNavigate();
-
     const [ menuLateral, setMenuLateral] = useState(false)
    
+
     const handleClick = () => {
         menuLateral ? setMenuLateral(false) : setMenuLateral(true)
     }
 
     const handleAut = () => {
-        props.setAuth(false);
+        props.dispatch({ type: 'AUTH', value: false});
         navigate('/');
     }
+
+    
 
     return(
         <>
@@ -64,7 +70,7 @@ export const NavBarSuperior = (props) => {
             
                     <Div>
                         <FiAlignJustify onClick={handleClick}/>
-                            Log {props.auth === true ? 'in' : 'out'} 
+                            Log {dataLoggingContext.auth ? 'in' : 'out'} 
                     </Div>
                 </Div>
 
@@ -72,7 +78,7 @@ export const NavBarSuperior = (props) => {
                     <ImEnvelop />
                     <FiBell />
                     {/* <IoIosLogOut onClick={props.setAuth(false)}/> */}
-                    {props.auth === true ? 
+                    {dataLoggingContext.auth ? 
                         <IoIosLogOut onClick={handleAut}/> :
                         null
                     }
