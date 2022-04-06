@@ -46,15 +46,11 @@ const DivCabecera = styled(Div)`
     margin-right: 2rem;
 `;
 
-const DivMid = styled(Div)`
+/* const DivMid = styled(Div)`
     width: 37rem;
     gap: 7rem;
     margin-left: -4rem;
-`;
-
-const DivMidDatos = styled(DivMid)`
-    margin-left: 0;
-`;
+`; */
 
 const DivCheck = styled(Div)`
     align-items: baseline;

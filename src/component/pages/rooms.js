@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+
+import {roomsListDate} from '../slice/roomSlices';
 
 import { RoomList } from "../lists/roomList";
-import { roomsData } from "../data/rooms";
+//import { roomsData } from "../data/rooms";//Este sera el que se borre
 import { Paginador } from "../comun/paginador";
 import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
@@ -39,6 +42,10 @@ export const Rooms = () =>{
 
     const selectores = ['All Rooms', 'Active Employee', 'Inactive Employee']
     
+    const roomsList = useSelector(roomsListDate);
+
+    console.log(roomsList)
+
     return (
         <DivBase>
             <Div>
@@ -58,9 +65,9 @@ export const Rooms = () =>{
                 </ControlDiv>
 
                 <div>
-                    <RoomList rooms={roomsData}/>                    
+                    <RoomList rooms={roomsList}/>                    
                 </div>
-
+                
                 <Paginador paginas={8}/>
 
             </Div>

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { EjemReducer } from "../ejemplo/ejemReducer";
+import { EjemRedux } from "../ejemplo/ejemRedux";
 
 import styled from "styled-components";
 
@@ -22,7 +23,7 @@ export const Bookings = () =>{
             <EjemReducer/>
             
             <br/>
-
+            <EjemRedux />
             
         </Div>
     )
