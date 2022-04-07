@@ -1,4 +1,12 @@
 import React, {useState, useContext } from "react";
+import {useSelector, useDispatch} from 'react-redux';
+
+import {
+    addUser,
+    deleteUser,
+    editUser,
+    getOneUser,
+} from '../slice/userSlice';
 import { LogingContext } from "../App";
 
 export const User = (props) =>{
@@ -6,6 +14,8 @@ export const User = (props) =>{
     const [newName, setNewName] = useState('')
     const [newEmail, setNesEmail] = useState('')
     const dataUser = useContext(LogingContext);
+
+    const dispatch = useDispatch();
 
     const handleClickChance = () => {
 
@@ -20,8 +30,13 @@ export const User = (props) =>{
         console.log('clickcado')
     }
 
-    /* console.log(newName)
-    console.log(newEmail) */
+    const handleDate = () => {
+        console.log('Data User');
+        dispatch(addUser());
+        dispatch(deleteUser());
+        dispatch(editUser());
+        dispatch(getOneUser())
+    }
 
     return (
         <div>
@@ -47,8 +62,8 @@ export const User = (props) =>{
                 <button onClick={() => handleClickChance()}>Cambiar Datos</button>
             </div>
 
-            
-            
+            <button onClick={handleDate}>Infor por consola</button>
+
         </div>
     )
 }
