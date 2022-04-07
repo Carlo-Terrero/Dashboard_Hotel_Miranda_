@@ -9,20 +9,21 @@ export const roomSlice = createSlice({
     },
 
     reducers: {
-        addRoom: (state) => {
+        addRoom: (state, action) => {
             console.log('Room añadida');
         },
 
-        deleteRoom: (state) => {
+        deleteRoom: (state, action) => {
             console.log('delete room');
         },
 
-        editRoom: (state) => {
-            console.log('edit foto');
+        editRoom: (state, action) => {
+            console.log('edit room');
         },
 
-        getOneElemen: (state) => {
-            console.log(`select 1 foto`);
+        //Cambiar nombre getOneRoon
+        getOneElemen: (state, action) => {
+            console.log(`select 1 room`);
         },
         
     },

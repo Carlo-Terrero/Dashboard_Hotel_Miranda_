@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deleteConcierge} from '../slice/consiergeSlice';
 
 import styled from 'styled-components';
 
@@ -138,8 +140,16 @@ export const ConciergeList = (props) => {
 
     const navigate = useNavigate();
 
+    const dispatch = useDispatch();
+
     const handleClick = (id) => {        
         navigate(`${id}`);
+    }
+
+    const handleClickPoint = () => {
+        dispatch(deleteConcierge())
+        console.log('kk')
+        
     }
 
     return(
@@ -164,8 +174,8 @@ export const ConciergeList = (props) => {
             </Container>
 
             {props.concierges.map((concierge,i) => 
-                <ContainerRooms key={i} onClick={() => handleClick(concierge.id)}>
-                    <DivCheckRooms>                    
+                <ContainerRooms key={i} >
+                    <DivCheckRooms onClick={() => handleClick(concierge.id)}>                    
                         <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
 
                         <DivImg>
@@ -201,11 +211,10 @@ export const ConciergeList = (props) => {
                         </DivPrecio>
                         
                         <P>{concierge.status === true ? <PGreen>ACTIVE</PGreen> : <PRed>INACTIVE</PRed>}</P>
-
                        
                     </Div>
 
-                    <DivMenuPuntos>
+                    <DivMenuPuntos onClick={handleClickPoint}>
                         {<AiOutlineMore/>}
                     </DivMenuPuntos>
                    

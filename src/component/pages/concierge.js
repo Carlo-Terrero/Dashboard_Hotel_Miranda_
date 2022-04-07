@@ -1,8 +1,16 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { 
+    addConcierge,
+    editConcierge,
+    getOneConcierge,
+    conciergesListDate,
+} from "../slice/consiergeSlice";
+
 import styled from "styled-components";
 
 import { ConciergeList } from "../lists/conciergeList";
-import { conciersgeData } from "../data/concierge"
 import { Paginador } from "../comun/paginador";
 import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
@@ -39,7 +47,17 @@ const NewRoom = styled.button`
 export const Concierge = () =>{
     
     const selectores = ['All Employee', 'Active Employee', 'Inactive Employee']
+
+    const conciergeListDate = useSelector(conciergesListDate);
+    const dispatch = useDispatch();
     
+    const handleClickNewConcierge = () => {
+        console.log('kks')
+        dispatch(addConcierge())
+        dispatch(editConcierge())
+        dispatch(getOneConcierge())
+    }
+
     return (
         <DivBase>
             <Div>
@@ -48,7 +66,7 @@ export const Concierge = () =>{
                     <SelectorGreenMenu selectores={selectores}/>                               
 
                     <ControlDiv>
-                        <NewRoom>
+                        <NewRoom onClick={handleClickNewConcierge}>
                             + New Employee
                         </NewRoom>
 
@@ -59,7 +77,7 @@ export const Concierge = () =>{
                 </ControlDiv>
 
                 <div>
-                    <ConciergeList concierges={conciersgeData}/>                    
+                    <ConciergeList concierges={conciergeListDate}/>                    
                 </div>
 
                 <Paginador paginas={8}/>

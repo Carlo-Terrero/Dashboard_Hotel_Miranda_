@@ -1,5 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { deleteRoom } from '../slice/roomSlices';
 
 import styled from 'styled-components';
 import { AiOutlineMore } from 'react-icons/ai';
@@ -129,11 +132,18 @@ export const RoomList = (props) => {
 
     const navigate = useNavigate();
 
+    const dispatch = useDispatch();
+
     const handleClick = (date) => {
         console.log('hola', date)
         navigate(`${date}`)
     }
 
+    const saludo = () => {
+        dispatch(deleteRoom())
+        console.log('puntos');
+    }
+    
     return(
         <DivContainer>
             <Container>
@@ -157,8 +167,8 @@ export const RoomList = (props) => {
             </Container>        
 
             {props.rooms.map((room,i) => 
-                <ContainerRooms key={i} onClick={() => handleClick(room.id)}>
-                    <DivCheckRooms>                    
+                <ContainerRooms key={i} >
+                    <DivCheckRooms onClick={() => handleClick(room.id)}>                    
                         <Check type="checkbox" id={`cbox${i}`} value="first_checkbox" /> 
 
                         <DivImg>
@@ -188,8 +198,8 @@ export const RoomList = (props) => {
                        
                     </Div>
 
-                    <DivMenuPuntos>
-                        {<AiOutlineMore></AiOutlineMore>}
+                    <DivMenuPuntos onClick={saludo}>
+                        {<AiOutlineMore/>}
                     </DivMenuPuntos>
                    
                     

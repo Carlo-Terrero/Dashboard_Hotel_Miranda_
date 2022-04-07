@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import {roomsListDate} from '../slice/roomSlices';
+import {
+    roomsListDate,
+    addRoom,
+    editRoom,
+    getOneElemen
+} from '../slice/roomSlices';
 
 import { RoomList } from "../lists/roomList";
 //import { roomsData } from "../data/rooms";//Este sera el que se borre
@@ -42,9 +47,17 @@ export const Rooms = () =>{
 
     const selectores = ['All Rooms', 'Active Employee', 'Inactive Employee']
     
+    const dispatch = useDispatch();
     const roomsList = useSelector(roomsListDate);
 
-    console.log(roomsList)
+    const handleClickNewRoom = () => {
+        console.log('kk')
+        dispatch(addRoom());
+        dispatch(editRoom());
+        dispatch(getOneElemen());
+
+        // onCLick={ ()=> {dispatch(addRoom())} } ----Si lo quieres hacer en una sola linea
+    }
 
     return (
         <DivBase>
@@ -54,7 +67,7 @@ export const Rooms = () =>{
                     <SelectorGreenMenu selectores={selectores}/>                                 
 
                     <ControlDiv>
-                        <NewRoom>
+                        <NewRoom onClick={handleClickNewRoom}>
                             + New Room
                         </NewRoom>
 
