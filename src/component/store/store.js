@@ -2,7 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '../slice/counterSlice';
 import roomReducer from '../slice/roomSlices';
-import conciergeReducer from '../slice/consiergeSlice';
+import conciergeReducer from '../slice/conciergeSlice';
 import userSlice from '../slice/userSlice';
 import bookingSlice from '../slice/bookingSlice';
 

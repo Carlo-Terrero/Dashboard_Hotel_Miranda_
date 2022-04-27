@@ -14,7 +14,17 @@ export function EjemRedux() {
     ) */
   const count = useSelector(selectCount)
   const dispatch = useDispatch()
-  const [incrementAmount, setIncrementAmount] = useState('2')
+  const [incrementAmount, setIncrementAmount] = useState(2)
+  const [numPausado, setNumPausado] = useState(4)
+
+  const pausado = () =>{
+    console.log('hola')
+
+    
+    setTimeout(() => {
+      dispatch(incrementByAmount(Number(numPausado) || 0))
+    }, 1000);
+  }
 
   return (
     <div>
@@ -26,7 +36,11 @@ export function EjemRedux() {
         >
           +
         </button>
-        <span >{count}</span>
+
+        <span >
+          {count}
+        </span>
+
         <button
           
           aria-label="Decrement value"
@@ -34,18 +48,17 @@ export function EjemRedux() {
         >
           -
         </button>
+
       </div>
-            {/* omit additional rendering output here */}
 
       <div >
         <input
           
-          aria-label="Set increment amount"
           value={incrementAmount}
           onChange={e => setIncrementAmount(e.target.value)}
         />
+
         <button
-          
           onClick={() =>
             dispatch(incrementByAmount(Number(incrementAmount) || 0))
           }
@@ -53,6 +66,20 @@ export function EjemRedux() {
           Add Amount
         </button>
        
+      </div>
+
+      <div>
+
+        <input
+          value={numPausado}
+          onChange={(e) => setNumPausado(e.target.value)}
+        />
+
+        <button
+          onClick={pausado}>
+          Añadir con pausa
+        </button>
+
       </div>
     </div>
   )

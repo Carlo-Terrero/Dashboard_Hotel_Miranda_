@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { deleteConcierge} from '../slice/consiergeSlice';
+import { deleteConcierge} from '../slice/conciergeSlice';
 
 import styled from 'styled-components';
 
@@ -172,7 +172,7 @@ export const ConciergeList = (props) => {
                 </DivCabecera>
                 
             </Container>
-
+            
             {props.concierges.map((concierge,i) => 
                 <ContainerRooms key={i} >
                     <DivCheckRooms onClick={() => handleClick(concierge.id)}>                    

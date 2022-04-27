@@ -7,6 +7,8 @@ import {
     getOneBooking,
 } from '../slice/bookingSlice';
 
+import {EjemRedux} from '../ejemplo/ejemRedux'
+
 import styled from "styled-components";
 
 const Div =  styled.div` 
@@ -33,6 +35,10 @@ export const Bookings = () =>{
             <p>Soy Bookings</p>
             
             <button onClick={handleDate}>Datos por consola</button>
+            <br/>
+            <br/>
+            <EjemRedux/>
+            
             
         </Div>
     )

@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { 
     addConcierge,
     editConcierge,
-    getOneConcierge,
     conciergesListDate,
-} from "../slice/consiergeSlice";
+    //fetchConcierge,
+} from "../slice/conciergeSlice";
 
 import styled from "styled-components";
 
@@ -49,14 +49,17 @@ export const Concierge = () =>{
     const selectores = ['All Employee', 'Active Employee', 'Inactive Employee']
 
     const conciergeListDate = useSelector(conciergesListDate);
+    //const cc = useSelector(fetchConcierge());
     const dispatch = useDispatch();
     
     const handleClickNewConcierge = () => {
         console.log('kks')
         dispatch(addConcierge())
         dispatch(editConcierge())
-        dispatch(getOneConcierge())
+        //dispatch(getOneConcierge())
     }
+    console.log(conciergeListDate)
+    console.log('ll')
 
     return (
         <DivBase>
@@ -77,7 +80,7 @@ export const Concierge = () =>{
                 </ControlDiv>
 
                 <div>
-                    <ConciergeList concierges={conciergeListDate}/>                    
+                    {/* <ConciergeList concierges={conciergeListDate}/> */}                    
                 </div>
 
                 <Paginador paginas={8}/>
