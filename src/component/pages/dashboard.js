@@ -94,22 +94,19 @@ export const Dashboard = () =>{
 
             <Div>
                {/*  <GraficoDashboar /> */}
-               <Svg />
+               {/* <Svg />
                <CircleP />
                <Circles />
                <CirclesReact />
                <AxisUno />
                <AxisDos />
-               <AxisTres /> 
+               <AxisTres />  */}
                {/* <D3BarGraph /> */}
-           
-
                {/* Mejor ejemplo */}
                <D3BarGraph />
-
             </Div>
 
-            <UseD3 />
+            {/* <UseD3 /> */}
 
         </DivBase>
 

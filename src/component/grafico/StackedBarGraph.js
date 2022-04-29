@@ -9,7 +9,6 @@ import {
   max
 } from "d3";
 import { axisRight } from "d3";
-import { axisTop } from "d3";
 
 export const StackedBarGraph = ({ datasets, keys, colors, apellido }) => {
   const [data, setData] = useState(datasets);

@@ -13,7 +13,7 @@ export const User = (props) =>{
 
     const [newName, setNewName] = useState('')
     const [newEmail, setNesEmail] = useState('')
-    const dataUser = useContext(LogingContext);
+    //const dataUser = useContext(LogingContext);
 
     const dispatch = useDispatch();
 
@@ -40,13 +40,13 @@ export const User = (props) =>{
 
     return (
         <div>
-            <div>
+           {/*  <div>
                 Nombre de usuario: {dataUser.name}
                 <br/>
                 Correo del usuario: {dataUser.email} 
                 <br/>
                 Estado de la cuenta {dataUser.auth ? 'Activa' : 'IN-ACTIVA'}
-            </div>
+            </div> */}
             
             <div>
                 <label>

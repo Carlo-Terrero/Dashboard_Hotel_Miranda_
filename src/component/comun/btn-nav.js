@@ -11,12 +11,6 @@ const Name = styled.a`
 `;
 
 
-/* const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: red !important;
-  
-`; */
 
 export const BtnNav = (props) => {
 

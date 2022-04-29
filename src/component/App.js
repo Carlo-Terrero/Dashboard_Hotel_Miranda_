@@ -7,9 +7,9 @@ import { Concierge } from "./pages/concierge";
 import { Dashboard } from "./pages/dashboard";
 import { User } from "./pages/users";
 import { Rooms } from "./pages/rooms";
-import { Guest } from "./pages/guest";
+//import { Guest } from "./pages/bookings";
 import { Auth } from "./pages/auth";
-import { GuestDetails } from "./details/guestDetails";
+import { BookingsDetails } from "./details/guestDetails";
 import { ConsciergeDetail } from "./details/consciergeDetail";
 import { RoomDetails } from "./details/roomDetails";
 
@@ -59,8 +59,6 @@ function App() {
             <Route path="/"  element={<Auth dispatch={dispatch}/>} />
             <Route path='/dashboard' element={<Dashboard/>} />
 
-            <Route path="/bookings" element={<Bookings/>} />
-
             <Route path="/rooms" element={<Rooms/>} />
             <Route path="/rooms/:id" element={<RoomDetails/>} />
 
@@ -69,8 +67,8 @@ function App() {
             
             <Route path="/user" element={<User dispatch={dispatch}/>} />
 
-            <Route path="/guest" element={<Guest/>} />
-            <Route path="/guest/:id" element={<GuestDetails/>} />
+            <Route path="/bookings" element={<Bookings/>} />
+            <Route path="/bookings/:id" element={<BookingsDetails/>} />
           </Routes>
           
         </Router>

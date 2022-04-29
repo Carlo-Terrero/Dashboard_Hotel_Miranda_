@@ -91,9 +91,9 @@ export const D3BarGraph = () => {
   const [keys, setKeys] = useState(allKeys);
 
   return (
-    <div>
-      <label style={{color: 'green', marginRight: '4rem'}}>Check In</label>
-      <label style={{color: 'red'}}>Check Aut</label>
+    <div style={{marginTop: '2rem'}}>
+      <label style={{color: 'green', marginRight: '4rem'}}>Check In 753</label>
+      <label style={{color: 'red'}}>Check Out 516</label>
       {/* <div className="fields" style={{ display: "flex" }}>
         {allKeys.map((key) => (
           <div key={key} className="field" style={{ display: "flex" }}>
