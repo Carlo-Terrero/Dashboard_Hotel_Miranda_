@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deleteUsers} from '../slice/userSlice';
 
 import styled from 'styled-components';
 
@@ -46,15 +48,11 @@ const DivCabecera = styled(Div)`
     margin-right: 2rem;
 `;
 
-const DivMid = styled(Div)`
+/* const DivMid = styled(Div)`
     width: 37rem;
     gap: 7rem;
     margin-left: -4rem;
-`;
-
-const DivMidDatos = styled(DivMid)`
-    margin-left: 0;
-`;
+`; */
 
 const DivCheck = styled(Div)`
     align-items: baseline;
@@ -142,8 +140,16 @@ export const ConciergeList = (props) => {
 
     const navigate = useNavigate();
 
+    const dispatch = useDispatch();
+
     const handleClick = (id) => {        
         navigate(`${id}`);
+    }
+
+    const handleClickPoint = () => {
+        dispatch(deleteUsers())
+        console.log('kk')
+        
     }
 
     return(
@@ -166,10 +172,10 @@ export const ConciergeList = (props) => {
                 </DivCabecera>
                 
             </Container>
-
+            
             {props.concierges.map((concierge,i) => 
-                <ContainerRooms key={i} onClick={() => handleClick(concierge.id)}>
-                    <DivCheckRooms>                    
+                <ContainerRooms key={i} >
+                    <DivCheckRooms onClick={() => handleClick(concierge.id)}>                    
                         <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
 
                         <DivImg>
@@ -205,11 +211,10 @@ export const ConciergeList = (props) => {
                         </DivPrecio>
                         
                         <P>{concierge.status === true ? <PGreen>ACTIVE</PGreen> : <PRed>INACTIVE</PRed>}</P>
-
                        
                     </Div>
 
-                    <DivMenuPuntos>
+                    <DivMenuPuntos onClick={handleClickPoint}>
                         {<AiOutlineMore/>}
                     </DivMenuPuntos>
                    

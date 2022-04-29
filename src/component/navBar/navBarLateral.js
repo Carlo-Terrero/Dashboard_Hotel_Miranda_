@@ -84,20 +84,20 @@ export const NavBarLateral = () => {
                 <BtnNav name={"Bookings"} />
             </Div>
 
-            <Div>
+           {/*  <Div>
                 <IconDiv>
                     <FaRegUser/>
                 </IconDiv>                    
                 
                 <BtnNav name={"Guest"} />                
-            </Div>
+            </Div> */}
             
             <Div>
                 <IconDiv>
-                    <RiKey2Line/>
+                    <FaRegUser/>
                 </IconDiv>
 
-                <BtnNav name={"Concierge"} />
+                <BtnNav name={"Users"} />
             </Div>
 
 

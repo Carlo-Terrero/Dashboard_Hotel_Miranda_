@@ -1,8 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+    roomsListDate,
+    addRoom,
+    editRoom,
+    getOneElemen
+} from '../slice/roomSlices';
 
 import { RoomList } from "../lists/roomList";
-import { roomsData } from "../data/rooms";
+//import { roomsData } from "../data/rooms";//Este sera el que se borre
 import { Paginador } from "../comun/paginador";
 import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
@@ -39,6 +47,18 @@ export const Rooms = () =>{
 
     const selectores = ['All Rooms', 'Active Employee', 'Inactive Employee']
     
+    const dispatch = useDispatch();
+    const roomsList = useSelector(roomsListDate);
+
+    const handleClickNewRoom = () => {
+        console.log('kk')
+        dispatch(addRoom());
+        dispatch(editRoom());
+        dispatch(getOneElemen());
+
+        // onCLick={ ()=> {dispatch(addRoom())} } ----Si lo quieres hacer en una sola linea
+    }
+
     return (
         <DivBase>
             <Div>
@@ -47,7 +67,7 @@ export const Rooms = () =>{
                     <SelectorGreenMenu selectores={selectores}/>                                 
 
                     <ControlDiv>
-                        <NewRoom>
+                        <NewRoom onClick={handleClickNewRoom}>
                             + New Room
                         </NewRoom>
 
@@ -58,9 +78,9 @@ export const Rooms = () =>{
                 </ControlDiv>
 
                 <div>
-                    <RoomList rooms={roomsData}/>                    
+                    <RoomList rooms={roomsList}/>                    
                 </div>
-
+                
                 <Paginador paginas={8}/>
 
             </Div>

@@ -2,7 +2,6 @@ import React, {useState, useContext} from "react";
 import { LogingContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
-
 import styled from "styled-components";
 
 //Icons
@@ -14,12 +13,13 @@ import { NavBarLateral } from "./navBarLateral";
 const Div = styled.div`
     display: flex;
     justify-content: space-between;
-    background: aqua;
+    background: white;
     align-items: center;
     padding-left: 2rem;
     padding-right: 2rem;
     gap: 2rem;
     font-size: 1.2rem;
+    
 `;
 
 const DivIcon = styled(Div)`
@@ -63,7 +63,7 @@ export const NavBarSuperior = (props) => {
             
                 <Div>
                     <Div>
-                        <img src="../../../static/logo.ong" alt="Logo"/>
+                        <img src="../../../static/logo.png" alt="Logo"/>
                         <div>
                             <H1>Travl</H1>
                             <P>Hotel Admin Dashboard</P>

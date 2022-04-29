@@ -1,13 +1,13 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 
-export const GuestDetails = () => {
+export const BookingsDetails = () => {
 
     const {id} = useParams();
 
     return (
         <div>
-            <p>Soy guest {id}</p>
+            <p>Soy BookingsDetails {id}</p>
         </div>
     )
 }

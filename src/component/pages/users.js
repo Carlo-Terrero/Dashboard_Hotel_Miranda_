@@ -1,54 +1,96 @@
-import React, {useState, useContext } from "react";
-import { LogingContext } from "../App";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export const User = (props) =>{
+//Este dato se va al garete cuando hagamo la conexion
+import { conciergeData } from "../data/concierge";
 
-    const [newName, setNewName] = useState('')
-    const [newEmail, setNesEmail] = useState('')
-    const dataUser = useContext(LogingContext);
+import { 
+    addUsers,
+    editUsers,
+    usersListDate,
+    //fetchUsers,
+} from "../slice/userSlice";
 
-    const handleClickChance = () => {
+import styled from "styled-components";
 
-        if(newName.length > 0){
-            props.dispatch({type: 'NAME', value: newName})
-        }
-        
-        if(newEmail.length > 0){
-            props.dispatch({type: 'EMAIL', value: newEmail})
-        }        
-        
-        console.log('clickcado')
+import { ConciergeList } from "../lists/conciergeList";
+import { Paginador } from "../comun/paginador";
+import { BtnNewEst } from "../comun/btnNewEst";
+import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
+
+
+const DivBase = styled.div`
+    padding: 2rem;
+`;
+
+const Div =  styled.div` 
+    display: grid;
+    margin-left: 300px;
+`;
+
+const ControlDiv = styled.div`
+    justify-content: space-between;
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 0.3rem;
+`;
+
+const NewRoom = styled.button`
+    color: white;
+    background: #013401;
+    border: none;
+    border-radius: 10px;
+    width: 170px;
+    height: 2.5rem;
+    justify-content: center;
+    align-items: center;
+`;
+
+
+export const Users = () =>{
+    
+    const selectores = ['All Employee', 'Active Employee', 'Inactive Employee']
+
+    //const conciergeListDate = useSelector(usersListDate);
+    //const cc = useSelector(fetchConcierge());
+    const dispatch = useDispatch();
+    
+    const handleClickNewUsers = () => {
+        console.log('kks')
+        dispatch(addUsers())
+        dispatch(editUsers())
+        //dispatch(getOneConcierge())
     }
-
-    /* console.log(newName)
-    console.log(newEmail) */
+    //console.log(conciergeListDate)
+    console.log('ll')
 
     return (
-        <div>
-            <div>
-                Nombre de usuario: {dataUser.name}
-                <br/>
-                Correo del usuario: {dataUser.email} 
-                <br/>
-                Estado de la cuenta {dataUser.auth ? 'Activa' : 'IN-ACTIVA'}
-            </div>
-            
-            <div>
-                <label>
-                    <p>Nuevo nombre</p>
-                    <input type='text' value={newName} onChange={(e) => {setNewName(e.target.value)}}/>
-                </label>
+        <DivBase>
+            <Div>
+                <ControlDiv>
+                    <SelectorGreenMenu selectores={selectores}/>                               
 
-                <label>
-                    <p>Nuevo email</p>
-                    <input type="email" value={newEmail} onChange={(e) => {setNesEmail(e.target.value)}} />
-                </label>
-                
-                <button onClick={() => handleClickChance()}>Cambiar Datos</button>
-            </div>
+                    <ControlDiv>
+                        <NewRoom onClick={handleClickNewUsers}>
+                            + New Employee
+                        </NewRoom>
 
+                        <BtnNewEst/>
+                        
+                    </ControlDiv>
+                   
+                </ControlDiv>
+
+                <div>
+                    <ConciergeList concierges={conciergeData}/>                    
+                </div>
+
+                <Paginador paginas={8}/>
+
+            </Div>
             
-            
-        </div>
+        </DivBase>
+        
     )
 }
+

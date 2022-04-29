@@ -1,4 +1,4 @@
-export const conciersgeData = [{
+export const conciergeData = [{
     "id": 1,
     "name": "Shel",
     "fecha_alta": "03/18/2022",

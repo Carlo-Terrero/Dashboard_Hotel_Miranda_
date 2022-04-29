@@ -1,6 +1,11 @@
 import React from "react";
 
 import { Kpis } from "../dashboard/kpis";
+import { GraficoDashboar , Svg, CircleP, Circles, CirclesReact, AxisUno, AxisDos, AxisTres } from "../grafico/graficoDashboar";
+import UseD3 from "../grafico/hookGrafico";
+/* import {D3BarGraph} from "../grafico/.js;" */
+
+import { D3BarGraph } from "../grafico/D3BarGraph";
 
 import styled from "styled-components";
 
@@ -41,8 +46,10 @@ const Container = styled.div`
 
 export const Dashboard = () =>{
     
+    
 
     return (
+        <>
         <DivBase>
             <Div>
                
@@ -79,9 +86,33 @@ export const Dashboard = () =>{
                         
                         <Kpis num={"516"} name={'Check Out'}/>
                     </Kdiv>
+
+                    
                 </Container>
 
             </Div>
+
+            <Div>
+               {/*  <GraficoDashboar /> */}
+               {/* <Svg />
+               <CircleP />
+               <Circles />
+               <CirclesReact />
+               <AxisUno />
+               <AxisDos />
+               <AxisTres />  */}
+               {/* <D3BarGraph /> */}
+               {/* Mejor ejemplo */}
+               <D3BarGraph />
+            </Div>
+
+            {/* <UseD3 /> */}
+
         </DivBase>
+
+
+
+
+        </>
     )
 }

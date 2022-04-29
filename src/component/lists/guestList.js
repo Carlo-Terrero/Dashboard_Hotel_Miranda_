@@ -46,12 +46,6 @@ const DivCabecera = styled(Div)`
     margin-right: -2rem;
 `;
 
-const DivMid = styled(Div)`
-    width: 37rem;
-    gap: 7rem;
-    margin-left: -4rem;
-`;
-
 const DivCheck = styled(Div)`
     align-items: baseline;
     width: 300px;
@@ -151,6 +145,8 @@ export const GuesteList = (props) => {
                 return <BtnLiveGrey>Pending</BtnLiveGrey>
             case state = 4:
                 return <BtnDarkGrey>Canceled</BtnDarkGrey>
+            default:
+                return state;
         }
     }
 
