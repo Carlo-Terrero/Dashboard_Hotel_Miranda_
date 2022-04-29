@@ -97,7 +97,7 @@ export const NavBarLateral = () => {
                     <FaRegUser/>
                 </IconDiv>
 
-                <BtnNav name={"Concierge"} />
+                <BtnNav name={"Users"} />
             </Div>
 
 

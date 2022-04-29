@@ -13,7 +13,7 @@ import { NavBarLateral } from "./navBarLateral";
 const Div = styled.div`
     display: flex;
     justify-content: space-between;
-    background: aqua;
+    background: white;
     align-items: center;
     padding-left: 2rem;
     padding-right: 2rem;

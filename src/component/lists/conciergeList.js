@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { deleteConcierge} from '../slice/conciergeSlice';
+import { deleteUsers} from '../slice/userSlice';
 
 import styled from 'styled-components';
 
@@ -147,7 +147,7 @@ export const ConciergeList = (props) => {
     }
 
     const handleClickPoint = () => {
-        dispatch(deleteConcierge())
+        dispatch(deleteUsers())
         console.log('kk')
         
     }

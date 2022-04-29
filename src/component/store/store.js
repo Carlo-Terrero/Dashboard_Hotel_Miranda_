@@ -2,16 +2,18 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '../slice/counterSlice';
 import roomReducer from '../slice/roomSlices';
-import conciergeReducer from '../slice/conciergeSlice';
-import userSlice from '../slice/userSlice';
-import bookingSlice from '../slice/bookingSlice';
+import pruebaReducer from '../slice/pruebaSinUso';
+import userReducer from '../slice/userSlice';
+import bookingReducer from '../slice/bookingSlice';
 
 export default configureStore({
     reducer: {
         counter: counterReducer,
         room: roomReducer,
-        concierge: conciergeReducer,
-        user: userSlice,
-        booking: bookingSlice,
+        pruebaSinUso: pruebaReducer,
+        user: userReducer,
+        booking: bookingReducer,
+        
+
     }
 })

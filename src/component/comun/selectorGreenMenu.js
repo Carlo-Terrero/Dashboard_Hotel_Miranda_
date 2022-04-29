@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import styled from 'styled-components'
 
@@ -9,27 +9,35 @@ const MiniDiv = styled.div`
     gap: 0;
     margin-bottom: 0.3rem;
 
-    p{
-        border-bottom: #80808075 1px solid;
-        color: #464444;
-        padding-bottom: 1rem;
-        width: 10rem;
-        text-align: center;
-    }
 `;
 
+const Select = styled.p`
+    border-bottom: ${props=> props.isActive ? "green" : "grey" } 2px solid;
+    color: ${props=> props.isActive ? "green" : "grey" } ;
+    padding-bottom: 1rem;
+    width: 10rem;
+    text-align: center;
+    cursor: pointer;
+`
 
 
 export const SelectorGreenMenu = (props) => {
+    const [isActive,setIsActive]=useState(props.selectores[0])
+    function handleClick(date){
+        console.log(date)
+        setIsActive(date)
+    }
+   
 
     return(
         <MiniDiv>
-            {props.selectores.map((s,i) => 
-                <p key={i}>{s}</p>
+            {props.selectores.map((selector,i) => 
+                <Select key={i} isActive={isActive === selector} onClick={()=>handleClick(selector)}>{selector }</Select>
+                
                 )}
-
+                
             {/* <P>All Employee</P>
-                        
+                    
             <P>Active Employee</P>
             {console.log(props.selectores[1])}
             <P>Inactive Employee</P> */}

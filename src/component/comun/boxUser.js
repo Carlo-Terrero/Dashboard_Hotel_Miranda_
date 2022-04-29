@@ -47,7 +47,7 @@ export const BoxUser = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/user');
+        navigate('/userEdit');
     }
 
     return(

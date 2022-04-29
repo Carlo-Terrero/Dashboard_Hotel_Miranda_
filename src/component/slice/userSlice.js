@@ -1,38 +1,129 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { conciergeData } from "../data/concierge"; // Este es mi client
 
-export const userSlice = createSlice({
-    name: 'user',
+/*
+function wait(ms) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, ms);
+    });
+}
+*/
 
-    initialState: {
-        userList: {}
+//llamar una funcion esperar para que devuelva los dotos json
+
+const wait = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(
+                /* initialState.conciergeList = */  conciergeData
+            );
+            reject(
+                new Error('Error Date')
+            );
+
+        }, 1000);
+    });
+}
+
+export const fetchUsers = createAsyncThunk('concierge/fetchConcierge', /* async */ () => {
+    const response = /* await */ conciergeData
+    return response.data
+})
+
+/* export const addNewConcierge = createAsyncThunk(
+    "posts/addNewPost",
+    async (initialPost) => {
+      const response = await initialPost/* client.post("/fakeApi/posts", initialPost) /;
+      return response.data;
+    }
+); */
+
+const promise = new Promise((resolve, reject) => {
+	const number = 4 /* Math.floor(Math.random() * 10) */;
+
+	setTimeout(
+		() => number < 5
+			? resolve(number)//.then(() => initialState.conciergeList = number)
+			: reject(new Error('Menor a 5')),
+		1000
+	);
+});
+
+async function doggido(){
+    let respon = await wait();
+    return respon;
+}
+
+
+const initialState = {
+    //conciergeList: promise.then((number) => {return number.json()}),//wait(),
+    //conciergeList: wait().then((conciergeData) => conciergeData),//wait(),
+    //conciergeList: doggido(), //Seguimos con lo mismo
+    status: 'idle',
+    error: null,
+}
+
+export const usersSlice = createSlice({
+    name: 'users',
+
+    /* initialState: {
+        //conciergeList: promise,
+        //conciergeList: wait(),
+        /* status: 'idle',
+        error: null, /
+    }, */
+
+    initialState:{
+        usersList: conciergeData
     },
 
     reducers: {
-
-        addUser: (state, action) => {
-            console.log('add User');
+        addUsers: (state, action) => {
+            console.log('add Users');
         },
 
-        deleteUser: (state, action) => {
-            console.log('delete User');
+        deleteUsers: (state, action) => {
+            console.log('delete concerge');
         },
 
-        editUser: (state, action) => {
-            console.log('edit User');
+        editUsers: (state, action) => {
+            console.log('edit Users');
         },
 
-        getOneUser: (state,action) => {
-            console.log('get one user');
-        },
+        /* getOneUsers: (state, action) => {
+            console.log('get one Users');
+        } */
 
     },
 
+    extraReducers(builder) {
+        builder
+            .addCase(fetchUsers.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(fetchUsers.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                // Add any fetched posts to the array
+                state.users.usersList = state.users.users.concat(action.payload)
+            })
+            .addCase(fetchUsers.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            /* .addCase(addNewUsers.fulfilled, (state, action) => {
+                state.posts.push(action.payload)
+            }) */
+    },
 })
 
 // Exportamos los reducer(actions) que nos van a ayudar a interactuar.
-export const {addUser, deleteUser, editUser, getOneUser} = userSlice.actions;
+export const {addUsers, deleteUsers, editUsers, /* getOneUsers */} = usersSlice.actions;
 
-// Exportamos los datos de todas la habitaciones
-export const userListDate = (state) => state.user.userList;
+export const usersListDate = (state) => state.users.usersList;
 
-export default userSlice.reducer;
+export default usersSlice.reducer;
+
+//Asi obtenemos un Users por ID
+export const getOneUsers = (state, id) => state.users.usersList.find((users) => users.id === id);

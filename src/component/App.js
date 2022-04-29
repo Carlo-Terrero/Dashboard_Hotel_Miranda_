@@ -3,14 +3,14 @@ import {BrowserRouter as Router , Routes, Route } from 'react-router-dom';
 
 import { NavBarSuperior } from './navBar/navBarSuperior';
 import { Bookings } from "./pages/bookings";
-import { Concierge } from "./pages/concierge";
+import { Users } from "./pages/users";
 import { Dashboard } from "./pages/dashboard";
-import { User } from "./pages/users";
+import { UserEdit } from "./pages/usersEdit";
 import { Rooms } from "./pages/rooms";
 //import { Guest } from "./pages/bookings";
 import { Auth } from "./pages/auth";
 import { BookingsDetails } from "./details/guestDetails";
-import { ConsciergeDetail } from "./details/consciergeDetail";
+import { UserDetail } from "./details/userDetail";
 import { RoomDetails } from "./details/roomDetails";
 
 // Configuracion de del Reducer
@@ -62,10 +62,10 @@ function App() {
             <Route path="/rooms" element={<Rooms/>} />
             <Route path="/rooms/:id" element={<RoomDetails/>} />
 
-            <Route path="/concierge" element={<Concierge/>} />
-            <Route path="/concierge/:id" element={<ConsciergeDetail/>} />
+            <Route path="/Users" element={<Users/>} />
+            <Route path="/Users/:id" element={<UserDetail/>} />
             
-            <Route path="/user" element={<User dispatch={dispatch}/>} />
+            <Route path="/userEdit" element={<UserEdit dispatch={dispatch}/>} />
 
             <Route path="/bookings" element={<Bookings/>} />
             <Route path="/bookings/:id" element={<BookingsDetails/>} />
