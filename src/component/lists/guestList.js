@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 import { AiOutlineMore } from 'react-icons/ai';
 
+import {PopupViewNotes} from '../comun/popupViewNotes';
+
 const DivContainer = styled.div`
     display: grid; 
     background: white;   
@@ -151,7 +153,6 @@ export const GuesteList = (props) => {
     }
 
     const handleClick = (id) => {
-        console.log('hola', id);
         navigate(`${id}`)
     }
 
@@ -179,9 +180,9 @@ export const GuesteList = (props) => {
             </Container>
 
             {props.guests.map((guest,i) => 
-                <ContainerRooms key={i} onClick={() => handleClick(guest.id)}>
-                    <DivCheckRooms>                    
-                        <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
+                <ContainerRooms key={i} >
+                    <DivCheckRooms onClick={() => handleClick(guest.id)}>                    
+                        {/* <Check type="checkbox" id="cbox1" value="first_checkbox" />  */}
 
                         <DivImg>
                             img aqui
@@ -198,7 +199,8 @@ export const GuesteList = (props) => {
                     <P>{guest.check_in}</P>
                     <P>{guest.check_out}</P>
                         
-                    <Button> View Notes</Button>
+                    <PopupViewNotes elementID={guest.id}/>
+                    
                     
                     <PRoom>{guest.room_type} </PRoom>                       
                         

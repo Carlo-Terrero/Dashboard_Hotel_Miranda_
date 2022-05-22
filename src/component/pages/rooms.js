@@ -58,6 +58,7 @@ export const Rooms = () =>{
 
         // onCLick={ ()=> {dispatch(addRoom())} } ----Si lo quieres hacer en una sola linea
     }
+    console.log('lista desde room', roomsList);
 
     return (
         <DivBase>
