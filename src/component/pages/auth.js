@@ -3,14 +3,20 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from "styled-components";
 
-
 const DivBase = styled.div`
-    width: auto;
-    heigth: 300px;
+    background-image: url(https://cdn.pixabay.com/photo/2016/11/17/09/28/hotel-1831072_960_720.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 94.2vh;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 `;
 
-const Div = styled(DivBase)` 
-    margin-left: 300px;
+const Div = styled.div` 
+    
     margin-top: 15%;
     padding-bottom: auto;
     background: none;
@@ -22,7 +28,8 @@ const Form = styled.form`
     border-radius: 15px;
     width: 300px;
     border: black 0.1rem solid;
-    
+    background: #cb868673;
+    height: 16rem;
 
     label {
         display: grid;       
@@ -31,7 +38,7 @@ const Form = styled.form`
 
         p{
             margin: 0;
-            color: black;
+            color: white;
             font-size: 1.3rem;
         }
 
@@ -40,14 +47,14 @@ const Form = styled.form`
             border: none;
             height: 1.3rem;
             border: black 0.1rem solid;
-        }
+        }        
+    }
 
-        button 
-        
+    button {
+        width: 150px;
+        margin: auto;
     }
 `;
-
-
 
 export const Auth = (props) => {
     
@@ -74,9 +81,7 @@ export const Auth = (props) => {
     }
 
     return (
-        <DivBase>
-            <Div>
-                
+        <DivBase>                
                 <Form onSubmit={handleSubmit}>
                     <label>
                         <p>Email:</p>                        
@@ -91,11 +96,9 @@ export const Auth = (props) => {
                     <button className='sumit' type="submit">sumit</button>
                 </Form>
                
-                <p>hols {props.auth === true ? 'in' : 'out'}</p>
+               {/*  <p>hols {props.auth === true ? 'in' : 'out'}</p>
                 <p>Email: carlos@gmail.com</p>
-                <p>Pass: ponko</p>
-                
-            </Div>
+                <p>Pass: ponko</p> */}                            
         </DivBase>
     )
 }

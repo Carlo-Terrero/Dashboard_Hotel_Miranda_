@@ -17,7 +17,7 @@ import { ConciergeList } from "../lists/conciergeList";
 import { Paginador } from "../comun/paginador";
 import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
-
+import { PopupNewUser } from "../comun/popupNewUser";
 
 const DivBase = styled.div`
     padding: 2rem;
@@ -35,34 +35,19 @@ const ControlDiv = styled.div`
     margin-bottom: 0.3rem;
 `;
 
-const NewRoom = styled.button`
-    color: white;
-    background: #013401;
-    border: none;
-    border-radius: 10px;
-    width: 170px;
-    height: 2.5rem;
-    justify-content: center;
-    align-items: center;
-`;
-
-
 export const Users = () =>{
     
     const selectores = ['All Employee', 'Active Employee', 'Inactive Employee']
 
     //const conciergeListDate = useSelector(usersListDate);
     //const cc = useSelector(fetchConcierge());
-    const dispatch = useDispatch();
+  /*   const dispatch = useDispatch();
     
     const handleClickNewUsers = () => {
-        console.log('kks')
-        dispatch(addUsers())
-        dispatch(editUsers())
         //dispatch(getOneConcierge())
+        
     }
-    //console.log(conciergeListDate)
-    console.log('ll')
+    //console.log(conciergeListDate) */
 
     return (
         <DivBase>
@@ -71,9 +56,8 @@ export const Users = () =>{
                     <SelectorGreenMenu selectores={selectores}/>                               
 
                     <ControlDiv>
-                        <NewRoom onClick={handleClickNewUsers}>
-                            + New Employee
-                        </NewRoom>
+
+                        <PopupNewUser/>
 
                         <BtnNewEst/>
                         

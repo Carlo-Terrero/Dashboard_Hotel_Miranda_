@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { StackedBarGraph } from "./StackedBarGraph";
 
+import styled from 'styled-components';
+
+const DivGrafico = styled.div`
+  margin-top: 3rem;
+  position:absolute;
+  right:172px;
+  top:135px;
+`;
+
 const data = [
   {
     name: "Lunes",
@@ -91,7 +100,7 @@ export const D3BarGraph = () => {
   const [keys, setKeys] = useState(allKeys);
 
   return (
-    <div style={{marginTop: '2rem'}}>
+    <DivGrafico /* style={{marginTop: '2rem'}} */>
       <label style={{color: 'green', marginRight: '4rem'}}>Check In 753</label>
       <label style={{color: 'red'}}>Check Out 516</label>
       {/* <div className="fields" style={{ display: "flex" }}>
@@ -117,6 +126,6 @@ export const D3BarGraph = () => {
       </div> */}
       <StackedBarGraph datasets={data} colors={colors} keys={keys} apellido={apellido} />
 
-    </div>
+    </DivGrafico>
   );
 };

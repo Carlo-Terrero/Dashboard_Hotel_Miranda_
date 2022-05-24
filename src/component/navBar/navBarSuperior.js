@@ -2,6 +2,9 @@ import React, {useState, useContext} from "react";
 import { LogingContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
+import logo from "../../static/LogoHotel.svg";
+import logo2 from "../../static/LogoHotel.svg";
+
 import styled from "styled-components";
 
 //Icons
@@ -20,6 +23,10 @@ const Div = styled.div`
     gap: 2rem;
     font-size: 1.2rem;
     
+`;
+
+const contLogo = styled.div`
+    font-size: 1.2rem;
 `;
 
 const DivIcon = styled(Div)`
@@ -43,7 +50,6 @@ export const NavBarSuperior = (props) => {
     const navigate = useNavigate();
     const [ menuLateral, setMenuLateral] = useState(false)
    
-
     const handleClick = () => {
         menuLateral ? setMenuLateral(false) : setMenuLateral(true)
     }
@@ -55,41 +61,48 @@ export const NavBarSuperior = (props) => {
         navigate('/');
     }
 
-    
-
     return(
         <>
             <Div>
             
                 <Div>
                     <Div>
-                        <img src="../../../static/logo.png" alt="Logo"/>
+                        
+                    
+                        <img className="imgIcono" src={logo} alt="Logo"/> 
+                        
+                        
+
                         <div>
-                            <H1>Travl</H1>
+                            <H1 >Travl</H1>
                             <P>Hotel Admin Dashboard</P>
                         </div>
                     </Div>           
             
                     <Div>
-                        <FiAlignJustify onClick={handleClick}/>
-                            Log {dataLoggingContext.auth ? 'in' : 'out'} 
+                        Log {dataLoggingContext.auth ? 'in' : 'out'} 
                     </Div>
+
+                    <button onClick={handleClick}>O</button>
                 </Div>
 
-                <DivIcon>
-                    <ImEnvelop />
-                    <FiBell />
-                    {/* <IoIosLogOut onClick={props.setAuth(false)}/> */}
-                    {dataLoggingContext.auth ? 
-                        <IoIosLogOut onClick={handleAut}/> :
-                        null
-                    }
-                </DivIcon>
+                {dataLoggingContext.auth ? 
+                    <DivIcon>
+                        <ImEnvelop />
+                        <FiBell />
+                        {/* <IoIosLogOut onClick={props.setAuth(false)}/> */}
+                        
+                            <IoIosLogOut onClick={handleAut}/> 
+                    </DivIcon>
+                    :
+                    null
+                }
                 
             </Div>
             
-            {menuLateral ? <NavBarLateral/> : null}
-            
+            {/* Cuando maquetemos el resto eliminamos el navBarLatelar de abajo */}
+            {dataLoggingContext.auth ? <NavBarLateral/> : null }
+            {menuLateral? <NavBarLateral/> : null}
         </>
        
     )

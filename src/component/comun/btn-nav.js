@@ -10,8 +10,6 @@ const Name = styled.a`
     text-decoration: none;    
 `;
 
-
-
 export const BtnNav = (props) => {
 
     const nameLink =  props.name.toLowerCase()
