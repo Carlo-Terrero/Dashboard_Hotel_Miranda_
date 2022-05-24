@@ -58,7 +58,7 @@ async function doggido(){
 
 
 const initialState = {
-    //conciergeList: promise.then((number) => {return number.json()}),//wait(),
+    //conciergeList: promise.then((number) => {return number}),  //wait(),
     //conciergeList: wait().then((conciergeData) => conciergeData),//wait(),
     //conciergeList: doggido(), //Seguimos con lo mismo
     status: 'idle',

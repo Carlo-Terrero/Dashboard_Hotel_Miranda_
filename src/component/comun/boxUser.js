@@ -14,6 +14,7 @@ const Div = styled.div`
     text-align: center;
     border-radius: 15px;
     box-shadow: 0px 18px 27px 2px rgb(0 0 0 / 35%);
+   
 `;
 
 const ImgDiv = styled.div`
@@ -37,6 +38,7 @@ const Button = styled.button`
     border: none;
     color: green;
     background: #74e77469;
+    cursor: pointer;
 `;
 
 export const BoxUser = () => {

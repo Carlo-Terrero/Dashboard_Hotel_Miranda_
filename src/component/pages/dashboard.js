@@ -1,9 +1,6 @@
 import React from "react";
 
 import { Kpis } from "../dashboard/kpis";
-import { GraficoDashboar , Svg, CircleP, Circles, CirclesReact, AxisUno, AxisDos, AxisTres } from "../grafico/graficoDashboar";
-import UseD3 from "../grafico/hookGrafico";
-/* import {D3BarGraph} from "../grafico/.js;" */
 
 import { D3BarGraph } from "../grafico/D3BarGraph";
 
@@ -13,10 +10,6 @@ import { RiCalendarCheckLine } from "react-icons/ri";
 
 const DivBase = styled.div`
     padding: 2rem;
-`;
-
-const Div =  styled.div` 
-    margin-left: 300px;
 `;
 
 const Kdiv = styled.div`
@@ -45,13 +38,10 @@ const Container = styled.div`
 `;
 
 export const Dashboard = () =>{
-    
-    
-
     return (
         <>
         <DivBase>
-            <Div>
+            <div>
                
                 <Container>
                     <Kdiv>
@@ -90,29 +80,13 @@ export const Dashboard = () =>{
                     
                 </Container>
 
-            </Div>
-
-            <Div>
-               {/*  <GraficoDashboar /> */}
-               {/* <Svg />
-               <CircleP />
-               <Circles />
-               <CirclesReact />
-               <AxisUno />
-               <AxisDos />
-               <AxisTres />  */}
-               {/* <D3BarGraph /> */}
-               {/* Mejor ejemplo */}
+            </div>
+            
+            <div>
                <D3BarGraph />
-            </Div>
-
-            {/* <UseD3 /> */}
+            </div>
 
         </DivBase>
-
-
-
-
         </>
     )
 }

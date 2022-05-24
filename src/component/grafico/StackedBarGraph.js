@@ -10,6 +10,14 @@ import {
 } from "d3";
 import { axisRight } from "d3";
 
+import styled from "styled-components";
+
+const Grafico = styled.div`
+  height: 340px;
+  width: 600px;
+  display: block;
+`;
+
 export const StackedBarGraph = ({ datasets, keys, colors, apellido }) => {
   const [data, setData] = useState(datasets);
   const svgRef = useRef();
@@ -89,16 +97,16 @@ export const StackedBarGraph = ({ datasets, keys, colors, apellido }) => {
 
   return (
     <>
-      <div
+      <Grafico
         ref={wrapperRef}
-        style={{ width: "90%", height: "400px", marginBottom: "2rem" }}
+        /* style={{ width: "90%", height: "400px", marginBottom: "2rem" }} */
       >
         <svg ref={svgRef} style={{ width: "100%", height: "110%" }}>
           <g className="x-axis" />
           <g className="y-axis" />
           <g className="z-axis" />
         </svg>
-      </div>
+      </Grafico>
     </>
   );
 };

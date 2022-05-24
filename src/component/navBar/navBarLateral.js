@@ -19,11 +19,11 @@ const Content = styled.div`
     justify-content: center;
     gap: 2em;
     padding-top: 2em;
+    border-bottom-right-radius: 35px;
 `;
 
 const IconDiv =  styled.div`
     font-size: 1.3rem;
-
 `;
 
 const Rotador = styled(IconDiv)`
@@ -38,6 +38,14 @@ const Div = styled.div`
     a{
         text-decoration: none;
         color: black;
+
+        :hover{
+            color: red;
+        }
+    }
+
+    :hover{
+        color: red;
     }
 `;
 
@@ -83,14 +91,6 @@ export const NavBarLateral = () => {
 
                 <BtnNav name={"Bookings"} />
             </Div>
-
-           {/*  <Div>
-                <IconDiv>
-                    <FaRegUser/>
-                </IconDiv>                    
-                
-                <BtnNav name={"Guest"} />                
-            </Div> */}
             
             <Div>
                 <IconDiv>
