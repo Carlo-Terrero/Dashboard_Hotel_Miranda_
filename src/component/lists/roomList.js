@@ -173,7 +173,7 @@ export const RoomList = (props) => {
 
             {props.rooms.map((room,i) => 
                 <ContainerRooms key={i} >
-                    <DivCheckRooms onClick={() => handleIdRoom(room.id)}>                    
+                    <DivCheckRooms onClick={() => handleIdRoom(room._id)}>                    
                         {/* <Check type="checkbox" id={`cbox${i}`} value="first_checkbox" />  */}
 
                         <DivImg >
@@ -189,7 +189,7 @@ export const RoomList = (props) => {
 
                     <DivMidDatos>
                         <Pd>{room.bed_type}</Pd>
-                        <P>{room.room_floor}</P>
+                        <P>Flooo A-{room.room_floor}</P>
                         <P>{room.facilities}</P>                                                                       
                     </DivMidDatos>
 

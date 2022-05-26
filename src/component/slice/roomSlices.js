@@ -1,15 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
+import {REACT_APP_LINK_HTTP} from '../../env';
+
 const initialState ={
     roomList: [],
     status: 'idk',
     //error: null
 }
 
-export const getRooms = createAsyncThunk('get/roms', async () =>{
-    const response = await axios.get('http://localhost:3001/rooms')
+export const getRooms = createAsyncThunk('get/rooms', async () => {
+    const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms`)
     return response.data.rooms;
+});
+
+export const getOneRoom = createAsyncThunk('getOne/room', async (id) => {
+    const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms/${id}`)
+    return [response.data.room];
 });
 
 export const roomSlice = createSlice({
@@ -49,6 +56,17 @@ export const roomSlice = createSlice({
             .addCase(getRooms.rejected, (state, action) => {
                 state.status = 'failed'                
             })
+            
+            .addCase(getOneRoom.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getOneRoom.fulfilled, (state, action) => {
+                state.status = 'success'
+                state.roomList = action.payload
+            })
+            .addCase(getOneRoom.rejected, (state, action) => {
+                state.status = 'loading'
+            })
             /* .addCase(addNewUsers.fulfilled, (state, action) => {
                 state.posts.push(action.payload)
             }) */
@@ -64,6 +82,6 @@ export const {addRoom, deleteRoom, editRoom, getOneElemen } = roomSlice.actions;
 export const roomsListDate = (state) => state.room.roomList;
 
 // Asi exportamos 1 elemento con el id deseado
-export const getOnetoom = (state, id) => state.room.roomList.find(room => room.id === id);
+//export const getOneRoom = (state, _id) => state.room.roomList.find(room => room._id === _id);
 
 export default roomSlice.reducer;
