@@ -1,7 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
 import { roomsData } from "../data/rooms";
 
-const getRoomsData = () =>{
+const initialState ={
+    roomList: [],
+    status: 'idk',
+    //error: null
+}
+
+/* const getRoomsData = () =>{
     return new Promise((resolve, reject) =>{
         setTimeout(() => {
             resolve( 
@@ -13,7 +20,12 @@ const getRoomsData = () =>{
 
         }, 1000);
     })
-}
+}; */
+
+export const getRooms = createAsyncThunk('get/roms', async () =>{
+    const response = await axios.get('http://localhost:3001/rooms')
+    return response.data;
+});
 
 /* let a;
 const res = async () => {
@@ -27,7 +39,7 @@ const res = async () => {
 
 //console.log(a)
 
-const initialState ={
+/* const initialState ={
     //roomList: wait(), //Me da la promesa sin respondes
     roomList: roomsData,
     //roomList: '',
@@ -35,7 +47,7 @@ const initialState ={
     //roomList: await res() ,
     status: 'idle',
     error: null
-}
+} */
 
 /* const initialState = async () => { return { 
     //roomList: await res(),
@@ -76,6 +88,25 @@ export const roomSlice = createSlice({
             console.log(`select 1 room`);
         },
         
+    },
+
+    extraReducers: (builder) => {
+        builder
+            .addCase(getRooms.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getRooms.fulfilled, (state, action) => {
+                state.status = 'success'
+                // Add any fetched posts to the array
+                //state.users.usersList = state.users.users.concat(action.payload)
+                state.roomList = action.payload
+            })
+            .addCase(getRooms.rejected, (state, action) => {
+                state.status = 'failed'                
+            })
+            /* .addCase(addNewUsers.fulfilled, (state, action) => {
+                state.posts.push(action.payload)
+            }) */
     },
 
 })

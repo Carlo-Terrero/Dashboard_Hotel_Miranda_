@@ -29,7 +29,7 @@ const wait = () => {
 
 export const fetchUsers = createAsyncThunk('concierge/fetchConcierge', /* async */ () => {
     const response = /* await */ conciergeData
-    return response.data
+    return response.data.results
 })
 
 /* export const addNewConcierge = createAsyncThunk(

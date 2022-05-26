@@ -134,8 +134,8 @@ export const RoomList = (props) => {
 
     const dispatch = useDispatch();
 
-    const handleClick = (date) => {
-        console.log('hola', date)
+    const handleIdRoom = (date) => {
+        //Con navigate añadimos a la url el dato que queramos, en este caso el ide
         navigate(`${date}`)
     }
 
@@ -168,7 +168,7 @@ export const RoomList = (props) => {
 
             {props.rooms.map((room,i) => 
                 <ContainerRooms key={i} >
-                    <DivCheckRooms onClick={() => handleClick(room.id)}>                    
+                    <DivCheckRooms onClick={() => handleIdRoom(room.id)}>                    
                         <Check type="checkbox" id={`cbox${i}`} value="first_checkbox" /> 
 
                         <DivImg>

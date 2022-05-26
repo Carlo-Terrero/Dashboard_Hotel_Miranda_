@@ -6,7 +6,8 @@ import {
     roomsListDate,
     addRoom,
     editRoom,
-    getOneElemen
+    getOneElemen,
+    getRooms
 } from '../slice/roomSlices';
 
 import { RoomList } from "../lists/roomList";
@@ -48,7 +49,10 @@ export const Rooms = () =>{
     const selectores = ['All Rooms', 'Active Employee', 'Inactive Employee']
     
     const dispatch = useDispatch();
+    //const roomsList = useSelector((state)=>state.rooms);
     const roomsList = useSelector(roomsListDate);
+    const roomAsy = dispatch(getRooms)
+    const datosOk = useSelector(roomAsy)
 
     const handleClickNewRoom = () => {
         console.log('kk')
@@ -58,8 +62,9 @@ export const Rooms = () =>{
 
         // onCLick={ ()=> {dispatch(addRoom())} } ----Si lo quieres hacer en una sola linea
     }
-    console.log('lista desde room', roomsList);
 
+    console.log(datosOk)
+    
     return (
         <DivBase>
             <Div>

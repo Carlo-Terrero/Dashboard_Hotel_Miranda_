@@ -1,13 +1,6 @@
 import React, {useState, useContext } from "react";
 import {useSelector, useDispatch} from 'react-redux';
 
-import {
-    addUser,
-    deleteUser,
-    editUser,
-    getOneUser,
-} from '../slice/pruebaSinUso';
-
 import styled from 'styled-components';
 
 const Div = styled.div`

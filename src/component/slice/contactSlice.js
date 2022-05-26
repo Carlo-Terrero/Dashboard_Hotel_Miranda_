@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const pruebaSlice = createSlice({
-    name: 'pruebaSinUso',
+export const contactSlice = createSlice({
+    name: 'contact',
 
     initialState: {
         userList: {}
@@ -30,9 +30,9 @@ export const pruebaSlice = createSlice({
 })
 
 // Exportamos los reducer(actions) que nos van a ayudar a interactuar.
-export const {addUser, deleteUser, editUser, getOneUser} = pruebaSlice.actions;
+export const {addUser, deleteUser, editUser, getOneUser} = contactSlice.actions;
 
 // Exportamos los datos de todas la habitaciones
 export const userListDateee = (state) => state.user.userList;
 
-export default pruebaSlice.reducer;
+export default contactSlice.reducer;
