@@ -112,6 +112,11 @@ const DivImg = styled.div`
     width: 8rem;
     background: grey;
     border-radius: 15px;
+
+    img{
+        height: 4rem;    
+        width: 8rem;
+    }
 `;
 
 const BtnGreen = styled.button`
@@ -148,7 +153,7 @@ export const RoomList = (props) => {
         <DivContainer>
             <Container>
                 <DivCheck>                    
-                    <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
+                    {/* <Check type="checkbox" id="cbox1" value="first_checkbox" />  */}
                     
                     <P>Room Name</P>
                 </DivCheck>
@@ -169,15 +174,15 @@ export const RoomList = (props) => {
             {props.rooms.map((room,i) => 
                 <ContainerRooms key={i} >
                     <DivCheckRooms onClick={() => handleIdRoom(room.id)}>                    
-                        <Check type="checkbox" id={`cbox${i}`} value="first_checkbox" /> 
+                        {/* <Check type="checkbox" id={`cbox${i}`} value="first_checkbox" />  */}
 
-                        <DivImg>
-                            img aqui
+                        <DivImg >
+                            <img src={`${room.foto}`}/>
                         </DivImg>
                         
                         <DivData>
-                            <Id>{room.id}</Id>
-                            <P>{room.first_name}</P>
+                            <Id>{room._id}</Id>
+                            <P>{room.number}</P>
                         </DivData>
                         
                     </DivCheckRooms>
@@ -190,8 +195,8 @@ export const RoomList = (props) => {
 
                     <Div>
                         <DivPrecio>
-                            <P>{room.rate} </P> 
-                            <Pn> /night</Pn>
+                            <P>{room.price}€</P> 
+                            <Pn>/night</Pn>
                         </DivPrecio>
                         
                         <P>{room.status === true ? <BtnGreen>Available</BtnGreen> : <BtnRed>Booked</BtnRed>}</P>

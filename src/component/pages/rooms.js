@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect, useContext} from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -49,10 +49,9 @@ export const Rooms = () =>{
     const selectores = ['All Rooms', 'Active Employee', 'Inactive Employee']
     
     const dispatch = useDispatch();
-    //const roomsList = useSelector((state)=>state.rooms);
+    //const roomsList = useSelector((state)=>state.rooms.roomList);
     const roomsList = useSelector(roomsListDate);
-    const roomAsy = dispatch(getRooms)
-    const datosOk = useSelector(roomAsy)
+    console.log(roomsList)
 
     const handleClickNewRoom = () => {
         console.log('kk')
@@ -63,8 +62,10 @@ export const Rooms = () =>{
         // onCLick={ ()=> {dispatch(addRoom())} } ----Si lo quieres hacer en una sola linea
     }
 
-    console.log(datosOk)
-    
+    useEffect(() => {
+        dispatch(getRooms());
+    }, [dispatch])
+
     return (
         <DivBase>
             <Div>
@@ -84,7 +85,7 @@ export const Rooms = () =>{
                 </ControlDiv>
 
                 <div>
-                    <RoomList rooms={roomsList}/>                    
+                    {<RoomList rooms={roomsList}/> }                
                 </div>
                 
                 <Paginador paginas={8}/>

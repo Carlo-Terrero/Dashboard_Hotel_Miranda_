@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
-import { roomsData } from "../data/rooms";
 
 const initialState ={
     roomList: [],
@@ -8,67 +7,15 @@ const initialState ={
     //error: null
 }
 
-/* const getRoomsData = () =>{
-    return new Promise((resolve, reject) =>{
-        setTimeout(() => {
-            resolve( 
-                roomsData
-            ); 
-            reject(
-                new Error('Error Date')
-            );
-
-        }, 1000);
-    })
-}; */
-
 export const getRooms = createAsyncThunk('get/roms', async () =>{
     const response = await axios.get('http://localhost:3001/rooms')
-    return response.data;
+    return response.data.rooms;
 });
-
-/* let a;
-const res = async () => {
-    const res = await wait();
-    console.log(res) // Aqui me da el array de objetos 
-    a = res;
-    console.log(a)
-    return a;
-} */
-//console.log(res());//Debuelve promesa sin responder
-
-//console.log(a)
-
-/* const initialState ={
-    //roomList: wait(), //Me da la promesa sin respondes
-    roomList: roomsData,
-    //roomList: '',
-    //roomList: a,
-    //roomList: await res() ,
-    status: 'idle',
-    error: null
-} */
-
-/* const initialState = async () => { return { 
-    //roomList: await res(),
-    roomList: roomsData,
-    status: 'idle',
-    error: null
-} } */
-
-/* let a;
-wait()
-    //.then((response) => console.log(response, '---'))
-    .then((response => {a = response}))
-//console.log('klk')
-console.log(a) */
 
 export const roomSlice = createSlice({
     name: 'room',
 
-    initialState,/* : {
-        roomList: roomsData,
-    }, */
+    initialState,
 
     reducers: {
         addRoom: (state, action) => {
@@ -96,9 +43,7 @@ export const roomSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(getRooms.fulfilled, (state, action) => {
-                state.status = 'success'
-                // Add any fetched posts to the array
-                //state.users.usersList = state.users.users.concat(action.payload)
+                state.status = 'success'                
                 state.roomList = action.payload
             })
             .addCase(getRooms.rejected, (state, action) => {
