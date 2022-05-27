@@ -9,6 +9,7 @@ const initialState ={
     //error: null
 }
 
+// solo falta, actualizar y que al liminar una room desaparezca de la lista
 export const getRooms = createAsyncThunk('get/rooms', async () => {
     const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms`)
     return response.data.rooms;
@@ -18,6 +19,17 @@ export const getOneRoom = createAsyncThunk('getOne/room', async (id) => {
     const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms/${id}`)
     return [response.data.room];
 });
+
+export const postNewRoom = createAsyncThunk('postRoom/room', async (obj) => {
+    const response = await axios.post(`${REACT_APP_LINK_HTTP}/rooms`, obj)
+    return response.data.room;
+})
+
+export const deleteOneRoom = createAsyncThunk('deleteRoom/room', async (id) => {
+    const response = await axios.delete(`${REACT_APP_LINK_HTTP}/rooms/${id}`)
+    return response.data.room;
+})
+
 
 export const roomSlice = createSlice({
     name: 'room',
@@ -66,6 +78,16 @@ export const roomSlice = createSlice({
             })
             .addCase(getOneRoom.rejected, (state, action) => {
                 state.status = 'loading'
+            })
+
+            .addCase(postNewRoom.fulfilled, (state, action) => {
+                state.status = 'success'
+                state.roomList.push(action.payload)
+            })
+
+            .addCase(deleteOneRoom.fulfilled, (state, action) => {
+                state.status = 'success'
+                //state.roomList.delete(action.payload)                
             })
             /* .addCase(addNewUsers.fulfilled, (state, action) => {
                 state.posts.push(action.payload)

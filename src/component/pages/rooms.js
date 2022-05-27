@@ -4,10 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import {
     roomsListDate,
-    addRoom,
-    editRoom,
-    getOneElemen,
-    getRooms
+    getRooms,
+    postNewRoom
 } from '../slice/roomSlices';
 
 import { RoomList } from "../lists/roomList";
@@ -54,12 +52,22 @@ export const Rooms = () =>{
     console.log(roomsList)
 
     const handleClickNewRoom = () => {
-        console.log('kk')
-        dispatch(addRoom());
-        dispatch(editRoom());
-        dispatch(getOneElemen());
-
-        // onCLick={ ()=> {dispatch(addRoom())} } ----Si lo quieres hacer en una sola linea
+        console.log('usuario creado')
+        const newRoon = {
+            foto: 'http://www.mdvacationclub.com/wp-content/uploads/2018/12/Placeholder.png', 
+            bed_type: 'Suite',
+            number: 2121,
+            description: 'Room para probar end poin de crear room',
+            offer: true,
+            price: 73,
+            discount: 21,
+            cancellation: 'Prueba si ganas de cancelacion',
+            facilities: 'Mosquiteras, Tv, Wifi',
+            status: true,
+            room_floor: 3
+        }
+        console.log(newRoon)
+        dispatch(postNewRoom(newRoon))
     }
 
     useEffect(() => {

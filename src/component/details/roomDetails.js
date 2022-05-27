@@ -8,8 +8,9 @@ export const RoomDetails = () => {
     const dispatch = useDispatch()
     const { id } = useParams();
     const room = useSelector(roomsListDate);
-    console.log(room[0])
-    let {foto, 
+    //console.log(room[0])
+    
+    const {foto, 
     bed_type,
     number,
     description,
@@ -25,9 +26,10 @@ export const RoomDetails = () => {
     useEffect(() =>{
         dispatch(getOneRoom(id))
     },[dispatch])
-
+    
     return(
         <div>
+            {/* <img src={foto} /> */}
             <p>Descripcion {description} </p>
             <p>Número {number} </p>
             <p>Precio {price} </p>

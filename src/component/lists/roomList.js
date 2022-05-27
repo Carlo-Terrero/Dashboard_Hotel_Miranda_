@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { deleteRoom } from '../slice/roomSlices';
+import { deleteOneRoom } from '../slice/roomSlices';
 
 import styled from 'styled-components';
 import { AiOutlineMore } from 'react-icons/ai';
@@ -144,9 +144,9 @@ export const RoomList = (props) => {
         navigate(`${date}`)
     }
 
-    const saludo = () => {
-        dispatch(deleteRoom())
-        console.log('puntos');
+    const handleDeleteRoom = (id) => {
+        //Disparador para eliminar habitacion
+        dispatch(deleteOneRoom(id))
     }
     
     return(
@@ -203,7 +203,7 @@ export const RoomList = (props) => {
                        
                     </Div>
 
-                    <DivMenuPuntos onClick={saludo}>
+                    <DivMenuPuntos onClick={() => handleDeleteRoom(room._id)}>
                         {<AiOutlineMore/>}
                     </DivMenuPuntos>
                    
