@@ -3,30 +3,37 @@ import axios from 'axios';
 
 import {REACT_APP_LINK_HTTP} from '../../env';
 
+const token = localStorage.getItem('Token');
+
+const headers = {headers: 
+    {'Authorization': `Bearer  ${token}`}
+};
+
 const initialState ={
     roomList: [],
-    status: 'idk',
+    status: 'idle',
     //error: null
-}
+};
 
 // solo falta, actualizar y que al liminar una room desaparezca de la lista
 export const getRooms = createAsyncThunk('get/rooms', async () => {
-    const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms`)
+    const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms`, headers )
+    
     return response.data.rooms;
 });
 
 export const getOneRoom = createAsyncThunk('getOne/room', async (id) => {
-    const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms/${id}`)
+    const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms/${id}`, headers )
     return [response.data.room];
 });
 
 export const postNewRoom = createAsyncThunk('postRoom/room', async (obj) => {
-    const response = await axios.post(`${REACT_APP_LINK_HTTP}/rooms`, obj)
+    const response = await axios.post(`${REACT_APP_LINK_HTTP}/rooms`, obj, headers)
     return response.data.room;
 })
 
 export const deleteOneRoom = createAsyncThunk('deleteRoom/room', async (id) => {
-    const response = await axios.delete(`${REACT_APP_LINK_HTTP}/rooms/${id}`)
+    const response = await axios.delete(`${REACT_APP_LINK_HTTP}/rooms/${id}`, headers)
     return response.data.room;
 })
 
@@ -82,16 +89,14 @@ export const roomSlice = createSlice({
 
             .addCase(postNewRoom.fulfilled, (state, action) => {
                 state.status = 'success'
-                state.roomList.push(action.payload)
+                state.roomList.push(action.payload);
             })
 
             .addCase(deleteOneRoom.fulfilled, (state, action) => {
                 state.status = 'success'
                 //state.roomList.delete(action.payload)                
             })
-            /* .addCase(addNewUsers.fulfilled, (state, action) => {
-                state.posts.push(action.payload)
-            }) */
+        
     },
 
 })
@@ -102,8 +107,5 @@ export const {addRoom, deleteRoom, editRoom, getOneElemen } = roomSlice.actions;
 
 // Exportamos los datos de todas la habitaciones
 export const roomsListDate = (state) => state.room.roomList;
-
-// Asi exportamos 1 elemento con el id deseado
-//export const getOneRoom = (state, _id) => state.room.roomList.find(room => room._id === _id);
 
 export default roomSlice.reducer;

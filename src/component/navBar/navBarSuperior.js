@@ -55,9 +55,8 @@ export const NavBarSuperior = (props) => {
     }
 
     const handleAut = () => {
-        props.dispatch({ type: 'NAME', value: 'no logg'});
-        props.dispatch({ type: 'EMAIL', value: 'no logg mail'});
-        props.dispatch({ type: 'AUTH', value: false});
+        localStorage.removeItem('Token');
+        props.dispatch({ type: 'LOGIN', value: {auth: false, user: '', email: ''}});
         navigate('/');
     }
 
@@ -67,11 +66,8 @@ export const NavBarSuperior = (props) => {
             
                 <Div>
                     <Div>
-                        
-                    
-                        <img className="imgIcono" src={logo} alt="Logo"/> 
-                        
-                        
+                                            
+                        <img className="imgIcono" src={logo} alt="Logo"/>                                                 
 
                         <div>
                             <H1 >Travl</H1>

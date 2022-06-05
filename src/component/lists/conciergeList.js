@@ -106,10 +106,12 @@ const Check = styled.input`
 `;
 
 const DivImg = styled.div`
+    background-image: url(${props => props.img});
+    background-repeat: round;
     margin: 1rem 0;
-    height: 5/*  */rem;    
+    height: 5rem;    
     width: 5rem;
-    background: grey;
+   
     border-radius: 15px;
 `;
 
@@ -156,7 +158,6 @@ export const ConciergeList = (props) => {
         <DivContainer>
             <Container>
                 <DivCheck>                    
-                    <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
                     
                     <P>Name</P>
                 </DivCheck>
@@ -176,22 +177,21 @@ export const ConciergeList = (props) => {
             {props.concierges.map((concierge,i) => 
                 <ContainerRooms key={i} >
                     <DivCheckRooms onClick={() => handleClick(concierge.id)}>                    
-                        <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
 
-                        <DivImg>
-                            img aqui
+                        <DivImg img={concierge.foto}>
+                            
                         </DivImg>
                         
                         <DivData>
                             <P>{concierge.name}</P>
-                            <Id>{concierge.id}</Id>
-                            <P>{concierge.fecha_alta}</P>
+                            <Id>{concierge._id}</Id>
+                            <P>{concierge.start_date}</P>
                         </DivData>
                         
                     </DivCheckRooms>
 
                     {/* <DivMidDatos> */}
-                        <Pd>{concierge.job_desk}</Pd>
+                        <Pd>{concierge.description}</Pd>
                       
                       <DivSchedule>
                         <P>{concierge.schedule}</P>
@@ -210,7 +210,7 @@ export const ConciergeList = (props) => {
                            
                         </DivPrecio>
                         
-                        <P>{concierge.status === true ? <PGreen>ACTIVE</PGreen> : <PRed>INACTIVE</PRed>}</P>
+                        <P>{concierge.estate === true ? <PGreen>ACTIVE</PGreen> : <PRed>INACTIVE</PRed>}</P>
                        
                     </Div>
 

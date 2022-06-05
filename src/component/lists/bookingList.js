@@ -93,10 +93,11 @@ const Check = styled.input`
 `;
 
 const DivImg = styled.div`
+    background-image: url(${props => props.img});
+    background-repeat: round;
     margin: 1rem 0;
     height: 3rem;    
     width: 3rem;
-    background: grey;
     border-radius: 15px;
 `;
 
@@ -139,13 +140,13 @@ export const GuesteList = (props) => {
 
     const handleStatus = (state) => {        
         switch(state) {
-            case state = 1:
+            case state = 0:
                 return <BtnGreen>Booked</BtnGreen>
-            case state = 2:
+            case state = 1:
                 return <BtnRed>Refund</BtnRed>
-            case state = 3:
+            case state = 2:
                 return <BtnLiveGrey>Pending</BtnLiveGrey>
-            case state = 4:
+            case state = 3:
                 return <BtnDarkGrey>Canceled</BtnDarkGrey>
             default:
                 return state;
@@ -160,7 +161,7 @@ export const GuesteList = (props) => {
         <DivContainer>
             <Container>
                 <DivCheck>                    
-                    <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
+                   
                     
                     <P>Guest</P>
                 </DivCheck>
@@ -181,25 +182,23 @@ export const GuesteList = (props) => {
 
             {props.guests.map((guest,i) => 
                 <ContainerRooms key={i} >
-                    <DivCheckRooms onClick={() => handleClick(guest.id)}>                    
-                        {/* <Check type="checkbox" id="cbox1" value="first_checkbox" />  */}
+                    <DivCheckRooms onClick={() => handleClick(guest._id)}>                        
 
-                        <DivImg>
-                            img aqui
+                        <DivImg img={guest.fotos}>
                         </DivImg>
                         
                         <DivData>
-                            <P>{guest.first_name}</P>
-                            <Id>{guest.id}</Id>
+                            <P>{guest.name}</P>
+                            <Id>{guest._id}</Id>
                         </DivData>
                         
                     </DivCheckRooms>  
 
                     <Pd>{guest.order_date}</Pd>                                            
-                    <P>{guest.check_in}</P>
-                    <P>{guest.check_out}</P>
+                    <P>{guest.check_In}</P>
+                    <P>{guest.check_Out}</P>
                         
-                    <PopupViewNotes elementID={guest.id}/>
+                    <PopupViewNotes elementID={guest.special_request}/>
                     
                     
                     <PRoom>{guest.room_type} </PRoom>                       

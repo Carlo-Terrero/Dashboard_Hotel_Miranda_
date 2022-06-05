@@ -1,83 +1,36 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { conciergeData } from "../data/concierge"; // Este es mi client
+import axios from "axios";
 
-/*
-function wait(ms) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve();
-        }, ms);
-    });
-}
-*/
+import {REACT_APP_LINK_HTTP} from '../../env';
 
-//llamar una funcion esperar para que devuelva los dotos json
+const token = localStorage.getItem('Token');
 
-const wait = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(
-                /* initialState.conciergeList = */  conciergeData
-            );
-            reject(
-                new Error('Error Date')
-            );
-
-        }, 1000);
-    });
+const headers = {headers: 
+    {'Authorization': `Bearer  ${token}`}
 }
 
-export const fetchUsers = createAsyncThunk('concierge/fetchConcierge', /* async */ () => {
-    const response = /* await */ conciergeData
-    return response.data.results
-})
+const initialState ={
+    usersList: [],
+    status: 'idle',
+    //error: null
+}
 
-/* export const addNewConcierge = createAsyncThunk(
-    "posts/addNewPost",
-    async (initialPost) => {
-      const response = await initialPost/* client.post("/fakeApi/posts", initialPost) /;
-      return response.data;
-    }
-); */
-
-const promise = new Promise((resolve, reject) => {
-	const number = 4 /* Math.floor(Math.random() * 10) */;
-
-	setTimeout(
-		() => number < 5
-			? resolve(number)//.then(() => initialState.conciergeList = number)
-			: reject(new Error('Menor a 5')),
-		1000
-	);
+export const getUsers = createAsyncThunk('get/users', async () => {
+    const response = await axios.get(`${REACT_APP_LINK_HTTP}/users`, headers);
+    
+    return response.data.result;
 });
 
-async function doggido(){
-    let respon = await wait();
-    return respon;
-}
+export const postNewUser = createAsyncThunk('newUser/post', async (obj) => {
+    const response = await axios.post(`${REACT_APP_LINK_HTTP}/users`, obj, headers);
 
-
-const initialState = {
-    //conciergeList: promise.then((number) => {return number}),  //wait(),
-    //conciergeList: wait().then((conciergeData) => conciergeData),//wait(),
-    //conciergeList: doggido(), //Seguimos con lo mismo
-    status: 'idle',
-    error: null,
-}
+    return response.data.result;
+});
 
 export const usersSlice = createSlice({
     name: 'users',
 
-    /* initialState: {
-        //conciergeList: promise,
-        //conciergeList: wait(),
-        /* status: 'idle',
-        error: null, /
-    }, */
-
-    initialState:{
-        usersList: conciergeData
-    },
+    initialState,
 
     reducers: {
         addUsers: (state, action) => {
@@ -92,38 +45,42 @@ export const usersSlice = createSlice({
             console.log('edit Users');
         },
 
-        /* getOneUsers: (state, action) => {
-            console.log('get one Users');
-        } */
-
     },
 
-    extraReducers(builder) {
+    extraReducers: (builder) => {
         builder
-            .addCase(fetchUsers.pending, (state, action) => {
+            .addCase(getUsers.pending, (state, action) => {
                 state.status = 'loading'
             })
-            .addCase(fetchUsers.fulfilled, (state, action) => {
-                state.status = 'succeeded'
-                // Add any fetched posts to the array
-                state.users.usersList = state.users.users.concat(action.payload)
+            .addCase(getUsers.fulfilled, (state, action) => {
+                state.status = 'success'
+                state.usersList = action.payload
+                
             })
-            .addCase(fetchUsers.rejected, (state, action) => {
+            .addCase(getUsers.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message
             })
             /* .addCase(addNewUsers.fulfilled, (state, action) => {
                 state.posts.push(action.payload)
             }) */
+            .addCase(postNewUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(postNewUser.fulfilled, (state, action) => {
+                state.status = 'success'                
+                state.roomList.push(action.payload);
+            })
+            .addCase(postNewUser.rejected, (state, action) => {
+                state.status = 'failed'                
+            })
     },
 })
 
 // Exportamos los reducer(actions) que nos van a ayudar a interactuar.
 export const {addUsers, deleteUsers, editUsers, /* getOneUsers */} = usersSlice.actions;
 
-export const usersListDate = (state) => state.users.usersList;
+
+export const usersListDate = (state) => state.user.usersList;
 
 export default usersSlice.reducer;
-
-//Asi obtenemos un Users por ID
-export const getOneUsers = (state, id) => state.users.usersList.find((users) => users.id === id);

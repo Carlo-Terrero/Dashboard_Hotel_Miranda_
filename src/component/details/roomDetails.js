@@ -21,25 +21,27 @@ export const RoomDetails = () => {
     facilities,
     status,
     room_floor} = room[0]
+
     //const { rooms } = useParams();
 
     useEffect(() =>{
         dispatch(getOneRoom(id))
-    },[dispatch])
-    
+    },[])
+
+    console.log(room)
     return(
         <div>
             {/* <img src={foto} /> */}
-            <p>Descripcion {description} </p>
-            <p>Número {number} </p>
-            <p>Precio {price} </p>
-            <p>Discount {discount} </p>
-            <p>Cancellation --- {cancellation} </p>
-            <p>Cama {bed_type} </p>
-            <p>Oferta {offer} </p>
-            <p>facilities {facilities} </p>
-            <p>Estado {status} </p>
-            <p>Piso {room_floor} </p>
+            <p>Descripcion === {description} </p>
+            <p>Número  === {number} </p>
+            <p>Precio  ===  {price} </p>
+            <p>Discount  ===  {discount} </p>
+            <p>Cancellation  ===  {cancellation} </p>
+            <p>Cama  ===  {bed_type} </p>
+            <p>Oferta  === {offer} </p>
+            <p>facilities  === {facilities} </p>
+            <p>Estado  === {status} </p>
+            <p>Piso  === {room_floor} </p>
         </div>
     )
 }

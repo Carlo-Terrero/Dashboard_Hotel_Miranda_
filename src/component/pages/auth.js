@@ -65,19 +65,28 @@ export const Auth = (props) => {
     
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');   
-    const [token, setToken] = useState('')
+    //const [token, setToken] = useState('')
 
     const navigate =  useNavigate();
 
     async function logUser() {
         try {
           const response = await axios.post(`${REACT_APP_LINK_LOGIN}`,{userName: email, password: pass});
-          console.log(response.data.token);
-          setToken(response.data.token);
+          //console.log(response.data.token);
           
-          const decode = jwt_decode(response.data.token)
-          
-          console.log(decode)
+          const token = response.data.token;
+          console.log(token)
+          localStorage.setItem('Token', token);
+          const decode = jwt_decode(token);          
+          const user = decode.user;
+            //console.log(user)
+               // {type:"action Login", 
+              // value: {name: user.name, email: user.email, auth:true}}
+          props.dispatch(
+            {type: 'LOGIN', value: {auth: true, user: user.name, email: user.email}}          
+          )
+
+
           navigate('/dashboard');
         } catch (error) {
           alert('Caracteres incorrectos')
@@ -109,7 +118,7 @@ export const Auth = (props) => {
                         
     }
 
-
+    
     return (
         <DivBase>                
             <Form onSubmit={handleSubmit}>

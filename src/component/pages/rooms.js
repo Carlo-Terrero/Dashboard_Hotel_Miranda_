@@ -49,10 +49,8 @@ export const Rooms = () =>{
     const dispatch = useDispatch();
     //const roomsList = useSelector((state)=>state.rooms.roomList);
     const roomsList = useSelector(roomsListDate);
-    console.log(roomsList)
 
     const handleClickNewRoom = () => {
-        console.log('usuario creado')
         const newRoon = {
             foto: 'http://www.mdvacationclub.com/wp-content/uploads/2018/12/Placeholder.png', 
             bed_type: 'Suite',
@@ -91,10 +89,8 @@ export const Rooms = () =>{
                     </ControlDiv>
                    
                 </ControlDiv>
-
-                <div>
-                    {<RoomList rooms={roomsList}/> }                
-                </div>
+                
+                <RoomList rooms={roomsList}/>                               
                 
                 <Paginador paginas={8}/>
 

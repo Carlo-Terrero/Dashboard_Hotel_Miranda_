@@ -9,7 +9,7 @@ import { UserEdit } from "./pages/usersEdit";
 import { Rooms } from "./pages/rooms";
 //import { Guest } from "./pages/bookings";
 import { Auth } from "./pages/auth";
-import { BookingsDetails } from "./details/guestDetails";
+import { BookingsDetails } from "./details/bookingDetails";
 import { UserDetail } from "./details/userDetail";
 import { RoomDetails } from "./details/roomDetails";
 
@@ -17,12 +17,8 @@ import { RoomDetails } from "./details/roomDetails";
 // Esta es la funcion que se encarga de gestionar los datos con los que trabajaremos
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'NAME':
-      return {...state, name: action.value}
-    case 'EMAIL':
-      return {...state, email: action.value}
-    case 'AUTH':
-      return {...state, auth: action.value}
+    case 'LOGIN':
+      return {auth: action.value.auth, user: action.value.user, email: action.value.email }
     default:
       return state
   }
@@ -72,6 +68,7 @@ function App() {
           </Routes>
           
         </Router>
+     
       </LogingContext.Provider>
       
     </div>

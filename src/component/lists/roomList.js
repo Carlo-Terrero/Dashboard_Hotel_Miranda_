@@ -110,7 +110,6 @@ const DivImg = styled.div`
     margin: 1rem 0;
     height: 4rem;    
     width: 8rem;
-    background: grey;
     border-radius: 15px;
 
     img{
@@ -153,7 +152,6 @@ export const RoomList = (props) => {
         <DivContainer>
             <Container>
                 <DivCheck>                    
-                    {/* <Check type="checkbox" id="cbox1" value="first_checkbox" />  */}
                     
                     <P>Room Name</P>
                 </DivCheck>
@@ -173,10 +171,9 @@ export const RoomList = (props) => {
 
             {props.rooms.map((room,i) => 
                 <ContainerRooms key={i} >
-                    <DivCheckRooms onClick={() => handleIdRoom(room._id)}>                    
-                        {/* <Check type="checkbox" id={`cbox${i}`} value="first_checkbox" />  */}
+                    <DivCheckRooms onClick={() => handleIdRoom(room._id)}>                                            
 
-                        <DivImg >
+                        <DivImg img={room.foto}>
                             <img src={`${room.foto}`}/>
                         </DivImg>
                         
