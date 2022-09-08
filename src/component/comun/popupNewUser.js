@@ -104,7 +104,7 @@ export const PopupNewUser = () =>{
         e.preventDefault();
 
         const User = {
-            nombre: newName,
+            name: newName,
             email: newEmail,
             contact: telefono,
             puesto: puesto,
@@ -112,7 +112,9 @@ export const PopupNewUser = () =>{
             description: description,
             estate: estado,
             password: pass,
-            schedule: schedule
+            schedule: schedule,
+            foto: foto,
+
         }
         
         console.log(User)

@@ -6,13 +6,12 @@ import jwt_decode from 'jwt-decode';
 import styled from "styled-components";
 import { REACT_APP_LINK_LOGIN } from '../../env';
 
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const DivBase = styled.div`
     background-image: url(https://cdn.pixabay.com/photo/2016/11/17/09/28/hotel-1831072_960_720.jpg);
     background-size: cover;
     width: 100%;
-    height: 94.2vh;
+    height: 100vh;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
@@ -65,23 +64,18 @@ export const Auth = (props) => {
     
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');   
-    //const [token, setToken] = useState('')
 
     const navigate =  useNavigate();
 
     async function logUser() {
         try {
           const response = await axios.post(`${REACT_APP_LINK_LOGIN}`,{userName: email, password: pass});
-          //console.log(response.data.token);
           
           const token = response.data.token;
-          console.log(token)
           localStorage.setItem('Token', token);
           const decode = jwt_decode(token);          
           const user = decode.user;
-            //console.log(user)
-               // {type:"action Login", 
-              // value: {name: user.name, email: user.email, auth:true}}
+
           props.dispatch(
             {type: 'LOGIN', value: {auth: true, user: user.name, email: user.email}}          
           )
@@ -89,21 +83,9 @@ export const Auth = (props) => {
 
           navigate('/dashboard');
         } catch (error) {
-          alert('Caracteres incorrectos')
-          //<msnError/>
-          {/* <ToastContainer /> */}
+          alert('Caracteres incorrectos');
         }
     }
-
-   /*  function parseJwt (token) {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-    
-        return JSON.parse(jsonPayload);
-    }; */
 
     const handleSubmit = (e) => {
 
@@ -132,7 +114,7 @@ export const Auth = (props) => {
                     <input className='pass' type="password" value={pass} onChange={(e) => setPass(e.target.value)}/>
                 </label>
 
-                <button className='sumit' type="submit">sumit</button>
+                <button className='sumit' type="submit">submit</button>
             </Form>
                                                   
         </DivBase>

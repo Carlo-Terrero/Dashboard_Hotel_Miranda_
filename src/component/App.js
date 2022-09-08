@@ -12,7 +12,7 @@ import { Auth } from "./pages/auth";
 import { BookingsDetails } from "./details/bookingDetails";
 import { UserDetail } from "./details/userDetail";
 import { RoomDetails } from "./details/roomDetails";
-
+import { Navigate } from "react-router-dom";
 // Configuracion de del Reducer
 // Esta es la funcion que se encarga de gestionar los datos con los que trabajaremos
 const reducer = (state, action) => {
@@ -34,37 +34,88 @@ const initialState = {
 // Configuracion del Context
 export const LogingContext = createContext(initialState);
 
+//Este componte se encarga de privatizar las urls si no se esta permitido el
+function PrivateRoute({ auth ,children}) {
+  return auth ? children : <Navigate to="/" replace={true} />;
+}
+
 function App() {  
 
   // Inicializacion de reducer
   const [state, dispatch] = useReducer(reducer, initialState)
-
+  console.log(state)
   return (
     <div className="App">
       <LogingContext.Provider
-            value={state}
-          /* value={userloging} */
+            value={state}            
           >
-
         <Router>
-
-          <NavBarSuperior dispatch={dispatch} />
 
           <Routes>
 
             <Route path="/"  element={<Auth dispatch={dispatch}/>} />
-            <Route path='/dashboard' element={<Dashboard/>} />
 
-            <Route path="/rooms" element={<Rooms/>} />
-            <Route path="/rooms/:id" element={<RoomDetails/>} />
+            <Route path='/dashboard' element={
+              <PrivateRoute auth={state.auth}>
+                <NavBarSuperior dispatch={dispatch} />
+                <Dashboard/>
+              </PrivateRoute>
+            } />
 
-            <Route path="/Users" element={<Users/>} />
-            <Route path="/Users/:id" element={<UserDetail/>} />
+            <Route path="/rooms" element={
+                <PrivateRoute auth={state.auth}>
+                  <NavBarSuperior dispatch={dispatch} />
+                  <Rooms/>
+                </PrivateRoute>
+              }             
+            />
+
+            <Route path="/rooms/:id" element={              
+                <PrivateRoute auth={state.auth}>
+                  <NavBarSuperior dispatch={dispatch} />
+                  <RoomDetails/>
+                </PrivateRoute>
+              } 
+            />
+
+            <Route path="/Users" element={
+                <PrivateRoute auth={state.auth}>
+                  <NavBarSuperior dispatch={dispatch} />
+                  <Users/>
+                </PrivateRoute>
+              }
+            />
+            <Route path="/Users/:id" element={
+                <PrivateRoute auth={state.auth}>
+                  <NavBarSuperior dispatch={dispatch} />
+                  <UserDetail/>
+                </PrivateRoute>
+              }
+            />
             
-            <Route path="/userEdit" element={<UserEdit dispatch={dispatch}/>} />
+            <Route path="/userEdit" element={
+                <PrivateRoute auth={state.auth}>
+                  <NavBarSuperior dispatch={dispatch} />
+                  <UserEdit dispatch={dispatch}/>
+                </PrivateRoute>
+              }
+            />
 
-            <Route path="/bookings" element={<Bookings/>} />
-            <Route path="/bookings/:id" element={<BookingsDetails/>} />
+            <Route path="/bookings" element={
+                <PrivateRoute auth={state.auth}>
+                  <NavBarSuperior dispatch={dispatch} />
+                  <Bookings/>
+                </PrivateRoute>
+              }
+            />
+                  
+            <Route path="/bookings/:id" element={
+                <PrivateRoute auth={state.auth}>
+                  <NavBarSuperior dispatch={dispatch} />
+                  <BookingsDetails/>
+                </PrivateRoute>
+              }
+            />
           </Routes>
           
         </Router>
@@ -76,3 +127,7 @@ function App() {
 }
 
 export default App;
+
+/**
+  
+ */
