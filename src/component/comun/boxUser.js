@@ -44,7 +44,6 @@ const Button = styled.button`
 export const BoxUser = () => {
 
     const dataUser = useContext(LogingContext);
-    
 
     const navigate = useNavigate();
 
@@ -58,7 +57,7 @@ export const BoxUser = () => {
                 <ImgDiv>
                     img aqui
                 </ImgDiv>
-                <H4>{dataUser.name}</H4>
+                <H4>{dataUser.user}</H4>
                 <P>{dataUser.email}</P>
                 <Button onClick={handleClick}><b>contact Us</b></Button>
             </div>

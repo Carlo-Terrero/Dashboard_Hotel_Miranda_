@@ -1,7 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
+
+import {useDispatch, useSelector} from "react-redux";
+
+import { 
+    getBookings,
+    bookingListDate
+    } from "../slice/bookingSlice";
                                    
-import { GuesteList } from "../lists/guestList";
+import { GuesteList } from "../lists/bookingList";
 import { guestData } from "../data/guest";
 import { Paginador } from "../comun/paginador";
 
@@ -41,7 +48,13 @@ const NewRoom = styled.button`
 
 export const Bookings = () =>{
 
-    const selectores = ['All Guest', 'Pending', 'Booked', 'Canceled', 'Refund']
+    const selectores = ['All Guest', 'Pending', 'Booked', 'Canceled', 'Refund'];
+    const dispatch = useDispatch();
+    const bookingList = useSelector(bookingListDate)
+
+    useEffect(() =>{
+        dispatch(getBookings());
+    },[dispatch] )
     
     return (
         <DivBase>
@@ -63,14 +76,12 @@ export const Bookings = () =>{
                 </ControlDiv>
 
                 <div>
-                    <GuesteList guests={guestData}/>                    
+                    <GuesteList guests={bookingList}/>                    
                 </div>
 
                 <Paginador paginas={8}/>
 
-            </Div>
-            
-        </DivBase>
-        
+            </Div>            
+        </DivBase>        
     )
 }

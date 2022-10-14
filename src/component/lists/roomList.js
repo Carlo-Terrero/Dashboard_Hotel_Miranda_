@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { deleteRoom } from '../slice/roomSlices';
+import { deleteOneRoom } from '../slice/roomSlices';
 
 import styled from 'styled-components';
 import { AiOutlineMore } from 'react-icons/ai';
@@ -110,8 +110,12 @@ const DivImg = styled.div`
     margin: 1rem 0;
     height: 4rem;    
     width: 8rem;
-    background: grey;
     border-radius: 15px;
+
+    img{
+        height: 4rem;    
+        width: 8rem;
+    }
 `;
 
 const BtnGreen = styled.button`
@@ -134,21 +138,20 @@ export const RoomList = (props) => {
 
     const dispatch = useDispatch();
 
-    const handleClick = (date) => {
-        console.log('hola', date)
+    const handleIdRoom = (date) => {
+        //Con navigate añadimos a la url el dato que queramos, en este caso el ide
         navigate(`${date}`)
     }
 
-    const saludo = () => {
-        dispatch(deleteRoom())
-        console.log('puntos');
+    const handleDeleteRoom = (id) => {
+        //Disparador para eliminar habitacion
+        dispatch(deleteOneRoom(id))
     }
     
     return(
         <DivContainer>
             <Container>
                 <DivCheck>                    
-                    <Check type="checkbox" id="cbox1" value="first_checkbox" /> 
                     
                     <P>Room Name</P>
                 </DivCheck>
@@ -168,37 +171,36 @@ export const RoomList = (props) => {
 
             {props.rooms.map((room,i) => 
                 <ContainerRooms key={i} >
-                    <DivCheckRooms onClick={() => handleClick(room.id)}>                    
-                        <Check type="checkbox" id={`cbox${i}`} value="first_checkbox" /> 
+                    <DivCheckRooms onClick={() => handleIdRoom(room._id)}>                                            
 
-                        <DivImg>
-                            img aqui
+                        <DivImg img={room.foto}>
+                            <img src={`${room.foto}`}/>
                         </DivImg>
                         
                         <DivData>
-                            <Id>{room.id}</Id>
-                            <P>{room.first_name}</P>
+                            <Id>{room._id}</Id>
+                            <P>{room.number}</P>
                         </DivData>
                         
                     </DivCheckRooms>
 
                     <DivMidDatos>
                         <Pd>{room.bed_type}</Pd>
-                        <P>{room.room_floor}</P>
+                        <P>Flooo A-{room.room_floor}</P>
                         <P>{room.facilities}</P>                                                                       
                     </DivMidDatos>
 
                     <Div>
                         <DivPrecio>
-                            <P>{room.rate} </P> 
-                            <Pn> /night</Pn>
+                            <P>{room.price}€</P> 
+                            <Pn>/night</Pn>
                         </DivPrecio>
                         
                         <P>{room.status === true ? <BtnGreen>Available</BtnGreen> : <BtnRed>Booked</BtnRed>}</P>
                        
                     </Div>
 
-                    <DivMenuPuntos onClick={saludo}>
+                    <DivMenuPuntos onClick={() => handleDeleteRoom(room._id)}>
                         {<AiOutlineMore/>}
                     </DivMenuPuntos>
                    
@@ -210,3 +212,4 @@ export const RoomList = (props) => {
         </DivContainer>
     )
 }
+

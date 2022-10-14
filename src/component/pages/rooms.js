@@ -1,12 +1,11 @@
-import React from "react";
+import React,{useEffect} from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
     roomsListDate,
-    addRoom,
-    editRoom,
-    getOneElemen
+    getRooms,
+    postNewRoom
 } from '../slice/roomSlices';
 
 import { RoomList } from "../lists/roomList";
@@ -48,17 +47,30 @@ export const Rooms = () =>{
     const selectores = ['All Rooms', 'Active Employee', 'Inactive Employee']
     
     const dispatch = useDispatch();
+    //const roomsList = useSelector((state)=>state.rooms.roomList);
     const roomsList = useSelector(roomsListDate);
 
     const handleClickNewRoom = () => {
-        console.log('kk')
-        dispatch(addRoom());
-        dispatch(editRoom());
-        dispatch(getOneElemen());
-
-        // onCLick={ ()=> {dispatch(addRoom())} } ----Si lo quieres hacer en una sola linea
+        const newRoon = {
+            foto: 'http://www.mdvacationclub.com/wp-content/uploads/2018/12/Placeholder.png', 
+            bed_type: 'Suite',
+            number: 2121,
+            description: 'Room para probar end poin de crear room',
+            offer: true,
+            price: 73,
+            discount: 21,
+            cancellation: 'Prueba si ganas de cancelacion',
+            facilities: 'Mosquiteras, Tv, Wifi',
+            status: true,
+            room_floor: 3
+        }
+        console.log(newRoon)
+        dispatch(postNewRoom(newRoon))
     }
-    console.log('lista desde room', roomsList);
+
+    useEffect(() => {
+        dispatch(getRooms());
+    }, [dispatch])
 
     return (
         <DivBase>
@@ -77,10 +89,8 @@ export const Rooms = () =>{
                     </ControlDiv>
                    
                 </ControlDiv>
-
-                <div>
-                    <RoomList rooms={roomsList}/>                    
-                </div>
+                
+                <RoomList rooms={roomsList}/>                               
                 
                 <Paginador paginas={8}/>
 

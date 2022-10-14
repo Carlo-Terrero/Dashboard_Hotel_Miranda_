@@ -22,7 +22,9 @@ const Select = styled.p`
 
 
 export const SelectorGreenMenu = (props) => {
-    const [isActive,setIsActive]=useState(props.selectores[0])
+    
+    const [isActive,setIsActive]=useState(props.selectores[0]);
+
     function handleClick(date){
         console.log(date)
         setIsActive(date)

@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { BtnNav } from '../comun/btn-nav';
 import { BoxUser } from '../comun/boxUser';
+import { useNavigate } from 'react-router-dom';
 
 import styled from "styled-components";
 
 //Icons
-import { RiKey2Line,RiCalendarCheckLine } from "react-icons/ri";
+import { RiKey2Line, RiCalendarCheckLine } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineDashboard } from "react-icons/md"
 
@@ -66,6 +66,9 @@ const P2 = styled.p`
 
 export const NavBarLateral = () => {
 
+    const navigate = useNavigate();
+
+
     return(
         <Content>
             <Div>   
@@ -73,7 +76,7 @@ export const NavBarLateral = () => {
                     <MdOutlineDashboard/>
                 </IconDiv>
 
-                <BtnNav name={"Dashboard"} />
+                <button onClick={() => navigate('/dashboard')}> Dashboard</button>
             </Div>
 
             <Div>
@@ -81,7 +84,8 @@ export const NavBarLateral = () => {
                     <RiKey2Line/>
                 </Rotador>
                 
-                <BtnNav name={"Rooms"} />
+                <button onClick={() => navigate('/rooms')}> Rooms</button>
+
             </Div>
 
             <Div>
@@ -89,15 +93,17 @@ export const NavBarLateral = () => {
                     <RiCalendarCheckLine/>
                 </IconDiv>
 
-                <BtnNav name={"Bookings"} />
+                <button onClick={() => navigate('/bookings')}> Bookings</button>
+
             </Div>
             
             <Div>
                 <IconDiv>
                     <FaRegUser/>
                 </IconDiv>
+                
+                <button onClick={() => navigate('/users')}> Users</button>
 
-                <BtnNav name={"Users"} />
             </Div>
 
 

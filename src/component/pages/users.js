@@ -1,14 +1,12 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Este dato se va al garete cuando hagamo la conexion
 import { conciergeData } from "../data/concierge";
 
 import { 
-    addUsers,
-    editUsers,
-    usersListDate,
-    //fetchUsers,
+    getUsers,
+    usersListDate
 } from "../slice/userSlice";
 
 import styled from "styled-components";
@@ -38,16 +36,12 @@ const ControlDiv = styled.div`
 export const Users = () =>{
     
     const selectores = ['All Employee', 'Active Employee', 'Inactive Employee']
+    const dispatch = useDispatch();
+    const users = useSelector(usersListDate);
 
-    //const conciergeListDate = useSelector(usersListDate);
-    //const cc = useSelector(fetchConcierge());
-  /*   const dispatch = useDispatch();
-    
-    const handleClickNewUsers = () => {
-        //dispatch(getOneConcierge())
-        
-    }
-    //console.log(conciergeListDate) */
+    useEffect(() => {
+        dispatch(getUsers());
+    }, [dispatch]);
 
     return (
         <DivBase>
@@ -66,7 +60,7 @@ export const Users = () =>{
                 </ControlDiv>
 
                 <div>
-                    <ConciergeList concierges={conciergeData}/>                    
+                    <ConciergeList concierges={users}/>                    
                 </div>
 
                 <Paginador paginas={8}/>

@@ -1,62 +1,47 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { roomsData } from "../data/rooms";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
 
-const getRoomsData = () =>{
-    return new Promise((resolve, reject) =>{
-        setTimeout(() => {
-            resolve( 
-                roomsData
-            ); 
-            reject(
-                new Error('Error Date')
-            );
+import {REACT_APP_LINK_HTTP} from '../../env';
 
-        }, 1000);
-    })
-}
+const token = localStorage.getItem('Token');
 
-/* let a;
-const res = async () => {
-    const res = await wait();
-    console.log(res) // Aqui me da el array de objetos 
-    a = res;
-    console.log(a)
-    return a;
-} */
-//console.log(res());//Debuelve promesa sin responder
-
-//console.log(a)
+const headers = {headers: 
+    {'Authorization': `Bearer  ${token}`}
+};
 
 const initialState ={
-    //roomList: wait(), //Me da la promesa sin respondes
-    roomList: roomsData,
-    //roomList: '',
-    //roomList: a,
-    //roomList: await res() ,
+    roomList: [],
     status: 'idle',
-    error: null
-}
+    //error: null
+};
 
-/* const initialState = async () => { return { 
-    //roomList: await res(),
-    roomList: roomsData,
-    status: 'idle',
-    error: null
-} } */
+// solo falta, actualizar y que al liminar una room desaparezca de la lista
+export const getRooms = createAsyncThunk('get/rooms', async () => {
+    const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms`, headers )
+    
+    return response.data.rooms;
+});
 
-/* let a;
-wait()
-    //.then((response) => console.log(response, '---'))
-    .then((response => {a = response}))
-//console.log('klk')
-console.log(a) */
+export const getOneRoom = createAsyncThunk('getOne/room', async (id) => {
+    const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms/${id}`, headers )
+    return [response.data.room];
+});
+
+export const postNewRoom = createAsyncThunk('postRoom/room', async (obj) => {
+    const response = await axios.post(`${REACT_APP_LINK_HTTP}/rooms`, obj, headers)
+    return response.data.room;
+})
+
+export const deleteOneRoom = createAsyncThunk('deleteRoom/room', async (id) => {
+    const response = await axios.delete(`${REACT_APP_LINK_HTTP}/rooms/${id}`, headers)
+    return response.data.room;
+})
+
 
 export const roomSlice = createSlice({
     name: 'room',
 
-    initialState,/* : {
-        roomList: roomsData,
-    }, */
+    initialState,
 
     reducers: {
         addRoom: (state, action) => {
@@ -78,6 +63,42 @@ export const roomSlice = createSlice({
         
     },
 
+    extraReducers: (builder) => {
+        builder
+            .addCase(getRooms.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getRooms.fulfilled, (state, action) => {
+                state.status = 'success'                
+                state.roomList = action.payload
+            })
+            .addCase(getRooms.rejected, (state, action) => {
+                state.status = 'failed'                
+            })
+            
+            .addCase(getOneRoom.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getOneRoom.fulfilled, (state, action) => {
+                state.status = 'success'
+                state.roomList = action.payload
+            })
+            .addCase(getOneRoom.rejected, (state, action) => {
+                state.status = 'loading'
+            })
+
+            .addCase(postNewRoom.fulfilled, (state, action) => {
+                state.status = 'success'
+                state.roomList.push(action.payload);
+            })
+
+            .addCase(deleteOneRoom.fulfilled, (state, action) => {
+                state.status = 'success'
+                //state.roomList.delete(action.payload)                
+            })
+        
+    },
+
 })
 
 
@@ -86,8 +107,5 @@ export const {addRoom, deleteRoom, editRoom, getOneElemen } = roomSlice.actions;
 
 // Exportamos los datos de todas la habitaciones
 export const roomsListDate = (state) => state.room.roomList;
-
-// Asi exportamos 1 elemento con el id deseado
-export const getOnetoom = (state, id) => state.room.roomList.find(room => room.id === id);
 
 export default roomSlice.reducer;
