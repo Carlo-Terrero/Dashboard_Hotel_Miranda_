@@ -20,7 +20,7 @@ const DivBase = styled.div`
 
 const Div =  styled.div` 
     display: grid;
-    margin-left: 300px;
+    margin-left: 30px;
 `;
 
 const ControlDiv = styled.div`

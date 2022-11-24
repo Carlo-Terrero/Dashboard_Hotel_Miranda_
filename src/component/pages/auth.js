@@ -4,7 +4,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 import styled from "styled-components";
-import { REACT_APP_LINK_LOGIN } from '../../env';
+import { REACT_APP_LINK_HTTP } from '../../env';
 
 import 'react-toastify/dist/ReactToastify.css';
 const DivBase = styled.div`
@@ -69,7 +69,7 @@ export const Auth = (props) => {
 
     async function logUser() {
         try {
-          const response = await axios.post(`${REACT_APP_LINK_LOGIN}`,{userName: email, password: pass});
+          const response = await axios.post(`${REACT_APP_LINK_HTTP}/login`,{userName: email, password: pass});
           
           const token = response.data.token;
           localStorage.setItem('Token', token);

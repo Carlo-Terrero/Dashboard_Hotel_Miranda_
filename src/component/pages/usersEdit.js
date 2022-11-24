@@ -34,6 +34,7 @@ const Div = styled.div`
 
 export const UserEdit = (props) =>{
 
+    //Hay que traer los datos el usuario y ponerlos aqui
     const [newName, setNewName] = useState('Carlos Terrero');
     const [newEmail, setNewEmail] = useState('Carlos@gmail.com');
     const [telefono, setTelefono] = useState(629228654);
@@ -134,10 +135,10 @@ export const UserEdit = (props) =>{
                     </select>
                 </label>
 
-                <label>
+                {/* <label>
                     <p>Password</p> 
                     <input value={pass} type="password" onChange={(e) => {setPass(e.target.value)}} />
-                </label>
+                </label> */}
             </div>
 
             <div>

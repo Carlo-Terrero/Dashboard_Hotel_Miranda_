@@ -10,7 +10,7 @@ import { MdOutlineLocalPhone } from 'react-icons/md';
 
 const DivContainer = styled.div`
     display: grid; 
-    background: white;   
+    background: white;  
     border-radius: 25px;
     border-bottom: #8080802e 0.1rem solid;
     padding-bottom: 0.9rem;
@@ -151,7 +151,6 @@ export const ConciergeList = (props) => {
     const handleClickPoint = () => {
         dispatch(deleteUsers())
         console.log('kk')
-        
     }
 
     return(
@@ -176,7 +175,7 @@ export const ConciergeList = (props) => {
             
             {props.concierges.map((concierge,i) => 
                 <ContainerRooms key={i} >
-                    <DivCheckRooms onClick={() => handleClick(concierge.id)}>                    
+                    <DivCheckRooms onClick={() => handleClick(concierge._id)}>                    
 
                         <DivImg img={concierge.foto}>
                             

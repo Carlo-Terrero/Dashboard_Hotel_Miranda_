@@ -8,7 +8,7 @@ import logo2 from "../../static/LogoHotel.svg";
 import styled from "styled-components";
 
 //Icons
-import {FiAlignJustify, FiBell} from "react-icons/fi";
+import {FiBell} from "react-icons/fi";
 import {IoIosLogOut} from "react-icons/io";
 import {ImEnvelop} from "react-icons/im";
 import { NavBarLateral } from "./navBarLateral";
@@ -23,10 +23,6 @@ const Div = styled.div`
     gap: 2rem;
     font-size: 1.2rem;
     
-`;
-
-const contLogo = styled.div`
-    font-size: 1.2rem;
 `;
 
 const DivIcon = styled(Div)`
@@ -79,7 +75,7 @@ export const NavBarSuperior = (props) => {
                         Log {dataLoggingContext.auth ? 'in' : 'out'} 
                     </Div>
 
-                    <button onClick={handleClick}>O</button>
+                    {/* <button onClick={handleClick}>O</button> */}
                 </Div>
 
                 {dataLoggingContext.auth ? 

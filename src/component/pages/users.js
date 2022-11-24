@@ -1,8 +1,6 @@
 import React,{useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-//Este dato se va al garete cuando hagamo la conexion
-import { conciergeData } from "../data/concierge";
+import { useNavigate } from "react-router-dom";
 
 import { 
     getUsers,
@@ -17,13 +15,10 @@ import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
 import { PopupNewUser } from "../comun/popupNewUser";
 
-const DivBase = styled.div`
-    padding: 2rem;
-`;
-
 const Div =  styled.div` 
+    padding: 2rem;
     display: grid;
-    margin-left: 300px;
+    padding-left: 3.5rem;
 `;
 
 const ControlDiv = styled.div`
@@ -33,25 +28,38 @@ const ControlDiv = styled.div`
     margin-bottom: 0.3rem;
 `;
 
+const NewUser = styled.button`
+    color: white;
+    background: #013401;
+    border: none;
+    border-radius: 10px;
+    width: 170px;
+    height: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+`;
+
 export const Users = () =>{
     
     const selectores = ['All Employee', 'Active Employee', 'Inactive Employee']
     const dispatch = useDispatch();
     const users = useSelector(usersListDate);
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getUsers());
     }, [dispatch]);
 
     return (
-        <DivBase>
+        
             <Div>
                 <ControlDiv>
                     <SelectorGreenMenu selectores={selectores}/>                               
 
                     <ControlDiv>
 
-                        <PopupNewUser/>
+                        <NewUser onClick={() => {navigate('newuser')}}>New user</NewUser>
 
                         <BtnNewEst/>
                         
@@ -67,7 +75,7 @@ export const Users = () =>{
 
             </Div>
             
-        </DivBase>
+        
         
     )
 }

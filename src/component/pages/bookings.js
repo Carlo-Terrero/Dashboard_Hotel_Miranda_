@@ -9,7 +9,6 @@ import {
     } from "../slice/bookingSlice";
                                    
 import { GuesteList } from "../lists/bookingList";
-import { guestData } from "../data/guest";
 import { Paginador } from "../comun/paginador";
 
 import { BtnNewEst } from "../comun/btnNewEst";

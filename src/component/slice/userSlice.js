@@ -27,6 +27,8 @@ export const postNewUser = createAsyncThunk('newUser/post', async (obj) => {
     return response.data.result;
 });
 
+/* export const getOneUsers =  */
+
 export const usersSlice = createSlice({
     name: 'users',
 

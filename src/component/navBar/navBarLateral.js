@@ -15,15 +15,20 @@ const Content = styled.div`
     display: grid;
     float: left;
     background: white;
-    width: 300px;
+    width: 150px;
     justify-content: center;
     gap: 2em;
     padding-top: 2em;
     border-bottom-right-radius: 35px;
+
+    :hover{
+        width: 300px;
+
+    }
 `;
 
 const IconDiv =  styled.div`
-    font-size: 1.3rem;
+    font-size: 1.5rem;
 `;
 
 const Rotador = styled(IconDiv)`
@@ -34,18 +39,23 @@ const Div = styled.div`
     color: #318431ab;
     display: flex;
     gap: 1rem;
+    margin-left: 2rem;
 
-    a{
-        text-decoration: none;
-        color: black;
-
-        :hover{
-            color: red;
-        }
+    .menu_text{
+        margin: 0;
+        font-size: 1.3rem;
+        display: none;
     }
 
     :hover{
         color: red;
+        
+        p{
+            display: block;
+            visibility: visible;
+            cursor: hand;
+        }
+
     }
 `;
 
@@ -56,7 +66,7 @@ const Div2 = styled(Div)`
 `;
 
 const P = styled.p`
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 `;
 
 const P2 = styled.p`
@@ -71,38 +81,38 @@ export const NavBarLateral = () => {
 
     return(
         <Content>
-            <Div>   
+            <Div onClick={() => navigate('/dashboard')}>   
                 <IconDiv>
                     <MdOutlineDashboard/>
                 </IconDiv>
 
-                <button onClick={() => navigate('/dashboard')}> Dashboard</button>
+                <p className='menu_text'>Dashboard</p>
             </Div>
 
-            <Div>
+            <Div onClick={() => navigate('/rooms')}>
                 <Rotador>
                     <RiKey2Line/>
                 </Rotador>
                 
-                <button onClick={() => navigate('/rooms')}> Rooms</button>
+                <p className='menu_text'>Rooms</p>
 
             </Div>
 
-            <Div>
+            <Div onClick={() => navigate('/bookings')}>
                 <IconDiv>
                     <RiCalendarCheckLine/>
                 </IconDiv>
 
-                <button onClick={() => navigate('/bookings')}> Bookings</button>
+                <p className='menu_text'>Bookings</p>
 
             </Div>
             
-            <Div>
+            <Div onClick={() => navigate('/users')}>
                 <IconDiv>
                     <FaRegUser/>
                 </IconDiv>
                 
-                <button onClick={() => navigate('/users')}> Users</button>
+                <p className='menu_text'>Users</p>
 
             </Div>
 
