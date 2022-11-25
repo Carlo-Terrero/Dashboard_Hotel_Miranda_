@@ -10,6 +10,16 @@ const Div = styled.div`
     align-items: center;
     justify-content: center;
 
+    padding-top: 2rem;
+    display: grid;
+    background: white;  
+    width: 40rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 3rem 25%;
+    border: 0.5px solid #80808038;
+
     h1{
         text-align: center;
     }

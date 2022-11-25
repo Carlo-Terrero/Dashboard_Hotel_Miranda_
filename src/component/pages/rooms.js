@@ -65,7 +65,7 @@ export const Rooms = () =>{
             room_floor: 3
         }
         console.log(newRoon)
-        dispatch(postNewRoom(newRoon))
+        //dispatch(postNewRoom(newRoon))
     }
 
     useEffect(() => {

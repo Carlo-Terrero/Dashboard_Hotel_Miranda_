@@ -106,7 +106,7 @@ export const Auth = (props) => {
             <Form onSubmit={handleSubmit}>
                 <label>                                        
                     <p>User:</p>                        
-                    <input className='mail' type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input className='text' type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </label>
 
                 <label>

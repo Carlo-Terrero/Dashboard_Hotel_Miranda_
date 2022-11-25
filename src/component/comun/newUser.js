@@ -34,12 +34,14 @@ const Form = styled.form`
 
         img{
             background-repeat: round;
-            height: 10rem;
+            height: 12rem;
             border-radius: 8px;
         }
 
-        divTriple{
+        div{
             margin-left: auto;
+            display: grid;
+            gap: 1rem;
         }
 
         label{
@@ -48,23 +50,17 @@ const Form = styled.form`
                 margin: 0.5rem;
             }
 
-            input{
+            input, select{
                 width: 15rem;
                 border-radius: 0.5rem;
                 border: 0.5px solid #80808070;
             }
+
         }
 
         
     }
 
-    divButton{
-        margin: -3.5rem 0 2rem auto;
-        display: flex;
-        gap: 2rem;
-    }
-
- 
 `;
 
 const BtnAceptar = styled.button`
@@ -74,13 +70,19 @@ const BtnAceptar = styled.button`
     border-radius: 25px;
     border: none;
     cursor: pointer;
+    background: green;
+    color: white;
 `;
 
 const BtnCancel = styled(BtnAceptar)`
     background: red;
-    color: white;
 `;
 
+const DivButton = styled.div`{
+    margin: -3.5rem 0 2rem auto;
+    display: flex;
+    gap: 2rem;
+}`;
 
 export const NewUser = () =>{
 
@@ -92,10 +94,10 @@ export const NewUser = () =>{
     const [puesto, setPuesto] = useState('');
     const [alta, setAlta] = useState('');
     const [description, setDescription] = useState('');
-    const [estado, setEstado] = useState();
+    const [estado, setEstado] = useState('true');
     const [pass, setPass] = useState('');
     const [foto, setFoto] = useState('https://i.blogs.es/808765/dpoty-puppy-2nd--c--tracy-kirby-the-kennel-club-2/1366_2000.jpg');
-    const [schedule, setSchedule] = useState('');
+    const [schedule, setSchedule] = useState('Sábado');
 
  /*    const [open, setOpen] = useState(false);
 
@@ -118,22 +120,22 @@ export const NewUser = () =>{
             foto: foto,
         }
         
-        //console.log(User)
+        console.log(User)
         dispatch(postNewUser(User))        
     }
     
     return(
         <Div>
             <Form onSubmit={handleSubmit}>
-                <h1>Insertar Nuevo Usuario</h1>
+                <h1>Añadir Nuevo Usuario</h1>
 
                 <div>
                     <img src={`${foto}`} alt='imagen user'/>
 
-                    <divTriple>
+                    <div>
                         <label>
-                            <p>Url img</p>
-                            <input value={foto} type="email" onChange={(e) => {setFoto(e.target.value)}} required/>
+                            <p>Url img Usuario</p>
+                            <input value={foto} type="text" onChange={(e) => {setFoto(e.target.value)}} required/>
                         </label>
 
                         <label>
@@ -145,7 +147,7 @@ export const NewUser = () =>{
                             <p>Email</p>
                             <input value={newEmail} type="email" onChange={(e) => {setNewEmail(e.target.value)}} required/>
                         </label>
-                    </divTriple>
+                    </div>
                     
                 </div>
 
@@ -160,7 +162,8 @@ export const NewUser = () =>{
                     <label>
                         <p>Puesto</p>
                         <select value={puesto} onChange={(e) => {setPuesto(e.target.value)}} required>
-                            <option defaultValue={"Servicio de Habitaciones"} /* value={"Servicio de Habitaciones"} */>Servicio de Habitaciones</option>
+                            <option >Seleccione puesto</option>
+                            <option value={"Servicio de Habitaciones"} >Servicio de Habitaciones</option>
                             <option value={"Manager"}>Manager</option>
                             <option value={"Recepción"}>Recepcionista</option>
                         </select>
@@ -170,7 +173,7 @@ export const NewUser = () =>{
                 <div>
                     <label>
                         <p>Fecha Alta</p>
-                        <input value={alta} type="text" onChange={(e) => {setAlta(e.target.value)}} required/>
+                        <input value={alta} type="date" onChange={(e) => {setAlta(e.target.value)}} required/>
                     </label>
 
                     <label>
@@ -181,17 +184,26 @@ export const NewUser = () =>{
 
                 <div>
 
-                    <div>
-                        <label>
-                            <p>Horario</p>
-                            <input value={schedule} type="text" onChange={(e) => {setSchedule(e.target.value)}} required/>
-                        </label>                                                        
-                    </div>
+                    <label>
+                        <p>Día de guardia</p>
+                        {/* <input value={schedule} type="text" onChange={(e) => {setSchedule(e.target.value)}} required/> */}
+                        <select value={schedule} type="text" onChange={(e) => {setSchedule(e.target.value)}}  required>
+                            <option > Seleccione día </option>
+                            <option value={"Lunes "}> Lunes </option>
+                            <option value={"Martes "}> Martes </option>
+                            <option value={"Miercoles "}> Miercoles </option>
+                            <option value={"Jueves "}> Jueves </option>
+                            <option value={"Viernes "}> Viernes </option>
+                            <option value={"Sábado "}> Sábado </option>
+                            <option value={"Domingo "}> domingo </option>
+                        </select>
+                    </label>                                                                            
 
                     <label>
                         <p>Estado</p> 
                         <select value={estado} onChange={(e) => {setEstado(e.target.value)}} required>
-                            <option value={"true"}>Activo</option>
+                            <option >Seleccione estado</option>
+                            <option value={"true"} >Activo</option>
                             <option value={"false"}>In-Activo</option>
                         </select>
                     </label>
@@ -208,10 +220,10 @@ export const NewUser = () =>{
                     
                 </div>
 
-                <divButton>
-                    <BtnAceptar type="submit"  /* onClick={() => {close()}} */>Insertar</BtnAceptar>
+                <DivButton>
+                    <BtnAceptar type="submit"  /* onClick={() => {close()}} */>Añadir</BtnAceptar>
                     <BtnCancel /* onClick={() => {close()}} */> Cancelar </BtnCancel>
-                </divButton>
+                </DivButton>
 
             </Form>
         </Div>

@@ -6,7 +6,33 @@ import { getOneRoom, roomsListDate } from '../slice/roomSlices';
 import styled from "styled-components";
 
 const DivContainer = styled.div`
-    background: red;
+    padding-top: 2rem;
+    display: flex;
+    background: white;  
+    width: 50rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 3rem 25%;
+    border: 0.5px solid #80808038;
+
+    div{
+        margin: 1rem;
+
+        img{
+            width: 25rem;
+        }
+
+        div{
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+
+            p{
+                margin: 0;
+            }
+        }
+    }
 `;
 
 export const RoomDetails = () => {
@@ -14,6 +40,7 @@ export const RoomDetails = () => {
     const dispatch = useDispatch()
     const { id } = useParams();
     const room = useSelector(roomsListDate);
+    let room2 = '';
     
     const {foto, 
     bed_type,
@@ -33,24 +60,31 @@ export const RoomDetails = () => {
 
     console.log(room)
     return(
-        <DivContainer>
-            {/* <img src={foto} /> */}
-            
-
+        <DivContainer>    
             <div>
-                <p>Descripcion === {description} </p>
-                <p>Número  === {number} </p>
-                <p>Precio  ===  {price} </p>
-                <p>Discount  ===  {discount} </p>
-                <p>Cancellation  ===  {cancellation} </p>
-                <p>Cama  ===  {bed_type} </p>
-                <p>Oferta  === {offer} </p>
-                <p>facilities  === {facilities} </p>
-                <p>Estado  === {status} </p>
-                <p>Piso  === {room_floor} </p>
+                <img src={foto}/>
             </div>
 
-            <div >
+            <div>
+                <div>
+                    <p>Piso: {room_floor} </p>
+                    <p>Número: {number} </p>
+                </div>
+
+                <p>Cama: {bed_type} </p>
+                <p>facilities: {facilities} </p>
+                <p>Descripcion: </p>
+                <p>{description} </p>
+
+                <div>
+                    <p>Precio: {price} </p>
+                    <p>Discount: {discount}%</p>
+                </div>
+                
+                <p>Oferta: {offer ? 'En oferta' : 'Sin oferta'} </p>                    
+                <p>Condiciones de cancelacion: </p>
+                <p>{cancellation}</p>
+                <p>Estado: {status ? 'Lista' : 'En mantenimiento'} </p>
 
             </div>
             

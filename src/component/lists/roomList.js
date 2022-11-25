@@ -179,7 +179,7 @@ export const RoomList = (props) => {
                         
                         <DivData>
                             <Id>{room._id}</Id>
-                            <P>{room.number}</P>
+                            <P>Number room: {room.number}</P>
                         </DivData>
                         
                     </DivCheckRooms>
