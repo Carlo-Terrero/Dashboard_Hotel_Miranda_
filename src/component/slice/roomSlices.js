@@ -37,6 +37,12 @@ export const deleteOneRoom = createAsyncThunk('deleteRoom/room', async (id) => {
     return response.data.room;
 })
 
+export const editOneRoom = createAsyncThunk('updatedRoom/put', async (roomElement) => {
+    const response = await axios.put(`${REACT_APP_LINK_HTTP}/rooms/${roomElement.id}`, roomElement.roomObj, headers)
+
+    return response.date.room;
+})
+
 
 export const roomSlice = createSlice({
     name: 'room',
@@ -95,6 +101,17 @@ export const roomSlice = createSlice({
             .addCase(deleteOneRoom.fulfilled, (state, action) => {
                 state.status = 'success'
                 //state.roomList.delete(action.payload)                
+            })
+
+            .addCase(editOneRoom.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(editOneRoom.fulfilled, (state, action) => {
+                state.status = 'success'
+                state.roomList.push(action.payload);
+            })
+            .addCase(editOneRoom.rejected, (state, action) => {
+                state.status = 'loading'
             })
         
     },

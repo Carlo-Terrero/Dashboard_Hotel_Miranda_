@@ -1,9 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import { useParams } from 'react-router-dom';
+
+import moment from "moment";
 
 import styled from "styled-components";
 
-import { useDispatch } from 'react-redux';
-import { postNewUser } from '../slice/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { postNewUser, updateOneUser, getOneUser, usersListDate} from '../slice/userSlice';
 
 const Div =  styled.div` 
     padding-top: 2rem;
@@ -84,24 +87,29 @@ const DivButton = styled.div`{
     gap: 2rem;
 }`;
 
-export const NewUser = () =>{
+export const NewUser = (props) =>{
 
+    const {id} = useParams();
+    const user = useSelector(usersListDate);
+    const userSelected =  user.find(user => user._id === id)
+
+    const validador = id ? true : false
     const dispatch = useDispatch();
-
-    const [newName, setNewName] = useState('');
-    const [newEmail, setNewEmail] = useState('');
-    const [telefono, setTelefono] = useState();
-    const [puesto, setPuesto] = useState('');
-    const [alta, setAlta] = useState('');
-    const [description, setDescription] = useState('');
-    const [estado, setEstado] = useState('true');
+    
+    const [newName, setNewName] = useState(validador  ? userSelected.name : '');
+    const [newEmail, setNewEmail] = useState(validador ? userSelected.email : '');
+    const [telefono, setTelefono] = useState(validador ? userSelected.contact : '');
+    const [puesto, setPuesto] = useState(validador ? userSelected.puesto : '');
+    const [alta, setAlta] = useState(validador ? moment(userSelected.start_date).format('yyyy-MM-dd') : '');
+    const [description, setDescription] = useState(validador ? userSelected.description : '');
+    const [estado, setEstado] = useState(validador ? userSelected.estate : '');
     const [pass, setPass] = useState('');
-    const [foto, setFoto] = useState('https://i.blogs.es/808765/dpoty-puppy-2nd--c--tracy-kirby-the-kennel-club-2/1366_2000.jpg');
-    const [schedule, setSchedule] = useState('Sábado');
+    const [foto, setFoto] = useState(validador ? userSelected.foto : 'https://i.blogs.es/808765/dpoty-puppy-2nd--c--tracy-kirby-the-kennel-club-2/1366_2000.jpg');
+    const [schedule, setSchedule] = useState(validador ? userSelected.schedule : '');
 
- /*    const [open, setOpen] = useState(false);
-
-    const closeModal = () => setOpen(true); */
+    useEffect(() => {
+        dispatch(getOneUser(id))
+    },[])
 
     const handleSubmit = (e) => {
 
@@ -115,19 +123,21 @@ export const NewUser = () =>{
             start_date: alta,
             description: description,
             estate: estado,
-            password: pass,
+            password: validador ? user.password : pass,
             schedule: schedule,
             foto: foto,
         }
         
-        console.log(User)
-        dispatch(postNewUser(User))        
+        
+        //dispatch(postNewUser(User))
+        validador ? console.log('Actualizar ', User) : console.log('crear ', User);
     }
     
     return(
         <Div>
             <Form onSubmit={handleSubmit}>
-                <h1>Añadir Nuevo Usuario</h1>
+                {/* <h1>Añadir Nuevo Usuario</h1> */}
+                <h1>{validador ? props.user.title : 'Craar usuario'}</h1>
 
                 <div>
                     <img src={`${foto}`} alt='imagen user'/>
@@ -201,8 +211,8 @@ export const NewUser = () =>{
 
                     <label>
                         <p>Estado</p> 
-                        <select value={estado} onChange={(e) => {setEstado(e.target.value)}} required>
-                            <option >Seleccione estado</option>
+                        <select value={estado} type="text" onChange={(e) => {setEstado(e.target.value)}} required>
+                            <option > Seleccione estado </option>
                             <option value={"true"} >Activo</option>
                             <option value={"false"}>In-Activo</option>
                         </select>
@@ -212,16 +222,18 @@ export const NewUser = () =>{
 
                 <div>
 
-                    <label>
+                    <label >
                         <p>Password</p> 
-                        <input value={pass} type="password" onChange={(e) => {setPass(e.target.value)}} />
+                        {validador ? 
+                            <input  value={pass} type="password" onChange={(e) => {setPass(e.target.value)}} disabled/> : 
+                            <input  value={pass} type="password" onChange={(e) => {setPass(e.target.value)}} />}
                     </label>
 
                     
                 </div>
 
                 <DivButton>
-                    <BtnAceptar type="submit"  /* onClick={() => {close()}} */>Añadir</BtnAceptar>
+                    <BtnAceptar type="submit" >{validador ? 'Actualizar' : 'Añadir'}</BtnAceptar>
                     <BtnCancel /* onClick={() => {close()}} */> Cancelar </BtnCancel>
                 </DivButton>
 

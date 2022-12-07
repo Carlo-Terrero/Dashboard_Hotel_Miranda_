@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 import styled from 'styled-components';
 
@@ -30,8 +31,6 @@ const Container = styled.div`
 const ContainerRooms = styled(Container)`
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
-/*  border-bottom-right-radius: 25px;
-    border-bottom-left-radius: 25px; */
     border-top: none;
     padding-right: 3rem;
     align-items: center;
@@ -101,16 +100,13 @@ const DivImg = styled.div`
     border-radius: 15px;
 `;
 
-const Button = styled.button`
+const BtnGreen = styled.button`
     color: black;
     background: green;
     height: 2.5rem;
     border: none;
     width: 7rem;
     border-radius: 10px;
-`;
-
-const BtnGreen = styled(Button)`
     color: green;
     background: #43fe8b3d;
 `;
@@ -194,9 +190,9 @@ export const GuesteList = (props) => {
                         
                     </DivCheckRooms>  
 
-                    <Pd>{guest.order_date}</Pd>                                            
-                    <P>{guest.check_In}</P>
-                    <P>{guest.check_Out}</P>
+                    <Pd>{moment(guest.order_date).format( "DD-MM-YYYY")}</Pd>                                            
+                    <P>{moment(guest.check_In).format( "DD-MM-YYYY")}</P>
+                    <P>{moment(guest.check_Out).format( "DD-MM-YYYY")}</P>
                         
                     <PopupViewNotes elementID={guest.special_request}/>
                     
@@ -206,9 +202,9 @@ export const GuesteList = (props) => {
                     {/* <P>{guest.status === true ? <PGreen>ACTIVE</PGreen> : <PRed>INACTIVE</PRed>}</P> */}
                     {handleStatus(guest.status)}
 
-                    <DivMenuPuntos>
+                    {/* <DivMenuPuntos>
                         {<AiOutlineMore/>}
-                    </DivMenuPuntos>
+                    </DivMenuPuntos> */}
                    
                     
                 </ContainerRooms>

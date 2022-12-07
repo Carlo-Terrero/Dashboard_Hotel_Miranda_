@@ -13,7 +13,8 @@ import { BookingsDetails } from "./details/bookingDetails";
 import { UserDetail } from "./details/userDetail";
 import { RoomDetails } from "./details/roomDetails";
 import { Navigate } from "react-router-dom";
-import { NewUser } from './comun/newUser';
+import { NewUser } from './newElement/newUser';
+import { NewRoom } from './newElement/newRoom';
 // Configuracion de del Reducer
 // Esta es la funcion que se encarga de gestionar los datos con los que trabajaremos
 const reducer = (state, action) => {
@@ -75,6 +76,14 @@ function App() {
                 <PrivateRoute auth={state.auth}>
                   <NavBarSuperior dispatch={dispatch} />
                   <RoomDetails/>
+                </PrivateRoute>
+              } 
+            />
+
+            <Route path="/rooms/newroom" element={              
+                <PrivateRoute auth={state.auth}>
+                  <NavBarSuperior dispatch={dispatch} />
+                  <NewRoom/>
                 </PrivateRoute>
               } 
             />

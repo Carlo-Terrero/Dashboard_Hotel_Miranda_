@@ -62,8 +62,8 @@ const Form = styled.form`
 
 export const Auth = (props) => {
     
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');   
+    const [email, setEmail] = useState('Carlos');
+    const [pass, setPass] = useState('ponko');   
 
     const navigate =  useNavigate();
 

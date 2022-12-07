@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
-import Moment from 'react-moment';
 
 import styled from "styled-components";
 
@@ -16,7 +15,7 @@ const DivContainer = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    margin: 3rem 25%;
+    margin: 3rem 20%;
     border: 0.5px solid #80808038;
 
     div{
@@ -36,6 +35,32 @@ const DivContainer = styled.div`
             }
         }
     }
+`;
+
+const BtnGreen = styled.button`
+    color: black;
+    background: green;
+    height: 2.5rem;
+    border: none;
+    width: 7rem;
+    border-radius: 10px;
+    color: green;
+    background: #43fe8b3d;
+`;
+
+const BtnRed = styled(BtnGreen)`
+    color: red;
+    background: #f2858566;
+`;
+
+const BtnLiveGrey = styled(BtnGreen)`
+    color: grey;
+    background: #3b3b3b3d;
+`;
+
+const BtnDarkGrey = styled(BtnGreen)`
+    color: #d3d0d0;
+    background: grey
 `;
 
 export const BookingsDetails = () => {
@@ -63,6 +88,21 @@ export const BookingsDetails = () => {
         status,
         _id
     } = booking[0]
+
+    const handleStatus = (state) => {        
+        switch(state) {
+            case state = 0:
+                return <BtnGreen>Booked</BtnGreen>
+            case state = 1:
+                return <BtnRed>Refund</BtnRed>
+            case state = 2:
+                return <BtnLiveGrey>Pending</BtnLiveGrey>
+            case state = 3:
+                return <BtnDarkGrey>Canceled</BtnDarkGrey>
+            default:
+                return state;
+        }
+    }
 
     return (
         <DivContainer>            
@@ -95,7 +135,8 @@ export const BookingsDetails = () => {
 
                 <div>
                     <p>Precio: {price} €</p>
-                    <p>{status}</p>
+                    {/* <p>{handleStatus(status)}</p> */}
+                    <p>{handleStatus(status)}</p>
                 </div>
 
             </div>

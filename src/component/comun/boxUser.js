@@ -64,7 +64,7 @@ export const BoxUser = () => {
     const handleClick = () => {
         navigate('/userEdit');
     }
-    console.log(dataUser)
+
     return(
         <Div>
             <div>

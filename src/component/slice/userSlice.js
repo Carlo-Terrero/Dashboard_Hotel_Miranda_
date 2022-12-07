@@ -15,19 +15,38 @@ const initialState ={
     //error: null
 }
 
-export const getUsers = createAsyncThunk('get/users', async () => {
-    const response = await axios.get(`${REACT_APP_LINK_HTTP}/users`, headers);
+export const getUsers = createAsyncThunk('users/get', async () => {
+    const response = await axios.get(`${REACT_APP_LINK_HTTP}/users`, 
+        headers
+    );
     
     return response.data.result;
 });
 
 export const postNewUser = createAsyncThunk('newUser/post', async (obj) => {
-    const response = await axios.post(`${REACT_APP_LINK_HTTP}/users`, obj, headers);
+    const response = await axios.post(`${REACT_APP_LINK_HTTP}/users`,
+        obj,
+        headers
+    );
 
     return response.data.result;
 });
 
-/* export const getOneUsers =  */
+export const getOneUser = createAsyncThunk('getOneUser/get', async (id) => {
+    const response = await axios.get(`${REACT_APP_LINK_HTTP}/users/${id}`, 
+        headers
+    );
+    
+    return [response.data.result];
+})
+
+export const updateOneUser = createAsyncThunk('putOneUser/put.', async (id) => {
+    const response = await axios.put(`${REACT_APP_LINK_HTTP}/users/${id}`,
+        headers
+    );
+
+    return response.date.result;
+})
 
 export const usersSlice = createSlice({
     name: 'users',
@@ -57,7 +76,6 @@ export const usersSlice = createSlice({
             .addCase(getUsers.fulfilled, (state, action) => {
                 state.status = 'success'
                 state.usersList = action.payload
-                
             })
             .addCase(getUsers.rejected, (state, action) => {
                 state.status = 'failed'
@@ -71,16 +89,38 @@ export const usersSlice = createSlice({
             })
             .addCase(postNewUser.fulfilled, (state, action) => {
                 state.status = 'success'                
-                state.roomList.push(action.payload);
+                state.usersList.push(action.payload);
             })
             .addCase(postNewUser.rejected, (state, action) => {
+                state.status = 'failed'                
+            })
+
+            .addCase(getOneUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getOneUser.fulfilled, (state, action) => {
+                state.status = 'success'             
+                state.usersList = action.payload
+            })
+            .addCase(getOneUser.rejected, (state, action) => {
+                state.status = 'failed'                
+            })
+
+            .addCase(updateOneUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(updateOneUser.fulfilled, (state, action) => {
+                state.status = 'success'                
+                state.usersList.push(action.payload);
+            })
+            .addCase(updateOneUser.rejected, (state, action) => {
                 state.status = 'failed'                
             })
     },
 })
 
 // Exportamos los reducer(actions) que nos van a ayudar a interactuar.
-export const {addUsers, deleteUsers, editUsers, /* getOneUsers */} = usersSlice.actions;
+export const {addUsers, deleteUsers, editUsers, /* getOneUser */} = usersSlice.actions;
 
 
 export const usersListDate = (state) => state.user.usersList;

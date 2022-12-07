@@ -66,6 +66,7 @@ const DivCheck = styled(Div)`
 const DivCheckRooms = styled(DivCheck)`
     align-items: center;
     gap: 1.5rem;
+    cursor: pointer;
 `;
 
 const DivPrecio = styled(Div)`
@@ -139,7 +140,6 @@ export const RoomList = (props) => {
     const dispatch = useDispatch();
 
     const handleIdRoom = (date) => {
-        //Con navigate añadimos a la url el dato que queramos, en este caso el ide
         navigate(`${date}`)
     }
 

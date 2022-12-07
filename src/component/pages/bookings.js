@@ -16,13 +16,9 @@ import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
 
 import { IoIosArrowDown } from "react-icons/io";
 
-const DivBase = styled.div`
-    padding: 2rem;
-`;
-
 const Div =  styled.div` 
     display: grid;
-    margin-left: 300px;
+    margin: 3rem 15%;
 `;
 
 const ControlDiv = styled.div`
@@ -56,31 +52,29 @@ export const Bookings = () =>{
     },[dispatch] )
     
     return (
-        <DivBase>
-            <Div>
+        <Div>
+            <ControlDiv>
+
+                <SelectorGreenMenu selectores={selectores}/>                                           
+
                 <ControlDiv>
+                    <NewRoom>
+                        1 November 2020 - 30 November 2020
+                        <IoIosArrowDown/>
+                    </NewRoom>
 
-                    <SelectorGreenMenu selectores={selectores}/>                                           
-
-                    <ControlDiv>
-                        <NewRoom>
-                            1 November 2020 - 30 November 2020
-                            <IoIosArrowDown/>
-                        </NewRoom>
-
-                        <BtnNewEst/>
-                        
-                    </ControlDiv>
-                   
+                    <BtnNewEst/>
+                    
                 </ControlDiv>
+                
+            </ControlDiv>
 
-                <div>
-                    <GuesteList guests={bookingList}/>                    
-                </div>
+            <div>
+                <GuesteList guests={bookingList}/>                    
+            </div>
 
-                <Paginador paginas={8}/>
+            <Paginador paginas={8}/>
 
-            </Div>            
-        </DivBase>        
+        </Div>            
     )
 }

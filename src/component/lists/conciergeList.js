@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { deleteUsers} from '../slice/userSlice';
+import { useDispatch, useSelector} from 'react-redux';
+import { deleteUsers, getUsers, usersListDate} from '../slice/userSlice';
+import moment from 'moment';
 
 import styled from 'styled-components';
 
@@ -47,12 +48,6 @@ const DivCabecera = styled(Div)`
     gap: 7rem;
     margin-right: 2rem;
 `;
-
-/* const DivMid = styled(Div)`
-    width: 37rem;
-    gap: 7rem;
-    margin-left: -4rem;
-`; */
 
 const DivCheck = styled(Div)`
     align-items: baseline;
@@ -138,20 +133,25 @@ const DivSchedule = styled.div`
 `;
 
 
-export const ConciergeList = (props) => {
+export const ConciergeList = () => {
 
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
+    const users = useSelector(usersListDate);
 
     const handleClick = (id) => {        
         navigate(`${id}`);
     }
 
     const handleClickPoint = () => {
-        dispatch(deleteUsers())
+  /*       //dispatch(deleteUsers()) */
         console.log('kk')
     }
+
+    useEffect(() => {
+        dispatch(getUsers());
+    }, [dispatch])
 
     return(
         <DivContainer>
@@ -173,7 +173,7 @@ export const ConciergeList = (props) => {
                 
             </Container>
             
-            {props.concierges.map((concierge,i) => 
+            {users.map((concierge,i) => 
                 <ContainerRooms key={i} >
                     <DivCheckRooms onClick={() => handleClick(concierge._id)}>                    
 
@@ -183,8 +183,8 @@ export const ConciergeList = (props) => {
                         
                         <DivData>
                             <P>{concierge.name}</P>
-                            <Id>{concierge._id}</Id>
-                            <P>{concierge.start_date}</P>
+                            {/* <Id>{concierge._id}</Id> */}
+                            <P>{moment(concierge.start_date).format( "DD-MM-YYYY")}</P>
                         </DivData>
                         
                     </DivCheckRooms>
