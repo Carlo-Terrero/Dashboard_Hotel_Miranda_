@@ -26,14 +26,11 @@ const Container = styled.div`
     padding-bottom: 0rem;
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
-    
 `;
 
 const ContainerRooms = styled(Container)`
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
-/*  border-bottom-right-radius: 25px;
-    border-bottom-left-radius: 25px; */
     border-top: none;
     padding-right: 3rem;
 `;
@@ -59,6 +56,7 @@ const DivCheckRooms = styled(DivCheck)`
     align-items: center;
     gap: 1.5rem;
     margin: 0;
+    cursor: pointer;
 `;
 
 const DivPrecio = styled(Div)`
@@ -93,7 +91,6 @@ const Pd = styled(P)`
 const Id = styled(P)`
     color: green;
 `;
-
 
 const Check = styled.input`
     color: red;
@@ -133,7 +130,7 @@ const DivSchedule = styled.div`
 `;
 
 
-export const ConciergeList = () => {
+export const UserList = () => {
 
     const navigate = useNavigate();
 

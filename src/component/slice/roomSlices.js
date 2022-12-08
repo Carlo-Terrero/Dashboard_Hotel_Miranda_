@@ -15,7 +15,6 @@ const initialState ={
     //error: null
 };
 
-// solo falta, actualizar y que al liminar una room desaparezca de la lista
 export const getRooms = createAsyncThunk('get/rooms', async () => {
     const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms`, headers )
     

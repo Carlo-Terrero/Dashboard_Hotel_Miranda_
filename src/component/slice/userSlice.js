@@ -40,8 +40,9 @@ export const getOneUser = createAsyncThunk('getOneUser/get', async (id) => {
     return [response.data.result];
 })
 
-export const updateOneUser = createAsyncThunk('putOneUser/put.', async (id) => {
-    const response = await axios.put(`${REACT_APP_LINK_HTTP}/users/${id}`,
+export const updateOneUser = createAsyncThunk('putOneUser/put.', async (userElement) => {
+    const response = await axios.put(`${REACT_APP_LINK_HTTP}/users/${userElement.id}`,
+        userElement.obj,
         headers
     );
 

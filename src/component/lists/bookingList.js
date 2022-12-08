@@ -56,6 +56,7 @@ const DivCheckRooms = styled(DivCheck)`
     align-items: center;
     gap: 1.5rem;
     margin: 0;
+    cursor: pointer;    
 `;
 
 const DivData = styled.div`

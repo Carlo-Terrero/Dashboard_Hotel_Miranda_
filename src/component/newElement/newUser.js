@@ -128,9 +128,8 @@ export const NewUser = (props) =>{
             foto: foto,
         }
         
-        
         //dispatch(postNewUser(User))
-        validador ? console.log('Actualizar ', User) : console.log('crear ', User);
+        validador ? dispatch(updateOneUser({id: id, obj: User})) : dispatch(postNewUser(User));
     }
     
     return(

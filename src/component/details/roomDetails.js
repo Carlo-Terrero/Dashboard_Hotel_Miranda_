@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getOneRoom, roomsListDate, editOneRoom } from '../slice/roomSlices';
+import { getOneRoom, roomsListDate, editOneRoom, postNewRoom } from '../slice/roomSlices';
 
 import styled from "styled-components";
 
@@ -88,12 +88,12 @@ export const RoomDetails = () => {
     const [bed_Type, setBed_Type] = useState(isExis ? roomSelected.bed_type : '');
     const [number, setNumber] = useState(isExis ? roomSelected.number : '');
     const [description, setDescription] = useState(isExis ? roomSelected.description : '');
-    const [offer, setOffer] = useState(isExis ? roomSelected.offer : '');
+    const [offer, setOffer] = useState(isExis ? roomSelected.offer : false);
     const [price, setPrice] = useState(isExis ? roomSelected.price : '');
-    const [discount, setDiscount] = useState(isExis ? roomSelected.discount : '');
+    const [discount, setDiscount] = useState(isExis ? roomSelected.discount : 0);
     const [cancellation, setCancellation] = useState(isExis ? roomSelected.cancellation : '');
-    const [facilities, setFacilities] = useState(isExis ? roomSelected.facilities : '');
-    const [status, setStatus] = useState(isExis ? roomSelected.status : '');
+    const [facilities, setFacilities] = useState(isExis ? roomSelected.facilities : 'Tv');
+    const [status, setStatus] = useState(isExis ? roomSelected.status : true);
     const [room_floor, setRoom_floor] = useState(isExis ? roomSelected.room_floor : '');
 
     useEffect(() =>{
@@ -116,8 +116,7 @@ export const RoomDetails = () => {
             status: status,
         }
         
-        console.log(roomObj);
-        //dispatch(editOneRoom({id: id, roomObj: roomObj}))
+        isExis ? dispatch(editOneRoom({id: id, roomObj: roomObj})) : dispatch(postNewRoom(roomObj));
         
     }
 
@@ -171,7 +170,7 @@ export const RoomDetails = () => {
 
                 <DivButton>
                     <Button onClick={hancleClickEdit}>{isExis ? 'Editar' : 'Crear'}</Button>
-                    {status ? <Button>Reservar</Button> : <DisabledButton disabled>Reservar</DisabledButton>}
+                    {/* {status ? <Button>Reservar</Button> : <DisabledButton disabled>Reservar</DisabledButton>} */}
                     
                 </DivButton>
             </div>

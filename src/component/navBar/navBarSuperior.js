@@ -22,12 +22,15 @@ const Div = styled.div`
     padding-right: 2rem;
     gap: 2rem;
     font-size: 1.2rem;
-    
 `;
 
 const DivIcon = styled(Div)`
     gap: 2rem;
     font-size: 1.2rem;
+
+    div{
+        cursor: pointer;
+    }
 `;
 
 const H1 = styled.h1`
@@ -44,11 +47,6 @@ export const NavBarSuperior = (props) => {
 
     const dataLoggingContext = useContext(LogingContext);
     const navigate = useNavigate();
-    const [ menuLateral, setMenuLateral] = useState(false)
-   
-    const handleClick = () => {
-        menuLateral ? setMenuLateral(false) : setMenuLateral(true)
-    }
 
     const handleAut = () => {
         localStorage.removeItem('Token');
@@ -71,30 +69,22 @@ export const NavBarSuperior = (props) => {
                         </div>
                     </Div>           
             
-                    <Div>
-                        Log {dataLoggingContext.auth ? 'in' : 'out'} 
-                    </Div>
-
-                    {/* <button onClick={handleClick}>O</button> */}
                 </Div>
 
-                {dataLoggingContext.auth ? 
                     <DivIcon>
                         <ImEnvelop />
-                        <FiBell />
-                        {/* <IoIosLogOut onClick={props.setAuth(false)}/> */}
                         
-                            <IoIosLogOut onClick={handleAut}/> 
+                        <FiBell />
+                        
+                        <div>
+                        <IoIosLogOut onClick={handleAut}/> 
+
+                        </div>
                     </DivIcon>
-                    :
-                    null
-                }
                 
             </Div>
             
-            {/* Cuando maquetemos el resto eliminamos el navBarLatelar de abajo */}
-            {dataLoggingContext.auth ? <NavBarLateral/> : null }
-            {menuLateral? <NavBarLateral/> : null}
+            <NavBarLateral/>
         </>
        
     )

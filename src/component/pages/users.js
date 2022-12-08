@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 
-import { ConciergeList } from "../lists/conciergeList";
+import { UserList } from "../lists/userList";
 import { Paginador } from "../comun/paginador";
 import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
@@ -53,7 +53,7 @@ export const Users = () =>{
             </ControlDiv>
 
             <div>
-                <ConciergeList />                    
+                <UserList/>                    
             </div>
 
             <Paginador paginas={8}/>
