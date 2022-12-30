@@ -45,7 +45,7 @@ export const bookingSlice = createSlice({
         },
 
     },
-    extraReducers: (builder) =>{
+    extraReducers: (builder) => {
         builder
             .addCase(getBookings.pending, (state, action) => {
                 state.status = 'loading'

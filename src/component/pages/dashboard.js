@@ -1,15 +1,16 @@
 import React from "react";
+import Calendar from "react-calendar";
+import 'react-calendar/dist/Calendar.css';
 
 import { Kpis } from "../dashboard/kpis";
-
 import { D3BarGraph } from "../grafico/D3BarGraph";
-
 import styled from "styled-components";
-
 import { RiCalendarCheckLine } from "react-icons/ri";
+import { MessageCart } from "../comun/messageCart";
 
 const DivBase = styled.div`
-    padding: 2rem;
+    display: grid;
+    margin: 3rem 15%;
 `;
 
 const Kdiv = styled.div`
@@ -37,12 +38,18 @@ const Container = styled.div`
     gap: 2rem;
 `;
 
+const BigContainer = styled(Container)`
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+`;
+
 export const Dashboard = () =>{
+
+    
     return (
-        <>
+
         <DivBase>
             <div>
-               
                 <Container>
                     <Kdiv>
                         <IconDiv>
@@ -50,7 +57,7 @@ export const Dashboard = () =>{
                         </IconDiv>
 
                         
-                        <Kpis num={"8,461"} name={'New Booking'}/>
+                        <Kpis num={"8,461"} name={'Total Booking'}/>
                     </Kdiv>
 
                     <Kdiv>
@@ -81,12 +88,17 @@ export const Dashboard = () =>{
                 </Container>
 
             </div>
-            
-            <div>
-               <D3BarGraph />
-            </div>
 
+            <BigContainer>
+                <Calendar />
+
+                <div>
+                    <D3BarGraph />
+                </div>
+            </BigContainer>
+
+            <MessageCart />
+            
         </DivBase>
-        </>
     )
 }
