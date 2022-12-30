@@ -13,15 +13,28 @@ const Div = styled.div`
     }
 `;
 
-export const Paginador = (props) => {
+export const Paginador = ({limit, elementList, currentPage, setCurrentPage}) => {
 
+
+    const totalPages = () => {
+        return Math.ceil(elementList / limit)
+    }
+
+    console.log(totalPages());
+
+    const prev = () => {}
     return(
         <Div>
-            <p>Showing {props.paginas} of ---- Data</p>
+            <p>Showing {currentPage} of {totalPages()} pages</p>
 
             <div>
-                <button>Prev</button>
-                <button>Next</button>
+                {currentPage <= 1 ? '' :<button onClick={() => setCurrentPage(currentPage - 1)}>
+                    Prev
+                </button>}
+
+                {currentPage === totalPages() ? '' : <button onClick={() => setCurrentPage(currentPage + 1)}>
+                    Next
+                </button>}
             </div>
         </Div>
     )

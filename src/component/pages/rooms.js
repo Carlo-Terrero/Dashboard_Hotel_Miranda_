@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useState} from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -48,6 +48,14 @@ export const Rooms = () =>{
     const roomsList = useSelector(roomsListDate);
     const navigate = useNavigate();
 
+    const limit = 10;
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const lastIndex = currentPage * limit;
+    const firsIndex = lastIndex - limit;
+
+
     const handleClickNewRoom = () => {
        navigate(`newroom`);
     }
@@ -73,9 +81,9 @@ export const Rooms = () =>{
                 
             </ControlDiv>
             
-            <RoomList rooms={roomsList}/>                               
+            <RoomList rooms={roomsList} lastIndex={lastIndex} firsIndex={firsIndex}/>                               
             
-            <Paginador paginas={8}/>
+            <Paginador limit={limit} elementList={roomsList.length} currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
         </Div>   
     )

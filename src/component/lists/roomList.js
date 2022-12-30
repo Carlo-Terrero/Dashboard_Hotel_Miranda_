@@ -133,7 +133,7 @@ const BtnRed = styled(BtnGreen)`
 `;
 
 
-export const RoomList = (props) => {
+export const RoomList = ({rooms, lastIndex ,firsIndex}) => {
 
     const navigate = useNavigate();
 
@@ -169,7 +169,7 @@ export const RoomList = (props) => {
                 
             </Container>        
 
-            {props.rooms.map((room,i) => 
+            {rooms.map((room,i) => 
                 <ContainerRooms key={i} >
                     <DivCheckRooms onClick={() => handleIdRoom(room._id)}>                                            
 
@@ -207,7 +207,7 @@ export const RoomList = (props) => {
                     
                 </ContainerRooms>
 
-            )}
+            ).slice(firsIndex, lastIndex)}
             
         </DivContainer>
     )
