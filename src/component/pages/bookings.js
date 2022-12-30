@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 
 import {useDispatch, useSelector} from "react-redux";
@@ -45,7 +45,14 @@ export const Bookings = () =>{
 
     const selectores = ['All Guest', 'Pending', 'Booked', 'Canceled', 'Refund'];
     const dispatch = useDispatch();
-    const bookingList = useSelector(bookingListDate)
+    const bookingList = useSelector(bookingListDate);
+
+    const limit = 10;
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const lastIndex = currentPage * limit;
+    const firsIndex = lastIndex - limit;
 
     useEffect(() =>{
         dispatch(getBookings());
@@ -70,10 +77,10 @@ export const Bookings = () =>{
             </ControlDiv>
 
             <div>
-                <GuesteList guests={bookingList}/>                    
+                <GuesteList guests={bookingList} elementList={bookingList.length} lastIndex={lastIndex} firsIndex={firsIndex}/>                    
             </div>
 
-            <Paginador paginas={8}/>
+            <Paginador limit={limit} elementList={bookingList.length} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 
         </Div>            
     )

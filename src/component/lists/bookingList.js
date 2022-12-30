@@ -131,7 +131,7 @@ const PRoom = styled(P)`
     width: 9rem;
 `;
 
-export const GuesteList = (props) => {
+export const GuesteList = ({guests, lastIndex, firsIndex}) => {
 
     const navigate = useNavigate()
 
@@ -177,7 +177,7 @@ export const GuesteList = (props) => {
                 
             </Container>
 
-            {props.guests.map((guest,i) => 
+            {guests.map((guest,i) => 
                 <ContainerRooms key={i} >
                     <DivCheckRooms onClick={() => handleClick(guest._id)}>                        
 
@@ -210,7 +210,7 @@ export const GuesteList = (props) => {
                     
                 </ContainerRooms>
 
-            )}
+            ).slice(firsIndex, lastIndex)}
             
         </DivContainer>
     )
