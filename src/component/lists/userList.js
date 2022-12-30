@@ -130,7 +130,7 @@ const DivSchedule = styled.div`
 `;
 
 
-export const UserList = () => {
+export const UserList = ({lastIndex, firsIndex ,setNumElementList}) => {
 
     const navigate = useNavigate();
 
@@ -146,6 +146,8 @@ export const UserList = () => {
         console.log('kk')
     }
 
+    setNumElementList(users.length)
+
     useEffect(() => {
         dispatch(getUsers());
     }, [dispatch])
@@ -158,10 +160,8 @@ export const UserList = () => {
                     <P>Name</P>
                 </DivCheck>
 
-                {/* <DivMid> */}
-                    <P>Job Desk</P>
-                    <P>Schedule</P>                    
-                {/* </DivMid> */}
+                <P>Job Desk</P>
+                <P>Schedule</P>                    
 
                 <DivCabecera>
                     <P>Contact</P>
@@ -180,21 +180,17 @@ export const UserList = () => {
                         
                         <DivData>
                             <P>{concierge.name}</P>
-                            {/* <Id>{concierge._id}</Id> */}
                             <P>{moment(concierge.start_date).format( "DD-MM-YYYY")}</P>
                         </DivData>
                         
                     </DivCheckRooms>
 
-                    {/* <DivMidDatos> */}
-                        <Pd>{concierge.description}</Pd>
+                    <Pd>{concierge.description}</Pd>
                       
-                      <DivSchedule>
-                        <P>{concierge.schedule}</P>
-                        <Pv>Check schedule</Pv>
-                      </DivSchedule>
-                                                                                               
-                    {/* </DivMidDatos> */}
+                    <DivSchedule>
+                    <P>{concierge.schedule}</P>
+                    <Pv>Check schedule</Pv>
+                    </DivSchedule>
 
                     <Div>
                         <DivPrecio>
@@ -213,12 +209,10 @@ export const UserList = () => {
                     <DivMenuPuntos onClick={handleClickPoint}>
                         {<AiOutlineMore/>}
                     </DivMenuPuntos>
-                   
                     
                 </ContainerRooms>
 
-            )}
-            
+            ).slice(firsIndex, lastIndex)}
             
         </DivContainer>
     )

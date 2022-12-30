@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
@@ -37,6 +37,16 @@ export const Users = () =>{
     const selectores = ['All Employee', 'Active Employee', 'Inactive Employee']
     const navigate = useNavigate();
 
+    const limit = 10;
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [numElementList, setNumElementList] = useState(1);
+
+    const lastIndex = currentPage * limit;
+    const firsIndex = lastIndex - limit;
+
+
+
     return (
         <Div>
             <ControlDiv>
@@ -53,10 +63,10 @@ export const Users = () =>{
             </ControlDiv>
 
             <div>
-                <UserList/>                    
+                <UserList lastIndex={lastIndex} firsIndex={firsIndex} setNumElementList={setNumElementList}/>                    
             </div>
 
-            <Paginador paginas={8}/>
+            <Paginador limit={limit} elementList={numElementList} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 
         </Div>
     )
