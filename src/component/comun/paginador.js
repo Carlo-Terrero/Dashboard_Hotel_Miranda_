@@ -15,14 +15,10 @@ const Div = styled.div`
 
 export const Paginador = ({limit, elementList, currentPage, setCurrentPage}) => {
 
-
     const totalPages = () => {
         return Math.ceil(elementList / limit)
     }
 
-    console.log(totalPages());
-
-    const prev = () => {}
     return(
         <Div>
             <p>Showing {currentPage} of {totalPages()} pages</p>

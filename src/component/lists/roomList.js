@@ -136,7 +136,6 @@ const BtnRed = styled(BtnGreen)`
 export const RoomList = ({rooms, lastIndex ,firsIndex}) => {
 
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
 
     const handleIdRoom = (date) => {

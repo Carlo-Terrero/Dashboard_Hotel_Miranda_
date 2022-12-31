@@ -6,13 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMessage, messageListData } from "../slice/messageSlice";
 import { BsArrowRight, BsArrowLeft, BsCheckCircle } from  "react-icons/bs";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { PaginatorService } from "../service/paginatorService";
-
-//import { IoIosCloseCircleOutline } from "react-icons/"
 
 const ContainerDiv = styled.div`
     background-color: white;
-    padding: 1rem 1rem 3rem 3rem;
+    padding: 1rem 2.8rem 2.8rem 3rem;
     border-radius: 20px;
 
     h4{
@@ -23,6 +20,7 @@ const ContainerDiv = styled.div`
 const ContainerElement = styled.div`
     display: flex;
     align-items: center;
+    gap: 3rem;
 `;
 
 const ContainerMessage = styled.div`
@@ -30,6 +28,12 @@ const ContainerMessage = styled.div`
     padding: 1rem;
     border-radius: 20px;
     border: solid 1px #8080801c;
+
+    :hover{
+        -webkit-box-shadow: -1px 20px 34px 7px rgba(0,0,0,0.34);
+        -moz-box-shadow: -1px 20px 34px 7px rgba(0,0,0,0.34);
+        box-shadow: -1px 20px 34px 7px rgba(0,0,0,0.34);
+    }
 `;
 
 const ContainerData = styled.div`
@@ -73,12 +77,15 @@ const ButtomLeft = styled.button`
     background-color: #0b870b;
     color: white;
     height: 55px;
-    width: 140px;
+    width: 55px;
     font-size: 1.7rem;
+    margin-left: -5rem;
+    
 `;
 
 const ButtomRight = styled(ButtomLeft)`
-
+    margin-right: -5rem;
+    margin-left: 0;
 `;
 
 export  const MessageCart = () => {
@@ -87,39 +94,18 @@ export  const MessageCart = () => {
     
     const messageList = useSelector(messageListData);
     const limit = 3;
-    
-    
-    const Paginador = new PaginatorService(limit, messageList);
-    const [newDatoIterable, setNewDatoIterable] = useState([]);
+
     const [ pageActual, setPageActual] = useState(1);
+    const lastIndex = pageActual * limit;
+    const firsIndex = lastIndex - limit;
 
     useEffect(() =>{
         dispatch(getMessage());
-        setNewDatoIterable(Paginador.getNewDatosComponent());
-        //setPageActual(1)
-        //console.log({totalPages})
+
     }, [dispatch])
 
-    const handlePrev = () => {
-        /* pageActual <= 1 ? setPageActual(1) : setPageActual(pageActual - 1);
-        //Paginador.change(pageActual);
-        //setNewDatoIterable(Paginador.getNewDatosComponent());
-        console.log('Prev ',pageActual, 'total',Paginador.totalPages());
-        handleChange(); */
-    }
-
-    const handleNext = () => {
-        /* pageActual >= Paginador.totalPages() ? setPageActual(Paginador.totalPages()) : setPageActual(pageActual + 1);
-        //Paginador.change(pageActual);
-        //setNewDatoIterable(Paginador.getNewDatosComponent());
-        console.log('Next ',pageActual, 'total',Paginador.totalPages());
-        handleChange(); */
-    }
-
-    const handleChange = () => {
-        console.log('en handleChange -> ', pageActual);
-        Paginador.change(pageActual);
-        setNewDatoIterable(Paginador.getNewDatosComponent());
+    const totalPages = () => {
+        return Math.ceil(messageList.length / limit)
     }
 
     return(
@@ -128,11 +114,11 @@ export  const MessageCart = () => {
 
             <ContainerElement>
 
-                {pageActual <= 1 ? '' : <ButtomLeft onClick={()=>handlePrev()}>
+                {pageActual <= 1 ? '' : <ButtomLeft onClick={()=>setPageActual(pageActual - 1)}>
                     <BsArrowLeft/>
                 </ButtomLeft>}
 
-                { newDatoIterable.length === 0 ? '' :  newDatoIterable.map((message, i) => 
+                {messageList.map((message, i) => 
                     <ContainerMessage key={i}>
                         <ContainerText>
                             <p>
@@ -155,57 +141,14 @@ export  const MessageCart = () => {
                             </ContainerState>
                         </ContainerData>
                     </ContainerMessage>
-                )}
+                ).slice(firsIndex, lastIndex)}
 
-                {pageActual === Paginador.totalPages() ? '': <ButtomRight onClick={()=>handleNext()}>
+                {pageActual === totalPages() ? '': <ButtomRight onClick={()=>setPageActual(pageActual + 1)}>
                     <BsArrowRight/>
                 </ButtomRight>}
 
             </ContainerElement>
-            {pageActual}
 
         </ContainerDiv>
     )
 }
-
-    /* */
-    /* let current_page = 1;
-    let obj_per_page = 3;
-    let newDatos = new Array;
-    function totNumPages()
-        {
-            return Math.ceil(messageList.length / obj_per_page);
-        }
-
-    function prev()
-        {
-            if (current_page > 1) {
-                current_page--;
-                change(current_page);
-            }
-            console.log('prev')
-        }
-    
-    function next()
-        {
-            if (current_page < totNumPages()) {
-                current_page++;
-                change(current_page);
-            }
-            console.log('next')
-        }
-
-
-    function change(page)
-    {
-        if (page < 1) page = 1;
-        if (page > totNumPages()) page = totNumPages();
-        for (let i = (page-1) * obj_per_page; i < (page * obj_per_page); i++) {
-            console.log(messageList[i])
-            newDatos.push(messageList[i])
-        }
-
-        console.log('-->',{newDatos})
-    } */
-
-    /* */
