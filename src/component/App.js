@@ -20,7 +20,18 @@ import { NewRoom } from './newElement/newRoom';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return {auth: action.value.auth, user: action.value.user, email: action.value.email }
+      return {auth: action.value.auth, 
+                    user: action.value.user, 
+                    email: action.value.email, 
+                    foto: action.value.foto ,
+                    id: action.value.id,
+                    auth: action.value.auth,
+                    contact: action.value.contact,
+                    description: action.value.description,
+                    estate: action.value.estate,
+                    puesto: action.value.puesto,
+                    start_date: action.value.start_date,
+                  }
     default:
       return state
   }
@@ -28,15 +39,22 @@ const reducer = (state, action) => {
 
 //Datos iniciales
 const initialState = {
-  name: 'no logg',
-  email: 'no logg mail',
+  name: '',
+  email: '',
   auth: false,
+  foto: '',
+  id: '',
+  contact: '',
+  description: '',
+  estate: '',
+  puesto: '',
+  start_date: '',
 }
 
 // Configuracion del Context
 export const LogingContext = createContext(initialState);
 
-//Este componte se encarga de privatizar las urls si no se esta permitido el
+//Este componente se encarga de privatizar las urls si no se esta permitido el user
 function PrivateRoute({ auth ,children}) {
   return auth ? children : <Navigate to="/" replace={true} />;
 }

@@ -22,6 +22,12 @@ const Div = styled.div`
                 height: 7rem;
                 width: 100%;
                 border-radius: 15px;
+
+                img{
+                    height: 7rem;
+                    width: 100%;
+                    border-radius: 15px;
+                }
             }
 
         }
@@ -35,6 +41,11 @@ const ImgDiv = styled.div`
     width: 5rem;
     border-radius: 50px;
 
+    img{
+        height: 5rem;    
+        width: 5rem;
+        border-radius: 50px;
+    }
     
 `;
 
@@ -68,8 +79,8 @@ export const BoxUser = () => {
     return(
         <Div>
             <div>
-                <ImgDiv>
-                    img aqui
+                <ImgDiv imgUser={dataUser.foto}>
+                    <img src={`${dataUser.foto}`}/>
                 </ImgDiv>
                 <H4>{dataUser.user}</H4>
                 <P>{dataUser.email}</P>

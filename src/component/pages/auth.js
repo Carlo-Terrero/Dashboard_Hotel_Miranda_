@@ -77,9 +77,18 @@ export const Auth = (props) => {
           const user = decode.user;
 
           props.dispatch(
-            {type: 'LOGIN', value: {auth: true, user: user.name, email: user.email}}          
+            {type: 'LOGIN', value: {auth: true, 
+                                    user: user.name, 
+                                    email: user.email, 
+                                    foto: user.foto ,
+                                    id: user.id,
+                                    contact: user.contact,
+                                    description: user.description,
+                                    estate: user.estate,
+                                    puesto: user.puesto,
+                                    start_date: user.start_date,
+                                }}          
           )
-
 
           navigate('/dashboard');
         } catch (error) {
