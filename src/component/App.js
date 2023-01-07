@@ -62,8 +62,8 @@ function PrivateRoute({ auth ,children}) {
 function App() {  
 
   // Inicializacion de reducer
-  const [state, dispatch] = useReducer(reducer, initialState)
-  console.log(state)
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <div className="App">
       <LogingContext.Provider

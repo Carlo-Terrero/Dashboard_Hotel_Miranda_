@@ -80,6 +80,7 @@ const ButtomLeft = styled.button`
     width: 55px;
     font-size: 1.7rem;
     margin-left: -5rem;
+    cursor: pointer;
     
 `;
 

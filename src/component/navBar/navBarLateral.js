@@ -40,6 +40,7 @@ const Div = styled.div`
     display: flex;
     gap: 1rem;
     margin-left: 2rem;
+    cursor: pointer;
 
     .menu_text{
         margin: 0;

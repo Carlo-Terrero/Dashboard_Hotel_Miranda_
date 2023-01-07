@@ -55,8 +55,9 @@ const Form = styled.form`
     }
 
     button {
-        width: 150px;
+        width: 80px;
         margin: auto;
+        border-radius: 6px;
     }
 `;
 
@@ -119,7 +120,7 @@ export const Auth = (props) => {
                 </label>
 
                 <label>
-                    <p>Pasword:</p>
+                    <p>Password:</p>
                     <input className='pass' type="password" value={pass} onChange={(e) => setPass(e.target.value)}/>
                 </label>
 

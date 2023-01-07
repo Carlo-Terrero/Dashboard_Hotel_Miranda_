@@ -136,7 +136,7 @@ export const NewUser = (props) =>{
         <Div>
             <Form onSubmit={handleSubmit}>
                 {/* <h1>Añadir Nuevo Usuario</h1> */}
-                <h1>{validador ? props.user.title : 'Craar usuario'}</h1>
+                <h1>{validador ? props.user.title : 'Crear usuario'}</h1>
 
                 <div>
                     <img src={`${foto}`} alt='imagen user'/>

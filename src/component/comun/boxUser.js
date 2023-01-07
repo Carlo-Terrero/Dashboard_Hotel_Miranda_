@@ -46,7 +46,6 @@ const ImgDiv = styled.div`
         width: 5rem;
         border-radius: 50px;
     }
-    
 `;
 
 const P = styled.p`
