@@ -14,8 +14,26 @@ const Div = styled.div`
 
     div{
         display: flex;
+        gap: 1rem;
     }
 `;
+
+const ButtonMove = styled.button`
+    height: 2.5rem;
+    width: 5rem;
+    border-radius: 5px;
+    border: 1px #115a11ad solid;
+    color: #013401;
+    background-color: white;
+    cursor: pointer;
+`;
+
+const ButtonPage = styled(ButtonMove)`
+    width: 2.5rem;
+    color: white;
+    background-color: #013401;
+`;
+
 
 export const Paginador = ({limit, elementList, currentPage, setCurrentPage}) => {
 
@@ -34,20 +52,20 @@ export const Paginador = ({limit, elementList, currentPage, setCurrentPage}) => 
             <p>Showing {currentPage} of {totalPages()} pages</p>
 
             <div>
-                {currentPage <= 1 ? '' :<button onClick={() => setCurrentPage(currentPage - 1)}>
+                {currentPage <= 1 ? '' :<ButtonMove onClick={() => setCurrentPage(currentPage - 1)}>
                     Prev
-                </button>}
+                </ButtonMove>}
 
                 {
                     pageNumbers.map((noPage, i) => 
                         //<p key={i}>{noPage}</p>
-                        <button key={i} onClick={() => setCurrentPage(noPage)}>{noPage}</button>
+                        <ButtonPage key={i} onClick={() => setCurrentPage(noPage)}>{noPage}</ButtonPage>
                     )
                 }
 
-                {currentPage === totalPages() ? '' : <button onClick={() => setCurrentPage(currentPage + 1)}>
+                {currentPage === totalPages() ? '' : <ButtonMove onClick={() => setCurrentPage(currentPage + 1)}>
                     Next
-                </button>}
+                </ButtonMove>}
             </div>
         </Div>
     )
