@@ -10,7 +10,6 @@ import {
 } from '../slice/roomSlices';
 
 import { RoomList } from "../lists/roomList";
-//import { roomsData } from "../data/rooms";//Este sera el que se borre
 import { Paginador } from "../comun/paginador";
 import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
@@ -68,7 +67,7 @@ export const Rooms = () =>{
         <Div>
             <ControlDiv>
 
-                <SelectorGreenMenu selectores={selectores}/>                                 
+                <SelectorGreenMenu selectores={selectores} dataFilter={roomsList}/>                                 
 
                 <ControlDiv>
                     <NewRoom onClick={handleClickNewRoom}>
