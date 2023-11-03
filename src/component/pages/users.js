@@ -1,5 +1,7 @@
 import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector} from 'react-redux';
+import { getUsers, usersListDate } from "../slice/userSlice";
 
 import styled from "styled-components";
 
@@ -7,6 +9,7 @@ import { UserList } from "../lists/userList";
 import { Paginador } from "../comun/paginador";
 import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
+import { useEffect } from "react";
 
 const Div =  styled.div` 
     display: grid;
@@ -37,15 +40,17 @@ export const Users = () =>{
     const selectores = ['All Employee', 'Active Employee', 'Inactive Employee']
     const navigate = useNavigate();
 
+    const dispatch = useDispatch();
+    const users = useSelector(usersListDate);
+
+    const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10;
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const [numElementList, setNumElementList] = useState(1);
-
     const lastIndex = currentPage * limit;
     const firsIndex = lastIndex - limit;
 
-
+    useEffect(()=>{
+        dispatch(getUsers());
+    },[dispatch])
 
     return (
         <Div>
@@ -65,11 +70,9 @@ export const Users = () =>{
                 
             </ControlDiv>
 
-            <div>
-                <UserList lastIndex={lastIndex} firsIndex={firsIndex} setNumElementList={setNumElementList}/>                    
-            </div>
+            <UserList lastIndex={lastIndex} firsIndex={firsIndex} users={users}/>                    
 
-            <Paginador limit={limit} elementList={numElementList} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+            <Paginador limit={limit} elementList={users.length} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 
         </Div>
     )

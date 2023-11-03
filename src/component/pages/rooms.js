@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import {
     roomsListDate,
-    getRooms,
-    postNewRoom
+    getRooms
 } from '../slice/roomSlices';
 
 import { RoomList } from "../lists/roomList";
@@ -41,19 +40,15 @@ const NewRoom = styled.button`
 export const Rooms = () =>{
 
     const selectores = ['All Rooms', 'Active Employee', 'Inactive Employee']
+    const navigate = useNavigate();
     
     const dispatch = useDispatch();
-    
     const roomsList = useSelector(roomsListDate);
-    const navigate = useNavigate();
-
-    const limit = 10;
 
     const [currentPage, setCurrentPage] = useState(1);
-
+    const limit = 10;
     const lastIndex = currentPage * limit;
     const firsIndex = lastIndex - limit;
-
 
     const handleClickNewRoom = () => {
        navigate(`newroom`);

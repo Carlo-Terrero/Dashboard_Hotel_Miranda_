@@ -3,16 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-const P = styled.p`
-    color: black;
-    font-weight: bold;
-`;
-
-const Id = styled(P)`
+const Pn = styled.p`
     color: green;
-`;
-
-const Pn = styled(Id)`
     font-weight: 100;
 `;
 
@@ -70,7 +62,7 @@ const ThSyled = styled(Td)`
 `;
 
 const TrElement = styled.tr`
-    
+
     :hover{
         cursor: pointer;
     }
@@ -109,68 +101,6 @@ export const RoomList = ({rooms, lastIndex ,firsIndex}) => {
                 </TrElement>
             ).slice(firsIndex, lastIndex)}
         </Table>
-
-        // <DivContainer>
-        //     <Container>
-        //         <DivCheck>                    
-                    
-        //             <P>Room Name</P>
-        //         </DivCheck>
-
-        //         <DivMid>
-        //             <P>Bed Type</P>
-        //             <P>Room Floor</P>
-        //             <P>Facilities</P>
-        //         </DivMid>
-
-        //         <DivCabecera>
-        //             <P>Rate</P>
-        //             <P>Status</P>
-        //         </DivCabecera>
-                
-        //     </Container>
-
-        //     {rooms.map((room,i) => 
-        //         <ContainerRooms key={i} >
-        //             <DivCheckRooms onClick={() => handleIdRoom(room._id)}>                                            
-
-        //                 <DivImg img={room.foto}>
-        //                     <img src={`${room.foto}`}/>
-        //                 </DivImg>
-                        
-        //                 <DivData>
-        //                     <Id>{room._id}</Id>
-        //                     <P>Number room: {room.number}</P>
-        //                 </DivData>
-                        
-        //             </DivCheckRooms>
-
-        //             <DivMidDatos>
-        //                 <Pd>{room.bed_type}</Pd>
-        //                 <P>Flooo A-{room.room_floor}</P>
-        //                 <P>{room.facilities}</P>                                                                       
-        //             </DivMidDatos>
-
-        //             <Div>
-        //                 <DivPrecio>
-        //                     <P>{room.price}€</P> 
-        //                     <Pn>/night</Pn>
-        //                 </DivPrecio>
-                        
-        //                 <P>{room.status === true ? <BtnGreen>Available</BtnGreen> : <BtnRed>Booked</BtnRed>}</P>
-                       
-        //             </Div>
-
-        //             <DivMenuPuntos onClick={() => handleDeleteRoom(room._id)}>
-        //                 {<AiOutlineMore/>}
-        //             </DivMenuPuntos>
-                   
-                    
-        //         </ContainerRooms>
-
-        //     ).slice(firsIndex, lastIndex)}
-            
-        // </DivContainer>
     )
 }
 
