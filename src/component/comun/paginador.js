@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Div = styled.div`
     display: flex;
     justify-content: space-between;
-    align-item: center;
+    align-items: center;
     margin-top: 3rem;
 
     p {
@@ -30,8 +30,10 @@ const ButtonMove = styled.button`
 
 const ButtonPage = styled(ButtonMove)`
     width: 2.5rem;
-    color: white;
-    background-color: #013401;
+    color: ${props => props.active ? "#013401" : "white"};
+    background-color: ${props => props.active ? "white" : "#013401"} ;
+    /* background-color: red; */
+
 `;
 
 
@@ -58,8 +60,7 @@ export const Paginador = ({limit, elementList, currentPage, setCurrentPage}) => 
 
                 {
                     pageNumbers.map((noPage, i) => 
-                        //<p key={i}>{noPage}</p>
-                        <ButtonPage key={i} onClick={() => setCurrentPage(noPage)}>{noPage}</ButtonPage>
+                        <ButtonPage active={currentPage === noPage} key={i} onClick={() => setCurrentPage(noPage)}>{noPage}</ButtonPage>
                     )
                 }
 

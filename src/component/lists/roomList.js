@@ -69,6 +69,13 @@ const ThSyled = styled(Td)`
     }
 `;
 
+const TrElement = styled.tr`
+    
+    :hover{
+        cursor: pointer;
+    }
+`;
+
 export const RoomList = ({rooms, lastIndex ,firsIndex}) => {
 
     const navigate = useNavigate();
@@ -91,7 +98,7 @@ export const RoomList = ({rooms, lastIndex ,firsIndex}) => {
             </tr>
 
             {rooms.map((room) => 
-                <tr key={room._id} onClick={() => handleIdRoom(room._id)}>
+                <TrElement key={room._id} onClick={() => handleIdRoom(room._id)}>
                     <ThSyled><img src={`${room.foto}`}/></ThSyled>
                     <Td>room Nº {room.number}</Td>
                     <Td>{room.bed_type}</Td>
@@ -99,7 +106,7 @@ export const RoomList = ({rooms, lastIndex ,firsIndex}) => {
                     <Td>{room.facilities}</Td>
                     <Td2>{room.price}<Pn>/night</Pn></Td2>
                     <Td>{room.status === true ? <BtnGreen>Available</BtnGreen> : <BtnRed>Booked</BtnRed>}</Td>
-                </tr>
+                </TrElement>
             ).slice(firsIndex, lastIndex)}
         </Table>
 
