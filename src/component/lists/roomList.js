@@ -1,96 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
-import { deleteOneRoom } from '../slice/roomSlices';
 
 import styled from 'styled-components';
-import { AiOutlineMore } from 'react-icons/ai';
-
-
-const DivContainer = styled.div`
-    display: grid; 
-    background: white;   
-    border-radius: 25px;
-    border-bottom: #8080802e 0.1rem solid;
-    padding-bottom: 0.9rem;
-`;
-
-const Container = styled.div`
-    display: flex;    
-    border: #8080802e 0.1rem solid;
-    justify-content: space-between;
-    padding-left: 2rem;
-    padding-right: 10rem;
-    padding-bottom: 0rem;
-    border-top-right-radius: 25px;
-    border-top-left-radius: 25px;
-    
-`;
-
-const ContainerRooms = styled(Container)`
-    border-top-right-radius: 0px;
-    border-top-left-radius: 0px;
-/*  border-bottom-right-radius: 25px;
-    border-bottom-left-radius: 25px; */
-    border-top: none;
-    padding-right: 3rem;
-`;
-
-const Div = styled.div`
-    display: flex;
-    gap: 3rem;
-    align-items: end;
-`;
-
-const DivCabecera = styled(Div)`
-    gap: 7rem;
-    margin-right: 2rem;
-`;
-
-const DivMid = styled(Div)`
-    width: 37rem;
-    gap: 7rem;
-    margin-left: -4rem;
-`;
-
-const DivMidDatos = styled(DivMid)`
-    margin-left: 0;
-`;
-
-const DivCheck = styled(Div)`
-    align-items: baseline;
-    width: 300px;
-`;
-
-const DivCheckRooms = styled(DivCheck)`
-    align-items: center;
-    gap: 1.5rem;
-    cursor: pointer;
-`;
-
-const DivPrecio = styled(Div)`
-    gap: 0.5rem;
-    width: 100px;
-`;
-
-const DivData = styled.div`
- 
-`;
-
-const DivMenuPuntos = styled.div`
-    font-size: 1.5rem;
-    margin-top:1rem;
-    margin-left: -4rem;
-`;
 
 const P = styled.p`
     color: black;
     font-weight: bold;
-`;
-
-const Pd = styled(P)`
-    width: 5rem;
 `;
 
 const Id = styled(P)`
@@ -98,25 +13,7 @@ const Id = styled(P)`
 `;
 
 const Pn = styled(Id)`
-    color green;
     font-weight: 100;
-`;
-
-const Check = styled.input`
-    color: red;
-    font-size:2rem;
-`;
-
-const DivImg = styled.div`
-    margin: 1rem 0;
-    height: 4rem;    
-    width: 8rem;
-    border-radius: 15px;
-
-    img{
-        height: 4rem;    
-        width: 8rem;
-    }
 `;
 
 const BtnGreen = styled.button`
@@ -132,83 +29,141 @@ const BtnRed = styled(BtnGreen)`
     background: red;
 `;
 
+const Table = styled.table`
+    border: #8080802e 0.1rem solid;
+    padding: 0.5rem 2rem;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    background: white;
+    border-spacing: 0;
+`;
+
+const Th = styled.th`
+    height: 40px;
+    border-bottom: 0.1px solid #8080802e;
+`;
+
+const Td = styled.td`
+    height: 5.5rem;
+    text-align: center;
+    border-bottom: 0.1px solid #8080802e;
+`;
+
+const Td2 = styled(Td)`
+    display: flex;
+    text-align: center;
+    align-items: center;
+    height: 6rem;
+
+    p{
+        margin: 0;
+        padding: 0;
+    }
+`;
+
+const ThSyled = styled(Td)`    
+
+    img{
+        height: 5.5rem;
+        width: 100%;
+    }
+`;
 
 export const RoomList = ({rooms, lastIndex ,firsIndex}) => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const handleIdRoom = (date) => {
         navigate(`${date}`)
     }
-
-    const handleDeleteRoom = (id) => {
-        //Disparador para eliminar habitacion
-        dispatch(deleteOneRoom(id))
-    }
     
     return(
-        <DivContainer>
-            <Container>
-                <DivCheck>                    
+
+        <Table>
+            <tr>
+                <Th></Th>
+                <Th>Room Name</Th>
+                <Th>Bed Type</Th>
+                <Th>Room Floor</Th>
+                <Th>Facilities</Th>
+                <Th>Rate</Th>
+                <Th>Status</Th>
+            </tr>
+
+            {rooms.map((room) => 
+                <tr key={room._id} onClick={() => handleIdRoom(room._id)}>
+                    <ThSyled><img src={`${room.foto}`}/></ThSyled>
+                    <Td>room Nº {room.number}</Td>
+                    <Td>{room.bed_type}</Td>
+                    <Td>Flooo A-{room.room_floor}</Td>
+                    <Td>{room.facilities}</Td>
+                    <Td2>{room.price}<Pn>/night</Pn></Td2>
+                    <Td>{room.status === true ? <BtnGreen>Available</BtnGreen> : <BtnRed>Booked</BtnRed>}</Td>
+                </tr>
+            ).slice(firsIndex, lastIndex)}
+        </Table>
+
+        // <DivContainer>
+        //     <Container>
+        //         <DivCheck>                    
                     
-                    <P>Room Name</P>
-                </DivCheck>
+        //             <P>Room Name</P>
+        //         </DivCheck>
 
-                <DivMid>
-                    <P>Bed Type</P>
-                    <P>Room Floor</P>
-                    <P>Facilities</P>
-                </DivMid>
+        //         <DivMid>
+        //             <P>Bed Type</P>
+        //             <P>Room Floor</P>
+        //             <P>Facilities</P>
+        //         </DivMid>
 
-                <DivCabecera>
-                    <P>Rate</P>
-                    <P>Status</P>
-                </DivCabecera>
+        //         <DivCabecera>
+        //             <P>Rate</P>
+        //             <P>Status</P>
+        //         </DivCabecera>
                 
-            </Container>        
+        //     </Container>
 
-            {rooms.map((room,i) => 
-                <ContainerRooms key={i} >
-                    <DivCheckRooms onClick={() => handleIdRoom(room._id)}>                                            
+        //     {rooms.map((room,i) => 
+        //         <ContainerRooms key={i} >
+        //             <DivCheckRooms onClick={() => handleIdRoom(room._id)}>                                            
 
-                        <DivImg img={room.foto}>
-                            <img src={`${room.foto}`}/>
-                        </DivImg>
+        //                 <DivImg img={room.foto}>
+        //                     <img src={`${room.foto}`}/>
+        //                 </DivImg>
                         
-                        <DivData>
-                            <Id>{room._id}</Id>
-                            <P>Number room: {room.number}</P>
-                        </DivData>
+        //                 <DivData>
+        //                     <Id>{room._id}</Id>
+        //                     <P>Number room: {room.number}</P>
+        //                 </DivData>
                         
-                    </DivCheckRooms>
+        //             </DivCheckRooms>
 
-                    <DivMidDatos>
-                        <Pd>{room.bed_type}</Pd>
-                        <P>Flooo A-{room.room_floor}</P>
-                        <P>{room.facilities}</P>                                                                       
-                    </DivMidDatos>
+        //             <DivMidDatos>
+        //                 <Pd>{room.bed_type}</Pd>
+        //                 <P>Flooo A-{room.room_floor}</P>
+        //                 <P>{room.facilities}</P>                                                                       
+        //             </DivMidDatos>
 
-                    <Div>
-                        <DivPrecio>
-                            <P>{room.price}€</P> 
-                            <Pn>/night</Pn>
-                        </DivPrecio>
+        //             <Div>
+        //                 <DivPrecio>
+        //                     <P>{room.price}€</P> 
+        //                     <Pn>/night</Pn>
+        //                 </DivPrecio>
                         
-                        <P>{room.status === true ? <BtnGreen>Available</BtnGreen> : <BtnRed>Booked</BtnRed>}</P>
+        //                 <P>{room.status === true ? <BtnGreen>Available</BtnGreen> : <BtnRed>Booked</BtnRed>}</P>
                        
-                    </Div>
+        //             </Div>
 
-                    <DivMenuPuntos onClick={() => handleDeleteRoom(room._id)}>
-                        {<AiOutlineMore/>}
-                    </DivMenuPuntos>
+        //             <DivMenuPuntos onClick={() => handleDeleteRoom(room._id)}>
+        //                 {<AiOutlineMore/>}
+        //             </DivMenuPuntos>
                    
                     
-                </ContainerRooms>
+        //         </ContainerRooms>
 
-            ).slice(firsIndex, lastIndex)}
+        //     ).slice(firsIndex, lastIndex)}
             
-        </DivContainer>
+        // </DivContainer>
     )
 }
 
