@@ -124,11 +124,48 @@ const BtnLiveGrey = styled(BtnGreen)`
 
 const BtnDarkGrey = styled(BtnGreen)`
     color: #d3d0d0;
-    background: grey
+    background: grey;
 `;
 
 const PRoom = styled(P)`
     width: 9rem;
+`;
+
+const Table = styled.table`
+    border: #8080802e 0.1rem solid;
+    padding: 0.5rem 2rem;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    background: white;
+    border-spacing: 0;
+`;
+
+const TrElement = styled.tr`
+    height: 3.5rem;
+    margin: 1rem;
+
+    :hover{
+        cursor: pointer;
+    }
+`;
+
+const Th = styled.th`
+    height: 40px;
+    border-bottom: 0.1px solid #8080802e;
+`;
+
+const Td = styled.td`
+    text-align: center;
+    border-bottom: 0.1px solid #8080802e;
+`;
+
+const ThImg = styled(Td)`
+    background-image: url(${props => props.img});
+    background-repeat: round;
+    margin: 1rem 0;
+    height: 0rem;
+    width: 5rem;
+    border-radius: 15px;
 `;
 
 export const GuesteList = ({guests, lastIndex, firsIndex}) => {
@@ -155,63 +192,31 @@ export const GuesteList = ({guests, lastIndex, firsIndex}) => {
     }
 
     return(
-        <DivContainer>
-            <Container>
-                <DivCheck>                    
-                   
-                    
-                    <P>Guest</P>
-                </DivCheck>
+        <Table>
+            <tr>
+                <Th>Guest</Th>
+                <Th>Name</Th>
+                <Th>Order Date</Th>
+                <Th>Check In</Th>
+                <Th>Check Out</Th>
+                <Th>Special Request</Th>
+                <Th>Room type</Th>
+                <Th>Status</Th>
+            </tr>
 
-                {/* <DivMid> */}
-                    <P>Order Date</P>
-                    <P>Check In</P>                    
-                    <P>Check Out</P>                    
-                    <P>Special Request</P>                    
-                {/* </DivMid> */}
-
-                <DivCabecera>
-                    <P>Room type</P>
-                    <P>Status</P>
-                </DivCabecera>
-                
-            </Container>
-
-            {guests.map((guest,i) => 
-                <ContainerRooms key={i} >
-                    <DivCheckRooms onClick={() => handleClick(guest._id)}>                        
-
-                        <DivImg img={guest.fotos}>
-                        </DivImg>
-                        
-                        <DivData>
-                            <P>{guest.name}</P>
-                            <Id>{guest._id}</Id>
-                        </DivData>
-                        
-                    </DivCheckRooms>  
-
-                    <Pd>{moment(guest.order_date).format( "DD-MM-YYYY")}</Pd>                                            
-                    <P>{moment(guest.check_In).format( "DD-MM-YYYY")}</P>
-                    <P>{moment(guest.check_Out).format( "DD-MM-YYYY")}</P>
-                        
-                    <PopupViewNotes elementID={guest.special_request}/>
-                    
-                    
-                    <PRoom>{guest.room_type} </PRoom>                       
-                        
-                    {/* <P>{guest.status === true ? <PGreen>ACTIVE</PGreen> : <PRed>INACTIVE</PRed>}</P> */}
-                    {handleStatus(guest.status)}
-
-                    {/* <DivMenuPuntos>
-                        {<AiOutlineMore/>}
-                    </DivMenuPuntos> */}
-                   
-                    
-                </ContainerRooms>
-
+            {guests.map((guest) =>
+                <TrElement key={guest._id} onClick={() => handleClick(guest._id)}>
+                    <ThImg img={guest.fotos}/>
+                    <Td>{guest.name}</Td>
+                    <Td>{moment(guest.order_date).format( "DD-MM-YYYY")}</Td>
+                    <Td>{moment(guest.check_In).format( "DD-MM-YYYY")}</Td>
+                    <Td>{moment(guest.check_Out).format( "DD-MM-YYYY")}</Td>
+                    <Td><PopupViewNotes elementID={guest.special_request}/></Td>
+                    <Td>{guest.room_type}</Td>
+                    <Td>{handleStatus(guest.status)}</Td>
+                </TrElement>
             ).slice(firsIndex, lastIndex)}
-            
-        </DivContainer>
+
+        </Table>
     )
 }

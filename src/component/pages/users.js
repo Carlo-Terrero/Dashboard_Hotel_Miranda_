@@ -50,11 +50,14 @@ export const Users = () =>{
     return (
         <Div>
             <ControlDiv>
-                <SelectorGreenMenu selectores={selectores}/>                               
+
+                <SelectorGreenMenu selectores={selectores} />                               
 
                 <ControlDiv>
 
-                    <NewUser onClick={() => {navigate('newuser')}}>+ New user</NewUser>
+                    <NewUser onClick={() => {navigate('newuser')}}>
+                        + New user
+                    </NewUser>
 
                     <BtnNewEst/>
                     
