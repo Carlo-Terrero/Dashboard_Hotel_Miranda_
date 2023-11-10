@@ -114,10 +114,8 @@ export const PopupNewUser = () =>{
             password: pass,
             schedule: schedule,
             foto: foto,
-
         }
         
-        console.log(User)
         dispatch(postNewUser(User))        
     }
 

@@ -13,12 +13,25 @@ import { BookingsDetails } from "./details/bookingDetails";
 import { UserDetail } from "./details/userDetail";
 import { RoomDetails } from "./details/roomDetails";
 import { Navigate } from "react-router-dom";
+import { NewUser } from './newElement/newUser';
+import { NewRoom } from './newElement/newRoom';
 // Configuracion de del Reducer
 // Esta es la funcion que se encarga de gestionar los datos con los que trabajaremos
 const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return {auth: action.value.auth, user: action.value.user, email: action.value.email }
+      return {auth: action.value.auth, 
+                    user: action.value.user, 
+                    email: action.value.email, 
+                    foto: action.value.foto ,
+                    id: action.value.id,
+                    auth: action.value.auth,
+                    contact: action.value.contact,
+                    description: action.value.description,
+                    estate: action.value.estate,
+                    puesto: action.value.puesto,
+                    start_date: action.value.start_date,
+                  }
     default:
       return state
   }
@@ -26,15 +39,22 @@ const reducer = (state, action) => {
 
 //Datos iniciales
 const initialState = {
-  name: 'no logg',
-  email: 'no logg mail',
+  name: '',
+  email: '',
   auth: false,
+  foto: '',
+  id: '',
+  contact: '',
+  description: '',
+  estate: '',
+  puesto: '',
+  start_date: '',
 }
 
 // Configuracion del Context
 export const LogingContext = createContext(initialState);
 
-//Este componte se encarga de privatizar las urls si no se esta permitido el
+//Este componente se encarga de privatizar las urls si no se esta permitido el user
 function PrivateRoute({ auth ,children}) {
   return auth ? children : <Navigate to="/" replace={true} />;
 }
@@ -42,8 +62,8 @@ function PrivateRoute({ auth ,children}) {
 function App() {  
 
   // Inicializacion de reducer
-  const [state, dispatch] = useReducer(reducer, initialState)
-  console.log(state)
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <div className="App">
       <LogingContext.Provider
@@ -78,10 +98,26 @@ function App() {
               } 
             />
 
+            <Route path="/rooms/newroom" element={              
+                <PrivateRoute auth={state.auth}>
+                  <NavBarSuperior dispatch={dispatch} />
+                  <NewRoom/>
+                </PrivateRoute>
+              } 
+            />
+
             <Route path="/Users" element={
                 <PrivateRoute auth={state.auth}>
                   <NavBarSuperior dispatch={dispatch} />
                   <Users/>
+                </PrivateRoute>
+              }
+            />
+
+            <Route path="/Users/newuser" element={
+                <PrivateRoute auth={state.auth}>
+                  <NavBarSuperior dispatch={dispatch} />
+                  <NewUser/>
                 </PrivateRoute>
               }
             />

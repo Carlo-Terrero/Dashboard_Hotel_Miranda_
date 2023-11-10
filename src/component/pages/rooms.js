@@ -1,26 +1,21 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useState} from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import {
     roomsListDate,
-    getRooms,
-    postNewRoom
+    getRooms
 } from '../slice/roomSlices';
 
 import { RoomList } from "../lists/roomList";
-//import { roomsData } from "../data/rooms";//Este sera el que se borre
 import { Paginador } from "../comun/paginador";
 import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
 
-const DivBase = styled.div`
-    padding: 2rem;
-`;
-
 const Div =  styled.div` 
     display: grid;
-    margin-left: 300px;
+    margin: 3rem 15%;
 `;
 
 const ControlDiv = styled.div`
@@ -39,33 +34,24 @@ const NewRoom = styled.button`
     height: 2.5rem;
     justify-content: center;
     align-items: center;
-   
+    cursor: pointer;
 `;
 
 export const Rooms = () =>{
 
     const selectores = ['All Rooms', 'Active Employee', 'Inactive Employee']
+    const navigate = useNavigate();
     
     const dispatch = useDispatch();
-    //const roomsList = useSelector((state)=>state.rooms.roomList);
     const roomsList = useSelector(roomsListDate);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 10;
+    const lastIndex = currentPage * limit;
+    const firsIndex = lastIndex - limit;
+
     const handleClickNewRoom = () => {
-        const newRoon = {
-            foto: 'http://www.mdvacationclub.com/wp-content/uploads/2018/12/Placeholder.png', 
-            bed_type: 'Suite',
-            number: 2121,
-            description: 'Room para probar end poin de crear room',
-            offer: true,
-            price: 73,
-            discount: 21,
-            cancellation: 'Prueba si ganas de cancelacion',
-            facilities: 'Mosquiteras, Tv, Wifi',
-            status: true,
-            room_floor: 3
-        }
-        console.log(newRoon)
-        dispatch(postNewRoom(newRoon))
+       navigate(`newroom`);
     }
 
     useEffect(() => {
@@ -73,30 +59,26 @@ export const Rooms = () =>{
     }, [dispatch])
 
     return (
-        <DivBase>
-            <Div>
+        <Div>
+            <ControlDiv>
+
+                <SelectorGreenMenu selectores={selectores} dataFilter={roomsList}/>                                 
+
                 <ControlDiv>
+                    <NewRoom onClick={handleClickNewRoom}>
+                        + New Room
+                    </NewRoom>
 
-                    <SelectorGreenMenu selectores={selectores}/>                                 
-
-                    <ControlDiv>
-                        <NewRoom onClick={handleClickNewRoom}>
-                            + New Room
-                        </NewRoom>
-
-                        <BtnNewEst/>
-                        
-                    </ControlDiv>
-                   
+                    <BtnNewEst/>
+                    
                 </ControlDiv>
                 
-                <RoomList rooms={roomsList}/>                               
-                
-                <Paginador paginas={8}/>
-
-            </Div>
+            </ControlDiv>
             
-        </DivBase>
-        
+            <RoomList rooms={roomsList} lastIndex={lastIndex} firsIndex={firsIndex}/>                               
+            
+            <Paginador limit={limit} elementList={roomsList.length} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+
+        </Div>   
     )
 }

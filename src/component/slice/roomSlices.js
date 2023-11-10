@@ -15,7 +15,6 @@ const initialState ={
     //error: null
 };
 
-// solo falta, actualizar y que al liminar una room desaparezca de la lista
 export const getRooms = createAsyncThunk('get/rooms', async () => {
     const response = await axios.get(`${REACT_APP_LINK_HTTP}/rooms`, headers )
     
@@ -35,6 +34,12 @@ export const postNewRoom = createAsyncThunk('postRoom/room', async (obj) => {
 export const deleteOneRoom = createAsyncThunk('deleteRoom/room', async (id) => {
     const response = await axios.delete(`${REACT_APP_LINK_HTTP}/rooms/${id}`, headers)
     return response.data.room;
+})
+
+export const editOneRoom = createAsyncThunk('updatedRoom/put', async (roomElement) => {
+    const response = await axios.put(`${REACT_APP_LINK_HTTP}/rooms/${roomElement.id}`, roomElement.roomObj, headers)
+
+    return response.date.room;
 })
 
 
@@ -95,6 +100,17 @@ export const roomSlice = createSlice({
             .addCase(deleteOneRoom.fulfilled, (state, action) => {
                 state.status = 'success'
                 //state.roomList.delete(action.payload)                
+            })
+
+            .addCase(editOneRoom.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(editOneRoom.fulfilled, (state, action) => {
+                state.status = 'success'
+                state.roomList.push(action.payload);
+            })
+            .addCase(editOneRoom.rejected, (state, action) => {
+                state.status = 'loading'
             })
         
     },

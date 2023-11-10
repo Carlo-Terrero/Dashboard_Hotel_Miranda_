@@ -1,8 +1,12 @@
-import React, {useState, useContext } from "react";
-import {useSelector, useDispatch} from 'react-redux';
-import { NewUser } from '../newElement/newUser';
-import {LogingContext} from '../App'
-import styled from 'styled-components';
+import React, {useState, useEffect} from "react";
+import { useParams } from 'react-router-dom';
+
+import moment from "moment";
+
+import styled from "styled-components";
+
+import { useDispatch, useSelector } from 'react-redux';
+import { postNewUser, updateOneUser, getOneUser, usersListDate} from '../slice/userSlice';
 
 const Div =  styled.div` 
     padding-top: 2rem;
@@ -54,8 +58,12 @@ const Form = styled.form`
                 border-radius: 0.5rem;
                 border: 0.5px solid #80808070;
             }
+
         }
+
+        
     }
+
 `;
 
 const BtnAceptar = styled.button`
@@ -73,73 +81,62 @@ const BtnCancel = styled(BtnAceptar)`
     background: red;
 `;
 
-const DivButton = styled.div`
+const DivButton = styled.div`{
     margin: -3.5rem 0 2rem auto;
     display: flex;
     gap: 2rem;
-`;
+}`;
 
-export const UserEdit = (props) =>{
+export const NewUser = (props) =>{
 
-    //Hay que traer los datos el usuario y ponerlos aqui
-    const dataUser = useContext(LogingContext);
-    console.log(dataUser)
-    
-    const [newName, setNewName] = useState(dataUser.user);
-    const [newEmail, setNewEmail] = useState(dataUser.email);
-    const [telefono, setTelefono] = useState(629228654);
-    const [puesto, setPuesto] = useState('Manager');
-    const [alta, setAlta] = useState('24/05/2022');
-    const [description, setDescription] = useState('Esta es una breve y resumida declaracion para las cosas que se ponen duras');
-    const [estado, setEstado] = useState(true);
-    const [pass, setPass] = useState('pass');
-    const [foto, setFoto] = useState(dataUser.foto);
-    //const dataUser = useContext(LogingContext);
+    const {id} = useParams();
+    const user = useSelector(usersListDate);
+    const userSelected =  user.find(user => user._id === id)
 
+    const validador = id ? true : false
     const dispatch = useDispatch();
+    
+    const [newName, setNewName] = useState(validador  ? userSelected.name : '');
+    const [newEmail, setNewEmail] = useState(validador ? userSelected.email : '');
+    const [telefono, setTelefono] = useState(validador ? userSelected.contact : '');
+    const [puesto, setPuesto] = useState(validador ? userSelected.puesto : '');
+    const [alta, setAlta] = useState(validador ? moment(userSelected.start_date).format('yyyy-MM-dd') : '');
+    const [description, setDescription] = useState(validador ? userSelected.description : '');
+    const [estado, setEstado] = useState(validador ? userSelected.estate : '');
+    const [pass, setPass] = useState('');
+    const [foto, setFoto] = useState(validador ? userSelected.foto : 'https://i.blogs.es/808765/dpoty-puppy-2nd--c--tracy-kirby-the-kennel-club-2/1366_2000.jpg');
+    const [schedule, setSchedule] = useState(validador ? userSelected.schedule : '');
 
-    const handleClickChance = () => {
+    useEffect(() => {
+        dispatch(getOneUser(id))
+    },[])
 
-        if(newName.length > 0){
-            props.dispatch({type: 'NAME', value: newName})
-        }
-        
-        if(newEmail.length > 0){
-            props.dispatch({type: 'EMAIL', value: newEmail})
-        }        
-        
-    }
+    const handleSubmit = (e) => {
 
-    const handleDate = () => {
-        /* console.log('Data User');
-        dispatch(addUser());
-        dispatch(deleteUser());
-        dispatch(editUser());
-        dispatch(getOneUser()) */
+        e.preventDefault();
 
         const User = {
-            nombre: newName,
+            name: newName,
             email: newEmail,
             contact: telefono,
             puesto: puesto,
             start_date: alta,
             description: description,
             estate: estado,
-            password: pass
+            password: validador ? user.password : pass,
+            schedule: schedule,
+            foto: foto,
         }
-
-        console.log(User)
+        
+        //dispatch(postNewUser(User))
+        validador ? dispatch(updateOneUser({id: id, obj: User})) : dispatch(postNewUser(User));
     }
-
-    const handleSubmit = () =>{
-
-    }
-
-    return (
+    
+    return(
         <Div>
             <Form onSubmit={handleSubmit}>
                 {/* <h1>Añadir Nuevo Usuario</h1> */}
-                <h1>Usuario logueado</h1>
+                <h1>{validador ? props.user.title : 'Crear usuario'}</h1>
 
                 <div>
                     <img src={`${foto}`} alt='imagen user'/>
@@ -162,6 +159,8 @@ export const UserEdit = (props) =>{
                     </div>
                     
                 </div>
+
+
 
                 <div>
                     <label>
@@ -197,7 +196,7 @@ export const UserEdit = (props) =>{
                     <label>
                         <p>Día de guardia</p>
                         {/* <input value={schedule} type="text" onChange={(e) => {setSchedule(e.target.value)}} required/> */}
-                        {/* <select value={schedule} type="text" onChange={(e) => {setSchedule(e.target.value)}}  required>
+                        <select value={schedule} type="text" onChange={(e) => {setSchedule(e.target.value)}}  required>
                             <option > Seleccione día </option>
                             <option value={"Lunes "}> Lunes </option>
                             <option value={"Martes "}> Martes </option>
@@ -206,7 +205,7 @@ export const UserEdit = (props) =>{
                             <option value={"Viernes "}> Viernes </option>
                             <option value={"Sábado "}> Sábado </option>
                             <option value={"Domingo "}> domingo </option>
-                        </select> */}
+                        </select>
                     </label>                                                                            
 
                     <label>
@@ -224,16 +223,16 @@ export const UserEdit = (props) =>{
 
                     <label >
                         <p>Password</p> 
-                        {/* {validador ? 
+                        {validador ? 
                             <input  value={pass} type="password" onChange={(e) => {setPass(e.target.value)}} disabled/> : 
-                            <input  value={pass} type="password" onChange={(e) => {setPass(e.target.value)}} />} */}
+                            <input  value={pass} type="password" onChange={(e) => {setPass(e.target.value)}} />}
                     </label>
 
                     
                 </div>
 
                 <DivButton>
-                    {/* <BtnAceptar type="submit" >{validador ? 'Actualizar' : 'Añadir'}</BtnAceptar> */}
+                    <BtnAceptar type="submit" >{validador ? 'Actualizar' : 'Añadir'}</BtnAceptar>
                     <BtnCancel /* onClick={() => {close()}} */> Cancelar </BtnCancel>
                 </DivButton>
 

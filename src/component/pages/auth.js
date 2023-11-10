@@ -4,7 +4,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 import styled from "styled-components";
-import { REACT_APP_LINK_LOGIN } from '../../env';
+import { REACT_APP_LINK_HTTP } from '../../env';
 
 import 'react-toastify/dist/ReactToastify.css';
 const DivBase = styled.div`
@@ -55,21 +55,22 @@ const Form = styled.form`
     }
 
     button {
-        width: 150px;
+        width: 80px;
         margin: auto;
+        border-radius: 6px;
     }
 `;
 
 export const Auth = (props) => {
     
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');   
+    const [email, setEmail] = useState('Carlos');
+    const [pass, setPass] = useState('ponko');   
 
     const navigate =  useNavigate();
 
     async function logUser() {
         try {
-          const response = await axios.post(`${REACT_APP_LINK_LOGIN}`,{userName: email, password: pass});
+          const response = await axios.post(`${REACT_APP_LINK_HTTP}/login`,{userName: email, password: pass});
           
           const token = response.data.token;
           localStorage.setItem('Token', token);
@@ -77,9 +78,18 @@ export const Auth = (props) => {
           const user = decode.user;
 
           props.dispatch(
-            {type: 'LOGIN', value: {auth: true, user: user.name, email: user.email}}          
+            {type: 'LOGIN', value: {auth: true, 
+                                    user: user.name, 
+                                    email: user.email, 
+                                    foto: user.foto ,
+                                    id: user.id,
+                                    contact: user.contact,
+                                    description: user.description,
+                                    estate: user.estate,
+                                    puesto: user.puesto,
+                                    start_date: user.start_date,
+                                }}          
           )
-
 
           navigate('/dashboard');
         } catch (error) {
@@ -106,11 +116,11 @@ export const Auth = (props) => {
             <Form onSubmit={handleSubmit}>
                 <label>                                        
                     <p>User:</p>                        
-                    <input className='mail' type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input className='text' type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </label>
 
                 <label>
-                    <p>Pasword:</p>
+                    <p>Password:</p>
                     <input className='pass' type="password" value={pass} onChange={(e) => setPass(e.target.value)}/>
                 </label>
 

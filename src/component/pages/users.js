@@ -1,29 +1,19 @@
-import React,{useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-//Este dato se va al garete cuando hagamo la conexion
-import { conciergeData } from "../data/concierge";
-
-import { 
-    getUsers,
-    usersListDate
-} from "../slice/userSlice";
+import React,{useState} from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector} from 'react-redux';
+import { getUsers, usersListDate } from "../slice/userSlice";
 
 import styled from "styled-components";
 
-import { ConciergeList } from "../lists/conciergeList";
+import { UserList } from "../lists/userList";
 import { Paginador } from "../comun/paginador";
 import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
-import { PopupNewUser } from "../comun/popupNewUser";
-
-const DivBase = styled.div`
-    padding: 2rem;
-`;
+import { useEffect } from "react";
 
 const Div =  styled.div` 
     display: grid;
-    margin-left: 300px;
+    margin: 3rem 15%;
 `;
 
 const ControlDiv = styled.div`
@@ -33,42 +23,58 @@ const ControlDiv = styled.div`
     margin-bottom: 0.3rem;
 `;
 
+const NewUser = styled.button`
+    color: white;
+    background: #013401;
+    border: none;
+    border-radius: 10px;
+    width: 170px;
+    height: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+`;
+
 export const Users = () =>{
     
     const selectores = ['All Employee', 'Active Employee', 'Inactive Employee']
+    const navigate = useNavigate();
+
     const dispatch = useDispatch();
     const users = useSelector(usersListDate);
 
-    useEffect(() => {
+    const [currentPage, setCurrentPage] = useState(1);    
+    const limit = 10;
+    const lastIndex = currentPage * limit;
+    const firsIndex = lastIndex - limit;
+
+    useEffect(()=>{
         dispatch(getUsers());
-    }, [dispatch]);
+    },[dispatch])
 
     return (
-        <DivBase>
-            <Div>
+        <Div>
+            <ControlDiv>
+
+                <SelectorGreenMenu selectores={selectores} />                               
+
                 <ControlDiv>
-                    <SelectorGreenMenu selectores={selectores}/>                               
 
-                    <ControlDiv>
+                    <NewUser onClick={() => {navigate('newuser')}}>
+                        + New user
+                    </NewUser>
 
-                        <PopupNewUser/>
-
-                        <BtnNewEst/>
-                        
-                    </ControlDiv>
-                   
+                    <BtnNewEst/>
+                    
                 </ControlDiv>
+                
+            </ControlDiv>
 
-                <div>
-                    <ConciergeList concierges={users}/>                    
-                </div>
+            <UserList lastIndex={lastIndex} firsIndex={firsIndex} users={users}/>                    
 
-                <Paginador paginas={8}/>
+            <Paginador limit={limit} elementList={users.length} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 
-            </Div>
-            
-        </DivBase>
-        
+        </Div>
     )
 }
 

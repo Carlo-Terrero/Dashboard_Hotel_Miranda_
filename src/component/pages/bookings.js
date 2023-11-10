@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 
 import {useDispatch, useSelector} from "react-redux";
@@ -9,7 +9,6 @@ import {
     } from "../slice/bookingSlice";
                                    
 import { GuesteList } from "../lists/bookingList";
-import { guestData } from "../data/guest";
 import { Paginador } from "../comun/paginador";
 
 import { BtnNewEst } from "../comun/btnNewEst";
@@ -17,13 +16,9 @@ import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
 
 import { IoIosArrowDown } from "react-icons/io";
 
-const DivBase = styled.div`
-    padding: 2rem;
-`;
-
 const Div =  styled.div` 
     display: grid;
-    margin-left: 300px;
+    margin: 3rem 15%;
 `;
 
 const ControlDiv = styled.div`
@@ -50,38 +45,43 @@ export const Bookings = () =>{
 
     const selectores = ['All Guest', 'Pending', 'Booked', 'Canceled', 'Refund'];
     const dispatch = useDispatch();
-    const bookingList = useSelector(bookingListDate)
+    const bookingList = useSelector(bookingListDate);
+
+    const limit = 10;
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const lastIndex = currentPage * limit;
+    const firsIndex = lastIndex - limit;
 
     useEffect(() =>{
         dispatch(getBookings());
     },[dispatch] )
     
     return (
-        <DivBase>
-            <Div>
+        <Div>
+            <ControlDiv>
+
+                <SelectorGreenMenu selectores={selectores}/>                                           
+
                 <ControlDiv>
+                    <NewRoom>
+                        1 November 2020 - 30 November 2020
+                        <IoIosArrowDown/>
+                    </NewRoom>
 
-                    <SelectorGreenMenu selectores={selectores}/>                                           
-
-                    <ControlDiv>
-                        <NewRoom>
-                            1 November 2020 - 30 November 2020
-                            <IoIosArrowDown/>
-                        </NewRoom>
-
-                        <BtnNewEst/>
-                        
-                    </ControlDiv>
-                   
+                    <BtnNewEst/>
+                    
                 </ControlDiv>
+                
+            </ControlDiv>
 
-                <div>
-                    <GuesteList guests={bookingList}/>                    
-                </div>
+            <div>
+                <GuesteList guests={bookingList} elementList={bookingList.length} lastIndex={lastIndex} firsIndex={firsIndex}/>                    
+            </div>
 
-                <Paginador paginas={8}/>
+            <Paginador limit={limit} elementList={bookingList.length} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 
-            </Div>            
-        </DivBase>        
+        </Div>            
     )
 }

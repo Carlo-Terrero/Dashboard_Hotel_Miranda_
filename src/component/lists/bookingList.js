@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 import styled from 'styled-components';
 
@@ -30,8 +31,6 @@ const Container = styled.div`
 const ContainerRooms = styled(Container)`
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
-/*  border-bottom-right-radius: 25px;
-    border-bottom-left-radius: 25px; */
     border-top: none;
     padding-right: 3rem;
     align-items: center;
@@ -57,6 +56,7 @@ const DivCheckRooms = styled(DivCheck)`
     align-items: center;
     gap: 1.5rem;
     margin: 0;
+    cursor: pointer;    
 `;
 
 const DivData = styled.div`
@@ -101,16 +101,13 @@ const DivImg = styled.div`
     border-radius: 15px;
 `;
 
-const Button = styled.button`
+const BtnGreen = styled.button`
     color: black;
     background: green;
     height: 2.5rem;
     border: none;
     width: 7rem;
     border-radius: 10px;
-`;
-
-const BtnGreen = styled(Button)`
     color: green;
     background: #43fe8b3d;
 `;
@@ -127,14 +124,51 @@ const BtnLiveGrey = styled(BtnGreen)`
 
 const BtnDarkGrey = styled(BtnGreen)`
     color: #d3d0d0;
-    background: grey
+    background: grey;
 `;
 
 const PRoom = styled(P)`
     width: 9rem;
 `;
 
-export const GuesteList = (props) => {
+const Table = styled.table`
+    border: #8080802e 0.1rem solid;
+    padding: 0.5rem 2rem;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    background: white;
+    border-spacing: 0;
+`;
+
+const TrElement = styled.tr`
+    height: 3.5rem;
+    margin: 1rem;
+
+    :hover{
+        cursor: pointer;
+    }
+`;
+
+const Th = styled.th`
+    height: 40px;
+    border-bottom: 0.1px solid #8080802e;
+`;
+
+const Td = styled.td`
+    text-align: center;
+    border-bottom: 0.1px solid #8080802e;
+`;
+
+const ThImg = styled(Td)`
+    background-image: url(${props => props.img});
+    background-repeat: round;
+    margin: 1rem 0;
+    height: 0rem;
+    width: 5rem;
+    border-radius: 15px;
+`;
+
+export const GuesteList = ({guests, lastIndex, firsIndex}) => {
 
     const navigate = useNavigate()
 
@@ -158,63 +192,31 @@ export const GuesteList = (props) => {
     }
 
     return(
-        <DivContainer>
-            <Container>
-                <DivCheck>                    
-                   
-                    
-                    <P>Guest</P>
-                </DivCheck>
+        <Table>
+            <tr>
+                <Th>Guest</Th>
+                <Th>Name</Th>
+                <Th>Order Date</Th>
+                <Th>Check In</Th>
+                <Th>Check Out</Th>
+                <Th>Special Request</Th>
+                <Th>Room type</Th>
+                <Th>Status</Th>
+            </tr>
 
-                {/* <DivMid> */}
-                    <P>Order Date</P>
-                    <P>Check In</P>                    
-                    <P>Check Out</P>                    
-                    <P>Special Request</P>                    
-                {/* </DivMid> */}
+            {guests.map((guest) =>
+                <TrElement key={guest._id} onClick={() => handleClick(guest._id)}>
+                    <ThImg img={guest.fotos}/>
+                    <Td>{guest.name}</Td>
+                    <Td>{moment(guest.order_date).format( "DD-MM-YYYY")}</Td>
+                    <Td>{moment(guest.check_In).format( "DD-MM-YYYY")}</Td>
+                    <Td>{moment(guest.check_Out).format( "DD-MM-YYYY")}</Td>
+                    <Td><PopupViewNotes elementID={guest.special_request}/></Td>
+                    <Td>{guest.room_type}</Td>
+                    <Td>{handleStatus(guest.status)}</Td>
+                </TrElement>
+            ).slice(firsIndex, lastIndex)}
 
-                <DivCabecera>
-                    <P>Room type</P>
-                    <P>Status</P>
-                </DivCabecera>
-                
-            </Container>
-
-            {props.guests.map((guest,i) => 
-                <ContainerRooms key={i} >
-                    <DivCheckRooms onClick={() => handleClick(guest._id)}>                        
-
-                        <DivImg img={guest.fotos}>
-                        </DivImg>
-                        
-                        <DivData>
-                            <P>{guest.name}</P>
-                            <Id>{guest._id}</Id>
-                        </DivData>
-                        
-                    </DivCheckRooms>  
-
-                    <Pd>{guest.order_date}</Pd>                                            
-                    <P>{guest.check_In}</P>
-                    <P>{guest.check_Out}</P>
-                        
-                    <PopupViewNotes elementID={guest.special_request}/>
-                    
-                    
-                    <PRoom>{guest.room_type} </PRoom>                       
-                        
-                    {/* <P>{guest.status === true ? <PGreen>ACTIVE</PGreen> : <PRed>INACTIVE</PRed>}</P> */}
-                    {handleStatus(guest.status)}
-
-                    <DivMenuPuntos>
-                        {<AiOutlineMore/>}
-                    </DivMenuPuntos>
-                   
-                    
-                </ContainerRooms>
-
-            )}
-            
-        </DivContainer>
+        </Table>
     )
 }
