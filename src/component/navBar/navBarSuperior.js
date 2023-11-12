@@ -3,7 +3,6 @@ import { LogingContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
 import logo from "../../static/LogoHotel.svg";
-import logo2 from "../../static/LogoHotel.svg";
 
 import styled from "styled-components";
 
@@ -71,16 +70,11 @@ export const NavBarSuperior = (props) => {
             
                 </Div>
 
-                    <DivIcon>
-                        <ImEnvelop />
-                        
-                        <FiBell />
-                        
-                        <div>
-                        <IoIosLogOut onClick={handleAut}/> 
-
-                        </div>
-                    </DivIcon>
+                <DivIcon>                    
+                    
+                    <IoIosLogOut onClick={handleAut}/> 
+                    
+                </DivIcon>
                 
             </Div>
             

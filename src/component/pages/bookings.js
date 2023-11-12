@@ -14,8 +14,6 @@ import { Paginador } from "../comun/paginador";
 import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
 
-import { IoIosArrowDown } from "react-icons/io";
-
 const Div =  styled.div` 
     display: grid;
     margin: 3rem 15%;
@@ -43,11 +41,13 @@ const NewRoom = styled.button`
 
 export const Bookings = () =>{
 
-    const selectores = ['All Guest', 'Pending', 'Booked', 'Canceled', 'Refund'];
+    const selectores = ['All Guest', 'Booked', 'Pending', 'Canceled', 'Refund'];
     const dispatch = useDispatch();
     
     const bookingList = useSelector(bookingListDate);
     
+    const [filterList, setFilterList] = useState(bookingList);
+
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10;
     const lastIndex = currentPage * limit;
@@ -56,14 +56,25 @@ export const Bookings = () =>{
     useEffect(() =>{
         dispatch(getBookings());
     },[dispatch] )
+
+    function dataFilter(filteredOut){
+        if(filteredOut === selectores[0]){
+            setFilterList(bookingList);
+            return;
+        }
+
+        const state = selectores.indexOf(filteredOut) - 1;
+        const elementSelected = bookingList.filter(element => element.status === state);
+        setFilterList(elementSelected);
+    }
     
     return (
         <Div>
             <ControlDiv>
 
-                <SelectorGreenMenu selectores={selectores} dataFilter={bookingList}/>                                           
+                <SelectorGreenMenu selectores={selectores} returnData={dataFilter}/>                                           
 
-                <ControlDiv>
+                {/* <ControlDiv>
                     <NewRoom>
                         1 November 2020 - 30 November 2020
                         <IoIosArrowDown/>
@@ -71,13 +82,13 @@ export const Bookings = () =>{
 
                     <BtnNewEst/>
                     
-                </ControlDiv>
+                </ControlDiv> */}
                 
             </ControlDiv>
 
-            <GuesteList guests={bookingList} elementList={bookingList.length} lastIndex={lastIndex} firsIndex={firsIndex}/>                                
+            <GuesteList guests={filterList} lastIndex={lastIndex} firsIndex={firsIndex}/>                                
 
-            <Paginador limit={limit} elementList={bookingList.length} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+            <Paginador limit={limit} elementList={filterList.length} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 
         </Div>            
     )

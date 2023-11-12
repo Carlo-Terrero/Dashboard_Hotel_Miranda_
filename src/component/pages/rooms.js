@@ -45,39 +45,55 @@ export const Rooms = () =>{
     const dispatch = useDispatch();
     const roomsList = useSelector(roomsListDate);
 
+    const [filterList, setFilterList] = useState(roomsList);
+
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10;
     const lastIndex = currentPage * limit;
     const firsIndex = lastIndex - limit;
 
+    useEffect(() => {
+        dispatch(getRooms());
+    }, [dispatch])
+
     const handleClickNewRoom = () => {
        navigate(`newroom`);
     }
 
-    useEffect(() => {
-        dispatch(getRooms());
-    }, [dispatch])
+    function dataFilter(filteredOut){
+        
+        if(filteredOut === selectores[0]){
+            setFilterList(roomsList);
+            return;
+        }
+
+        const state = filteredOut == selectores[1] ? true : false;
+        const elementSelected = roomsList.filter( element => element.status === state);
+        setFilterList(elementSelected);
+    }
 
     return (
         <Div>
             <ControlDiv>
 
-                <SelectorGreenMenu selectores={selectores} dataFilter={roomsList}/>                                 
+                <SelectorGreenMenu 
+                    selectores={selectores} 
+                    returnData={dataFilter}/>                                 
 
                 <ControlDiv>
                     <NewRoom onClick={handleClickNewRoom}>
                         + New Room
                     </NewRoom>
 
-                    <BtnNewEst/>
+                    {/* <BtnNewEst/> */}
                     
                 </ControlDiv>
                 
             </ControlDiv>
             
-            <RoomList rooms={roomsList} lastIndex={lastIndex} firsIndex={firsIndex}/>                               
+            <RoomList rooms={filterList} lastIndex={lastIndex} firsIndex={firsIndex}/>                               
             
-            <Paginador limit={limit} elementList={roomsList.length} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+            <Paginador limit={limit} elementList={filterList.length} currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
         </Div>   
     )

@@ -43,6 +43,8 @@ export const Users = () =>{
     const dispatch = useDispatch();
     const users = useSelector(usersListDate);
 
+    const [filterList, setFilterList] = useState(users);
+
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10;
     const lastIndex = currentPage * limit;
@@ -52,11 +54,22 @@ export const Users = () =>{
         dispatch(getUsers());
     },[dispatch])
 
+    function dataFilter(filteredOut){
+        if(filteredOut === selectores[0]){
+            setFilterList(users);
+            return;
+        }
+
+        const state = filteredOut === selectores[1] ? true : false;
+        const elementSelected = users.filter(element => element.estate === state);
+        setFilterList(elementSelected);
+    }
+
     return (
         <Div>
             <ControlDiv>
 
-                <SelectorGreenMenu selectores={selectores} />                               
+                <SelectorGreenMenu selectores={selectores} returnData={dataFilter}/>                               
 
                 <ControlDiv>
 
@@ -64,15 +77,15 @@ export const Users = () =>{
                         + New user
                     </NewUser>
 
-                    <BtnNewEst/>
+                    {/* <BtnNewEst/> */}
                     
                 </ControlDiv>
                 
             </ControlDiv>
 
-            <UserList lastIndex={lastIndex} firsIndex={firsIndex} users={users}/>                    
+            <UserList lastIndex={lastIndex} firsIndex={firsIndex} users={filterList}/>                    
 
-            <Paginador limit={limit} elementList={users.length} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+            <Paginador limit={limit} elementList={filterList.length} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 
         </Div>
     )

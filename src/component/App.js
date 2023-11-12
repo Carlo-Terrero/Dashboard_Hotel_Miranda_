@@ -20,35 +20,36 @@ import { NewRoom } from './newElement/newRoom';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return {auth: action.value.auth, 
-                    user: action.value.user, 
-                    email: action.value.email, 
-                    foto: action.value.foto ,
-                    id: action.value.id,
-                    auth: action.value.auth,
-                    contact: action.value.contact,
-                    description: action.value.description,
-                    estate: action.value.estate,
-                    puesto: action.value.puesto,
-                    start_date: action.value.start_date,
-                  }
+        return ( 
+            {auth: action.value.auth, 
+            user: action.value.user, 
+            email: action.value.email, 
+            foto: action.value.foto ,
+            id: action.value.id,
+            auth: action.value.auth,
+            contact: action.value.contact,
+            description: action.value.description,
+            estate: action.value.estate,
+            puesto: action.value.puesto,
+            start_date: action.value.start_date,
+            })
     default:
-      return state
-  }
+        return state
+    }
 }
 
 //Datos iniciales
 const initialState = {
-  name: '',
-  email: '',
-  auth: false,
-  foto: '',
-  id: '',
-  contact: '',
-  description: '',
-  estate: '',
-  puesto: '',
-  start_date: '',
+    name: '',
+    email: '',
+    auth: false,
+    foto: '',
+    id: '',
+    contact: '',
+    description: '',
+    estate: '',
+    puesto: '',
+    start_date: ''
 }
 
 // Configuracion del Context
@@ -66,104 +67,90 @@ function App() {
 
   return (
     <div className="App">
-      <LogingContext.Provider
+        <LogingContext.Provider
             value={state}            
-          >
-        <Router>
+        >
+            <Router>
+                <Routes>
+                    <Route path="/"  element={<Auth dispatch={dispatch}/>} />
 
-          <Routes>
+                    <Route path='/dashboard' element={
+                        <PrivateRoute auth={state.auth}>
+                            <NavBarSuperior dispatch={dispatch} />
+                            <Dashboard/>
+                        </PrivateRoute>
+                    }/>
 
-            <Route path="/"  element={<Auth dispatch={dispatch}/>} />
+                    <Route path="/rooms" element={
+                        <PrivateRoute auth={state.auth}>
+                            <NavBarSuperior dispatch={dispatch} />
+                            <Rooms/>
+                        </PrivateRoute>
+                    }/>
 
-            <Route path='/dashboard' element={
-              <PrivateRoute auth={state.auth}>
-                <NavBarSuperior dispatch={dispatch} />
-                <Dashboard/>
-              </PrivateRoute>
-            } />
+                    <Route path="/rooms/:id" element={              
+                        <PrivateRoute auth={state.auth}>
+                            <NavBarSuperior dispatch={dispatch} />
+                            <RoomDetails/>
+                        </PrivateRoute>
+                    }/>
 
-            <Route path="/rooms" element={
-                <PrivateRoute auth={state.auth}>
-                  <NavBarSuperior dispatch={dispatch} />
-                  <Rooms/>
-                </PrivateRoute>
-              }             
-            />
+                    <Route path="/rooms/newroom" element={              
+                        <PrivateRoute auth={state.auth}>
+                            <NavBarSuperior dispatch={dispatch} />
+                            <NewRoom/>
+                        </PrivateRoute>
+                    }/>
 
-            <Route path="/rooms/:id" element={              
-                <PrivateRoute auth={state.auth}>
-                  <NavBarSuperior dispatch={dispatch} />
-                  <RoomDetails/>
-                </PrivateRoute>
-              } 
-            />
+                    <Route path="/Users" element={
+                        <PrivateRoute auth={state.auth}>
+                            <NavBarSuperior dispatch={dispatch} />
+                            <Users/>
+                        </PrivateRoute>
+                    }/>
 
-            <Route path="/rooms/newroom" element={              
-                <PrivateRoute auth={state.auth}>
-                  <NavBarSuperior dispatch={dispatch} />
-                  <NewRoom/>
-                </PrivateRoute>
-              } 
-            />
+                    <Route path="/Users/newuser" element={
+                        <PrivateRoute auth={state.auth}>
+                            <NavBarSuperior dispatch={dispatch} />
+                            <NewUser/>
+                        </PrivateRoute>
+                    }/>
 
-            <Route path="/Users" element={
-                <PrivateRoute auth={state.auth}>
-                  <NavBarSuperior dispatch={dispatch} />
-                  <Users/>
-                </PrivateRoute>
-              }
-            />
+                    <Route path="/Users/:id" element={
+                        <PrivateRoute auth={state.auth}>
+                            <NavBarSuperior dispatch={dispatch} />
+                            <UserDetail/>
+                        </PrivateRoute>
+                    }/>
+                    
+                    <Route path="/userEdit" element={
+                        <PrivateRoute auth={state.auth}>
+                            <NavBarSuperior dispatch={dispatch} />
+                            <UserEdit dispatch={dispatch}/>
+                        </PrivateRoute>
+                    }/>
 
-            <Route path="/Users/newuser" element={
-                <PrivateRoute auth={state.auth}>
-                  <NavBarSuperior dispatch={dispatch} />
-                  <NewUser/>
-                </PrivateRoute>
-              }
-            />
-            <Route path="/Users/:id" element={
-                <PrivateRoute auth={state.auth}>
-                  <NavBarSuperior dispatch={dispatch} />
-                  <UserDetail/>
-                </PrivateRoute>
-              }
-            />
+                    <Route path="/bookings" element={
+                        <PrivateRoute auth={state.auth}>
+                            <NavBarSuperior dispatch={dispatch} />
+                            <Bookings/>
+                        </PrivateRoute>
+                    }/>
+                        
+                    <Route path="/bookings/:id" element={
+                        <PrivateRoute auth={state.auth}>
+                            <NavBarSuperior dispatch={dispatch} />
+                            <BookingsDetails/>
+                        </PrivateRoute>
+                    }/>
+                </Routes>
             
-            <Route path="/userEdit" element={
-                <PrivateRoute auth={state.auth}>
-                  <NavBarSuperior dispatch={dispatch} />
-                  <UserEdit dispatch={dispatch}/>
-                </PrivateRoute>
-              }
-            />
-
-            <Route path="/bookings" element={
-                <PrivateRoute auth={state.auth}>
-                  <NavBarSuperior dispatch={dispatch} />
-                  <Bookings/>
-                </PrivateRoute>
-              }
-            />
-                  
-            <Route path="/bookings/:id" element={
-                <PrivateRoute auth={state.auth}>
-                  <NavBarSuperior dispatch={dispatch} />
-                  <BookingsDetails/>
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-          
-        </Router>
+            </Router>
      
-      </LogingContext.Provider>
+        </LogingContext.Provider>
       
     </div>
   );
 }
 
 export default App;
-
-/**
-  
- */
