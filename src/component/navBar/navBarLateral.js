@@ -1,10 +1,8 @@
-import React from 'react';
-
-import { BoxUser } from '../comun/boxUser';
+import React, {useState} from 'react';
+import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 
-import styled from "styled-components";
-
+import { BoxUser } from '../comun/boxUser';
 //Icons
 import { RiKey2Line, RiCalendarCheckLine } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa";
@@ -15,15 +13,25 @@ const Content = styled.div`
     display: grid;
     float: left;
     background: white;
-    width: 150px;
+    width: 35px;
     justify-content: center;
     gap: 2em;
     padding-top: 2em;
     border-bottom-right-radius: 35px;
+    z-index: 5;
+    position: absolute;
+    padding: 1rem 1rem;
 
     :hover{
-        width: 300px;
+        width: 180px;
 
+        .container_nav{
+            p{
+                display: block;
+                visibility: visible;
+                cursor: pointer;
+            }
+        }
     }
 `;
 
@@ -36,53 +44,53 @@ const Rotador = styled(IconDiv)`
 `;
 
 const Div = styled.div`
-    color: #318431ab;
+    color: ${props => props.isActive ? 'blue' : '#318431ab;'};
     display: flex;
     gap: 1rem;
-    margin-left: 2rem;
     cursor: pointer;
 
-    .menu_text{
+    p{
         margin: 0;
         font-size: 1.3rem;
         display: none;
     }
 
     :hover{
-        color: red;
-        
-        p{
-            display: block;
-            visibility: visible;
-            cursor: hand;
-        }
-
+        color: blue;
     }
 `;
 
-const Div2 = styled(Div)`
-    display: grid;
+const Div2 = styled.div`
+    display: none;
     gap: 0;
     padding: 1rem 0;
 `;
 
 const P = styled.p`
     padding-bottom: 1rem;
+    margin-top: -3rem;
 `;
 
 const P2 = styled.p`
     margin: 0;
     color: black;
+
 `;
 
 export const NavBarLateral = () => {
 
+    const [isActive, setIsActive] = useState(0);
     const navigate = useNavigate();
 
+    function redirection(rout, position){
+        navigate(rout);
+        setIsActive(position);
+    }
 
+    console.log(isActive)
     return(
         <Content>
-            <Div onClick={() => navigate('/dashboard')}>   
+            <Div className='container_nav' isActive={isActive === 0} onClick={() => redirection('/dashboard', 0)}>   
                 <IconDiv>
                     <MdOutlineDashboard/>
                 </IconDiv>
@@ -90,7 +98,7 @@ export const NavBarLateral = () => {
                 <p className='menu_text'>Dashboard</p>
             </Div>
 
-            <Div onClick={() => navigate('/rooms')}>
+            <Div className='container_nav' isActive={isActive === 1} onClick={() => redirection('/rooms', 1)}>
                 <Rotador>
                     <RiKey2Line/>
                 </Rotador>
@@ -99,7 +107,7 @@ export const NavBarLateral = () => {
 
             </Div>
 
-            <Div onClick={() => navigate('/bookings')}>
+            <Div className='container_nav' isActive={isActive === 2} onClick={() => redirection('/bookings', 2)}>
                 <IconDiv>
                     <RiCalendarCheckLine/>
                 </IconDiv>
@@ -108,7 +116,7 @@ export const NavBarLateral = () => {
 
             </Div>
             
-            <Div onClick={() => navigate('/users')}>
+            <Div className='container_nav' isActive={isActive === 3} onClick={() => redirection('/users', 3)}>
                 <IconDiv>
                     <FaRegUser/>
                 </IconDiv>
@@ -117,17 +125,16 @@ export const NavBarLateral = () => {
 
             </Div>
 
+            {/* <BoxUser/> */}
 
-            <BoxUser/>
-
-            <Div2>
-                <P2><b>Travl Hotel Admin Dashboard</b></P2>
+            {/* <Div2>
+                <P><b>Travl Hotel Admin Dashboard</b></P>
                  &#169; 2020 All Rights Reserved 
             </Div2>
 
-            <Div>
+            <Div2>
                 <P>Mode with  by Peterdrow</P>
-            </Div>
+            </Div2> */}
 
         </Content>
     )
