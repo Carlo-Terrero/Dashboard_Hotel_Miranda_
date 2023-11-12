@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOneRoom, roomsListDate, editOneRoom, postNewRoom } from '../slice/roomSlices';
+import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -96,6 +97,8 @@ export const RoomDetails = () => {
     const [status, setStatus] = useState(isExis ? roomSelected.status : true);
     const [room_floor, setRoom_floor] = useState(isExis ? roomSelected.room_floor : '');
 
+    const navigate = useNavigate();
+
     useEffect(() =>{
         dispatch(getOneRoom(id))
     },[])
@@ -117,7 +120,7 @@ export const RoomDetails = () => {
         }
         
         isExis ? dispatch(editOneRoom({id: id, roomObj: roomObj})) : dispatch(postNewRoom(roomObj));
-        
+        navigate('/rooms');
     }
 
     return(
