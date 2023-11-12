@@ -87,7 +87,6 @@ export const NavBarLateral = () => {
         setIsActive(position);
     }
 
-    console.log(isActive)
     return(
         <Content>
             <Div className='container_nav' isActive={isActive === 0} onClick={() => redirection('/dashboard', 0)}>   
