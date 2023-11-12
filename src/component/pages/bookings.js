@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { 
     getBookings,
     bookingListDate
-    } from "../slice/bookingSlice";
+} from "../slice/bookingSlice";
                                    
 import { GuesteList } from "../lists/bookingList";
 import { Paginador } from "../comun/paginador";
@@ -45,12 +45,11 @@ export const Bookings = () =>{
 
     const selectores = ['All Guest', 'Pending', 'Booked', 'Canceled', 'Refund'];
     const dispatch = useDispatch();
+    
     const bookingList = useSelector(bookingListDate);
-
-    const limit = 10;
-
+    
     const [currentPage, setCurrentPage] = useState(1);
-
+    const limit = 10;
     const lastIndex = currentPage * limit;
     const firsIndex = lastIndex - limit;
 
@@ -62,7 +61,7 @@ export const Bookings = () =>{
         <Div>
             <ControlDiv>
 
-                <SelectorGreenMenu selectores={selectores}/>                                           
+                <SelectorGreenMenu selectores={selectores} dataFilter={bookingList}/>                                           
 
                 <ControlDiv>
                     <NewRoom>
@@ -76,9 +75,7 @@ export const Bookings = () =>{
                 
             </ControlDiv>
 
-            <div>
-                <GuesteList guests={bookingList} elementList={bookingList.length} lastIndex={lastIndex} firsIndex={firsIndex}/>                    
-            </div>
+            <GuesteList guests={bookingList} elementList={bookingList.length} lastIndex={lastIndex} firsIndex={firsIndex}/>                                
 
             <Paginador limit={limit} elementList={bookingList.length} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 
