@@ -6,7 +6,8 @@ import styled from 'styled-components';
 import {LogingContext} from '../App'
 
 const Div = styled.div`
-    display: grid;
+    display: flex;
+
     background: white;
     height: 15rem;
     align-content: center;
@@ -14,6 +15,10 @@ const Div = styled.div`
     text-align: center;
     border-radius: 17px;
     box-shadow: 0px 18px 27px 2px rgb(0 0 0 / 35%);
+
+    h4,button,p{
+        display:none;
+    }
    
     :hover{
         div{
@@ -76,15 +81,15 @@ export const BoxUser = () => {
     }
 
     return(
-        <Div>
-            <div>
+        <Div className='box_user'>
+            {/* <div> */}
                 <ImgDiv imgUser={dataUser.foto}>
                     <img src={`${dataUser.foto}`}/>
                 </ImgDiv>
                 <H4>{dataUser.user}</H4>
                 <P>{dataUser.email}</P>
                 <Button onClick={handleClick}><b>contact Us</b></Button>
-            </div>
+            {/* </div> */}
         </Div>
     )
 }
