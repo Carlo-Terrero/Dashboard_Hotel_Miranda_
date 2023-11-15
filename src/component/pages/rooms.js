@@ -45,8 +45,7 @@ export const Rooms = () =>{
     const dispatch = useDispatch();
     const roomsList = useSelector(roomsListDate);
 
-    //El dato es roomsList
-    const [filterList, setFilterList] = useState();
+    const [filterList, setFilterList] = useState(roomsList);
 
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10;
@@ -55,8 +54,11 @@ export const Rooms = () =>{
 
     useEffect(() => {
         dispatch(getRooms());
+    }, [dispatch]);
+
+    useEffect(() => {
         setFilterList(roomsList);
-    }, [dispatch])
+    }, [roomsList])
 
     const handleClickNewRoom = () => {
        navigate(`newroom`);
