@@ -45,7 +45,8 @@ export const Rooms = () =>{
     const dispatch = useDispatch();
     const roomsList = useSelector(roomsListDate);
 
-    const [filterList, setFilterList] = useState(roomsList);
+    //El dato es roomsList
+    const [filterList, setFilterList] = useState();
 
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10;
@@ -54,6 +55,7 @@ export const Rooms = () =>{
 
     useEffect(() => {
         dispatch(getRooms());
+        setFilterList(roomsList);
     }, [dispatch])
 
     const handleClickNewRoom = () => {
@@ -67,7 +69,7 @@ export const Rooms = () =>{
             return;
         }
 
-        const state = filteredOut == selectores[1] ? true : false;
+        const state = filteredOut === selectores[1] ? true : false;
         const elementSelected = roomsList.filter( element => element.status === state);
         setFilterList(elementSelected);
     }

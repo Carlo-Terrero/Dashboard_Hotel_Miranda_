@@ -46,6 +46,7 @@ export const Bookings = () =>{
     
     const bookingList = useSelector(bookingListDate);
     
+    //El dato es bookingList
     const [filterList, setFilterList] = useState(bookingList);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -55,6 +56,7 @@ export const Bookings = () =>{
 
     useEffect(() =>{
         dispatch(getBookings());
+        setFilterList(bookingList);
     },[dispatch] )
 
     function dataFilter(filteredOut){

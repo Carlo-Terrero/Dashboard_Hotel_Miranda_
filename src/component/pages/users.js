@@ -43,7 +43,8 @@ export const Users = () =>{
     const dispatch = useDispatch();
     const users = useSelector(usersListDate);
 
-    const [filterList, setFilterList] = useState(users);
+    //El dato es users
+    const [filterList, setFilterList] = useState();
 
     const [currentPage, setCurrentPage] = useState(1);    
     const limit = 10;
@@ -52,6 +53,7 @@ export const Users = () =>{
 
     useEffect(()=>{
         dispatch(getUsers());
+        setFilterList(users);
     },[dispatch])
 
     function dataFilter(filteredOut){
