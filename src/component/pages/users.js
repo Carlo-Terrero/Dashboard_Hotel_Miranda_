@@ -41,6 +41,7 @@ export const Users = () =>{
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
+    
     const users = useSelector(usersListDate);
 
     const [filterList, setFilterList] = useState(users);
@@ -53,6 +54,10 @@ export const Users = () =>{
     useEffect(()=>{
         dispatch(getUsers());
     },[dispatch])
+    
+    useEffect(()=>{
+        setFilterList(users);
+    },[users])
 
     function dataFilter(filteredOut){
         if(filteredOut === selectores[0]){
@@ -83,7 +88,7 @@ export const Users = () =>{
                 
             </ControlDiv>
 
-            <UserList lastIndex={lastIndex} firsIndex={firsIndex} users={filterList}/>                    
+            <UserList lastIndex={lastIndex} firsIndex={firsIndex} users={filterList}/>
 
             <Paginador limit={limit} elementList={filterList.length} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 

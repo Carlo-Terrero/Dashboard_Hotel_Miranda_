@@ -54,7 +54,11 @@ export const Rooms = () =>{
 
     useEffect(() => {
         dispatch(getRooms());
-    }, [dispatch])
+    }, [dispatch]);
+
+    useEffect(() => {
+        setFilterList(roomsList);
+    }, [roomsList])
 
     const handleClickNewRoom = () => {
        navigate(`newroom`);
@@ -67,7 +71,7 @@ export const Rooms = () =>{
             return;
         }
 
-        const state = filteredOut == selectores[1] ? true : false;
+        const state = filteredOut === selectores[1] ? true : false;
         const elementSelected = roomsList.filter( element => element.status === state);
         setFilterList(elementSelected);
     }

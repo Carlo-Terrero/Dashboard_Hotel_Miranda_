@@ -55,7 +55,11 @@ export const Bookings = () =>{
 
     useEffect(() =>{
         dispatch(getBookings());
-    },[dispatch] )
+    },[dispatch])
+
+    useEffect(() =>{
+        setFilterList(bookingList);
+    },[bookingList])
 
     function dataFilter(filteredOut){
         if(filteredOut === selectores[0]){
