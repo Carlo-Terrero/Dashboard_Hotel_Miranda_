@@ -91,7 +91,7 @@ export const UserEdit = (props) =>{
     const [puesto, setPuesto] = useState('Manager');
     const [alta, setAlta] = useState('24/05/2022');
     const [description, setDescription] = useState('Esta es una breve y resumida declaracion para las cosas que se ponen duras');
-    const [estado, setEstado] = useState(true);
+    const [state, setState] = useState(true);
     const [pass, setPass] = useState('pass');
     const [foto, setFoto] = useState(dataUser.foto);
     //const dataUser = useContext(LogingContext);
@@ -124,7 +124,7 @@ export const UserEdit = (props) =>{
             puesto: puesto,
             start_date: alta,
             description: description,
-            estate: estado,
+            estate: state,
             password: pass
         }
 
@@ -211,7 +211,7 @@ export const UserEdit = (props) =>{
 
                     <label>
                         <p>Estado</p> 
-                        <select value={estado} type="text" onChange={(e) => {setEstado(e.target.value)}} required>
+                        <select value={state} type="text" onChange={(e) => {setState(e.target.value)}} required>
                             <option > Seleccione estado </option>
                             <option value={"true"} >Activo</option>
                             <option value={"false"}>In-Activo</option>

@@ -85,7 +85,7 @@ export const Auth = (props) => {
                                     id: user.id,
                                     contact: user.contact,
                                     description: user.description,
-                                    estate: user.estate,
+                                    state: user.state,
                                     puesto: user.puesto,
                                     start_date: user.start_date,
                                 }}          
