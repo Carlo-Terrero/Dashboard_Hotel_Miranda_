@@ -86,7 +86,7 @@ export const RoomList = ({rooms, lastIndex ,firsIndex}) => {
                 <Th>Room Floor</Th>
                 <Th>Facilities</Th>
                 <Th>Rate</Th>
-                <Th>Status</Th>
+                <Th>State</Th>
             </tr>
 
             {rooms.map((room) => 
@@ -97,7 +97,7 @@ export const RoomList = ({rooms, lastIndex ,firsIndex}) => {
                     <Td>Flooo A-{room.room_floor}</Td>
                     <Td>{room.facilities}</Td>
                     <Td2>{room.price}<Pn>/night</Pn></Td2>
-                    <Td>{room.status === true ? <BtnGreen>Available</BtnGreen> : <BtnRed>Booked</BtnRed>}</Td>
+                    <Td>{room.state === true ? <BtnGreen>Available</BtnGreen> : <BtnRed>Booked</BtnRed>}</Td>
                 </TrElement>
             ).slice(firsIndex, lastIndex)}
         </Table>

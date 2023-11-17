@@ -68,7 +68,7 @@ export const UserList = ({lastIndex, firsIndex ,users}) => {
                 <Th>Job Desk</Th>
                 <Th>Schedule</Th>
                 <Th>Contact</Th>
-                <Th>Status</Th>
+                <Th>State</Th>
             </tr>
             {users.map((user) =>
                 <TrElement key={user._id} onClick={() => handleClick(user._id)}>
@@ -77,7 +77,7 @@ export const UserList = ({lastIndex, firsIndex ,users}) => {
                     <Td>{user.description}</Td>
                     <Td>{user.schedule ?? "-"}</Td>
                     <Td><MdOutlineLocalPhone/> {user.contact}</Td>
-                    <Td>{user.estate === true ? <PGreen>ACTIVE</PGreen> : <PRed>INACTIVE</PRed>}</Td>
+                    <Td>{user.state === true ? <PGreen>ACTIVE</PGreen> : <PRed>INACTIVE</PRed>}</Td>
                 </TrElement>
             ).slice(firsIndex, lastIndex)}
         </Table>

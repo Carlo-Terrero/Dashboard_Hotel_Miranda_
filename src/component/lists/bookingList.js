@@ -101,7 +101,7 @@ export const GuesteList = ({guests, lastIndex, firsIndex}) => {
                 <Th>Check Out</Th>
                 <Th>Special Request</Th>
                 <Th>Room type</Th>
-                <Th>Status</Th>
+                <Th>State</Th>
             </tr>
 
             {guests.map((guest) =>
@@ -113,7 +113,7 @@ export const GuesteList = ({guests, lastIndex, firsIndex}) => {
                     <Td>{moment(guest.check_Out).format( "DD-MM-YYYY")}</Td>
                     <Td><PopupViewNotes elementID={guest.special_request}/></Td>
                     <Td>{guest.room_type}</Td>
-                    <Td>{handleStatus(guest.status)}</Td>
+                    <Td>{handleStatus(guest.state)}</Td>
                 </TrElement>
             ).slice(firsIndex, lastIndex)}
 
