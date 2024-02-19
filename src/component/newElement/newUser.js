@@ -81,11 +81,11 @@ const BtnCancel = styled(BtnAceptar)`
     background: red;
 `;
 
-const DivButton = styled.div`{
+const DivButton = styled.div`
     margin: -3.5rem 0 2rem auto;
     display: flex;
     gap: 2rem;
-}`;
+`;
 
 export const NewUser = (props) =>{
 

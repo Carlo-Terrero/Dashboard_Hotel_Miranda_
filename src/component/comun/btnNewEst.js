@@ -1,9 +1,7 @@
 import React from 'react';
-
 import styled from 'styled-components';
 
 import { IoIosArrowDown } from "react-icons/io";
-
 
 const Newest = styled.button`
     display: flex;

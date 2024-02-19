@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { REACT_APP_LINK_HTTP } from '../../env';
 
 import 'react-toastify/dist/ReactToastify.css';
+
 const DivBase = styled.div`
     background-image: url(https://cdn.pixabay.com/photo/2016/11/17/09/28/hotel-1831072_960_720.jpg);
     background-size: cover;
@@ -19,12 +20,11 @@ const DivBase = styled.div`
     flex-direction: column;
 `;
 
-const Div = styled.div` 
-    
-    margin-top: 15%;
-    padding-bottom: auto;
-    background: none;
-`;
+// const Div = styled.div` 
+//     margin-top: 15%;
+//     padding-bottom: auto;
+//     background: none;
+// `;
 
 const Form = styled.form`
     display: grid;
@@ -70,30 +70,32 @@ export const Auth = (props) => {
 
     async function logUser() {
         try {
-          const response = await axios.post(`${REACT_APP_LINK_HTTP}/login`,{userName: email, password: pass});
+            const response = await axios.post(`${REACT_APP_LINK_HTTP}/login`,{userName: email, password: pass});
           
-          const token = response.data.token;
-          localStorage.setItem('Token', token);
-          const decode = jwt_decode(token);          
-          const user = decode.user;
+            const token = response.data.token;
+            localStorage.setItem('Token', token);
+            const decode = jwt_decode(token);          
+            const user = decode.user;
 
-          props.dispatch(
-            {type: 'LOGIN', value: {auth: true, 
-                                    user: user.name, 
-                                    email: user.email, 
-                                    foto: user.foto ,
-                                    id: user.id,
-                                    contact: user.contact,
-                                    description: user.description,
-                                    state: user.state,
-                                    puesto: user.puesto,
-                                    start_date: user.start_date,
-                                }}          
-          )
+            props.dispatch({
+                type: 'LOGIN',
+                value: {
+                    auth: true, 
+                    user: user.name, 
+                    email: user.email, 
+                    foto: user.foto ,
+                    id: user.id,
+                    contact: user.contact,
+                    description: user.description,
+                    state: user.state,
+                    puesto: user.puesto,
+                    start_date: user.start_date,
+                }
+            })
 
-          navigate('/dashboard');
-        } catch (error) {
-          alert('Caracteres incorrectos');
+            navigate('/dashboard');
+        }catch(error) {
+            alert('Caracteres incorrectos');
         }
     }
 
@@ -102,10 +104,9 @@ export const Auth = (props) => {
         e.preventDefault();
 
         if (email && pass ){
-            logUser()
-            
+            logUser();
         }else{
-            alert('Caracteres no coinciden')
+            alert('Caracteres no coinciden');
         }         
                         
     }

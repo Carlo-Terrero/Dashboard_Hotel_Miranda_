@@ -10,7 +10,7 @@ import {
 
 import { RoomList } from "../lists/roomList";
 import { Paginador } from "../comun/paginador";
-import { BtnNewEst } from "../comun/btnNewEst";
+// import { BtnNewEst } from "../comun/btnNewEst";
 import { SelectorGreenMenu } from "../comun/selectorGreenMenu";
 
 const Div =  styled.div` 
@@ -72,24 +72,19 @@ export const Rooms = () =>{
         }
 
         const state = filteredOut === selectores[1] ? true : false;
-        const elementSelected = roomsList.filter( element => element.status === state);
+        const elementSelected = roomsList.filter( element => element.state === state);
         setFilterList(elementSelected);
     }
 
     return (
         <Div>
             <ControlDiv>
-
-                <SelectorGreenMenu 
-                    selectores={selectores} 
-                    returnData={dataFilter}/>                                 
+                <SelectorGreenMenu selectores={selectores} returnData={dataFilter} />
 
                 <ControlDiv>
                     <NewRoom onClick={handleClickNewRoom}>
                         + New Room
                     </NewRoom>
-
-                    {/* <BtnNewEst/> */}
                     
                 </ControlDiv>
                 

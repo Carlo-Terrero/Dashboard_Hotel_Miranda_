@@ -62,13 +62,14 @@ export const Bookings = () =>{
     },[bookingList])
 
     function dataFilter(filteredOut){
+
         if(filteredOut === selectores[0]){
             setFilterList(bookingList);
             return;
         }
 
         const state = selectores.indexOf(filteredOut) - 1;
-        const elementSelected = bookingList.filter(element => element.status === state);
+        const elementSelected = bookingList.filter(element => element.state === state);
         setFilterList(elementSelected);
     }
     
@@ -76,7 +77,7 @@ export const Bookings = () =>{
         <Div>
             <ControlDiv>
 
-                <SelectorGreenMenu selectores={selectores} returnData={dataFilter}/>                                           
+                <SelectorGreenMenu selectores={selectores} returnData={dataFilter} />                                           
 
                 {/* <ControlDiv>
                     <NewRoom>

@@ -66,7 +66,7 @@ export const Users = () =>{
         }
 
         const state = filteredOut === selectores[1] ? true : false;
-        const elementSelected = users.filter(element => element.estate === state);
+        const elementSelected = users.filter(element => element.state === state);
         setFilterList(elementSelected);
     }
 
